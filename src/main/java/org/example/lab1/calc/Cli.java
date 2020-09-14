@@ -1,6 +1,7 @@
 package org.example.lab1.calc;
 
 import org.example.lab1.calc.operations.Cmd;
+import org.example.lab1.calc.operations.CmdPlus;
 import org.example.lab1.calc.operations.Precmd;
 import org.reflections.Reflections;
 import org.reflections.scanners.SubTypesScanner;
@@ -12,8 +13,8 @@ import java.util.Collection;
 import java.util.Set;
 
 // http://java-online.ru/java-reflection.xhtml
+// reflections getSubTypesOf ClassNotFoundException
 public class Cli {
-
 
 /*    private static List<Class<?>> getAllClassesFrom(String packageName) {
         return new Reflections(packageName, new SubTypesScanner(false))
@@ -36,7 +37,7 @@ public class Cli {
     static String prefixPackage = "org.example.lab1.calc.operations";
     static Reflections reflections;
     //static Set<Class<? extends Cmd>> subTypes;
-    //static Collection srcPath;
+    static Collection srcPath;
     static SubTypesScanner scanner;
 
     public static void main(String[] args) {
@@ -47,20 +48,12 @@ public class Cli {
         //list = new Reflections(prefixPackage).getSubTypesOf(Cmd.class)
         //Reflections
         //reflections = new Reflections(prefixPackage);
-        //srcPath = ClasspathHelper.forPackage(prefixPackage);
-
-        //scanner = new SubTypesScanner();
+        srcPath = ClasspathHelper.forPackage(prefixPackage);
+        scanner = new SubTypesScanner();
         ConfigurationBuilder cfg = new ConfigurationBuilder()
-                .setUrls(ClasspathHelper.forPackage(prefixPackage))
-                .setScanners(new SubTypesScanner());
-        reflections = new Reflections( //ClasspathHelper.forPackage(prefixPackage)
-                                        //srcPath
-                                        //, //new SubTypesScanner()
-                                            //scanner);
-                                        //new ConfigurationBuilder()
-                                                //.setUrls(ClasspathHelper.forPackage(prefixPackage))
-                                                //.setScanners(new SubTypesScanner())
-                                            cfg);
+                .setUrls(srcPath)
+                .setScanners(scanner);
+        reflections = new Reflections( cfg );
         Set<Class<? extends Cmd>> verbs = reflections.getSubTypesOf(Cmd.class);
 
         //Set<Class<? extends org.example.lab1.calc.operations.Cmd>>
