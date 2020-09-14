@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'application'
+//    id 'application'
 }
 
 group 'org.example'
@@ -21,6 +21,10 @@ dependencies {
     compile group: 'org.reflections', name: 'reflections', version: '0.9.12'
 }
 
-defaultTasks 'build'
+defaultTasks 'runCalc'
 
-//application {mainClassName = "org.example,lab1.calc"}
+//application {mainClassName = "org.example,lab1.calc.Cli"}
+task runCalc(type: JavaExec, dependsOn: build){
+  main = 'org.example.lab1.calc.Cli'
+  //classpath ("org.example.lab1.calc.operations")
+}

@@ -1,2 +1,2 @@
-org/example/lab1/calcTest.java
- org.example.lab1.calcTest
+org/example/lab1/calc/calcTest.java
+ org.example.lab1.calc.calcTest

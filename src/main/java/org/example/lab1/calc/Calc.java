@@ -2,8 +2,6 @@ package org.example.lab1.calc;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.example.lab1.calc.operations.CmdPlus;
-import org.example.lab1.calc.pre.Precalc;
 
 import java.util.HashMap;
 import java.util.List;
