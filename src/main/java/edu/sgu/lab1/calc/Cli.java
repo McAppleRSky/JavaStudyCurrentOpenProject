@@ -37,9 +37,9 @@ public class Cli {
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
-        String str = null;
+        Object str = null;
         try {
-            method.invoke(str, null);
+            method.invoke(str);
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {
@@ -52,3 +52,5 @@ public class Cli {
         System.out.println(calc.solve(args));
     }
 }
+
+// https://www.baeldung.com/java-method-reflection
