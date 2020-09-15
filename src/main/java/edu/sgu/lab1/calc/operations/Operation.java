@@ -9,9 +9,10 @@ public abstract class Operation {
     public abstract String getResult(int operand1, int operand2);
     protected abstract void init();
 
-    protected String simbols = "";
+    protected String symbols = "";
     protected HashMap<String, Integer> mnemonics = new HashMap<>();
     protected HashMap<Integer, Object> operations = new HashMap<>();
+    public abstract String getSymbols();
 
 
     /*    private int cmdIndex;

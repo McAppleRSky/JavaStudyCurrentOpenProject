@@ -12,14 +12,18 @@ public class Div extends Operation {
 
     @Override
     protected void init() {
-        StringBuilder stringBuilder = new StringBuilder(simbols);
+        StringBuilder stringBuilder = new StringBuilder(symbols);
         stringBuilder.append(symbol);
         intMnemonic = (byte)symbol;
         mnemonics.put(String.valueOf(symbol), Integer.valueOf(symbol));
     }
 
+    @Override
+    public String getSymbols() {
+        return symbols;
+    };
 
-    void Plus(){
+    void Div(){
         init();
     }
 
