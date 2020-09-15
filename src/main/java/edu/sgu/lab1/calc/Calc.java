@@ -1,4 +1,4 @@
-package org.example.lab1.calc;
+package edu.sgu.lab1.calc;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

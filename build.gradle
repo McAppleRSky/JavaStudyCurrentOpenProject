@@ -3,7 +3,7 @@ plugins {
 //    id 'application'
 }
 
-group 'org.example'
+group 'edu.sgu'
 version '1.0-SNAPSHOT'
 
 repositories {
@@ -18,7 +18,10 @@ dependencies {
     compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.13.3'
     compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.13.3'
 // https://mvnrepository.com/artifact/org.reflections/reflections
-    compile group: 'org.reflections', name: 'reflections', version: '0.9.12'
+//    compile group: 'org.reflections', name: 'reflections', version: '0.9.12'
+    compile ('org.reflections:reflections:0.9.12') {
+        exclude group: "org.javassist", module: "javassist"
+    }
 // https://mvnrepository.com/artifact/org.javassist/javassist
     compile group: 'org.javassist', name: 'javassist', version: '3.27.0-GA'
 }
@@ -27,6 +30,6 @@ defaultTasks 'runCalc'
 
 //application {mainClassName = "org.example,lab1.calc.Cli"}
 task runCalc(type: JavaExec, dependsOn: build){
-  main = 'org.example.lab1.calc.Cli'
-  //classpath ("org.example.lab1.calc.operations")
+  main = 'edu.sgu.lab1.calc.Cli'
+  classpath sourceSets.main.runtimeClasspath
 }
