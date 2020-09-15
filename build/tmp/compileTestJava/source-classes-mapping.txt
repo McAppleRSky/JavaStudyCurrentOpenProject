@@ -1,2 +1,0 @@
-org/example/lab1/calc/calcTest.java
- org.example.lab1.calc.calcTest
