@@ -7,27 +7,39 @@ import java.util.HashMap;
 public abstract class Operation {
 
     public abstract String getResult(int operand1, int operand2);
-    protected abstract void init();
 
-    protected String symbols = "";
-    protected HashMap<String, Integer> mnemonics = new HashMap<>();
-    protected HashMap<Integer, Object> operations = new HashMap<>();
-    public abstract String getSymbols();
+    protected static String symbols = "";
 
+    protected static HashMap<String, Integer> intMnemonics = new HashMap<>();
+    protected static HashMap<Integer, Object> operations = new HashMap<>();
 
-    /*    private int cmdIndex;
+    protected void operationAdd(char symbol, Object operation){
+        StringBuilder stringBuilder = new StringBuilder(symbols);
+        symbols = stringBuilder.append(symbol).toString();
 
-    public void setCmdIndex(int cmdIndex) {
-        this.cmdIndex = cmdIndex;
+        Integer intMnemonic = getMnemonic(symbol);
+        intMnemonics.put(String.valueOf(symbol), intMnemonic);
+        operations.put(intMnemonic, operation);
     }
 
-
-    public int getCmdIndex() {
-        return cmdIndex;
+    public Integer getMnemonic(char symbol){
+        Integer result = null;
+        result = Integer.valueOf((byte)symbol);
+        if ((result == null) || (result==0)) throw new NullPointerException("No mnemonics");
+        return result;
     }
 
-    public String getAllCmdInString() {
-        return allCmdInString;
-    }*/
+    public String getSymbols(){
+        return symbols;
+    };
 
+    public HashMap<String, Integer> getIntMnemonics(){
+        if (intMnemonics == null ) throw new NullPointerException("No mnemonics");
+        return intMnemonics;
+    };
+
+    public HashMap<Integer, Object> getOperations(){
+        if (operations == null ) throw new NullPointerException("No operations");
+        return operations;
+    };
 }

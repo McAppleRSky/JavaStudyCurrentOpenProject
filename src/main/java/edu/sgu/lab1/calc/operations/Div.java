@@ -5,26 +5,13 @@ public class Div extends Operation {
     private char symbol = '/';
     private int intMnemonic = Integer.MAX_VALUE;
 
+    public Div(){
+        operationAdd(symbol, this);
+    }
+
     @Override
     public String getResult(int operand1, int operand2) {
         return Float.toString(operand1 / operand2);
-    }
-
-    @Override
-    protected void init() {
-        StringBuilder stringBuilder = new StringBuilder(symbols);
-        stringBuilder.append(symbol);
-        intMnemonic = (byte)symbol;
-        mnemonics.put(String.valueOf(symbol), Integer.valueOf(symbol));
-    }
-
-    @Override
-    public String getSymbols() {
-        return symbols;
-    };
-
-    void Div(){
-        init();
     }
 
 }
