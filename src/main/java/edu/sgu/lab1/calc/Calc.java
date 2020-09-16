@@ -77,7 +77,7 @@ public class Calc {
         }
     }
 
-    public Integer getMnemonicInvoker(char symbol){
+    protected Integer getMnemonicInvoker(char symbol){
         Integer result = null;
         try {
             // reference to Operation.class
@@ -114,7 +114,7 @@ public class Calc {
     //private int getIntValueForIndex (int i){return intMnemonicAndValues.get(i);}
     //private int getIntValuesCount (){return intMnemonicAndValues.size();}
 
-    public String solve(String[] Args //, String sympols, HashMap<String, Integer> intMnemonics, HashMap<Integer, Object> operatoons
+    protected String solve(String[] Args //, String sympols, HashMap<String, Integer> intMnemonics, HashMap<Integer, Object> operatoons
     ) {
         String expectedSymbolExpression = "ioi";
         if (!tstArgsCount(Args)) return ("Too many parameters");
@@ -126,13 +126,13 @@ public class Calc {
                             intMnemonicsAndValues.get(2));
     }
 
-    public boolean tstArgsCount(String[] tstStrs) {
+    protected boolean tstArgsCount(String[] tstStrs) {
         if (tstStrs.length < 3) return false;
         else if (tstStrs.length > 3) logger.warn("Too match parameters");
         return true;
     }
 
-    public String getActualSymbolExpression(String[] values) {
+    protected String getActualSymbolExpression(String[] values) {
         StringBuffer actualExpression = new StringBuffer("   ");
         for (int i = 0; i < actualExpression.length(); i++) {
             actualExpression.setCharAt(i, getSymbolol_SaveToMnemonicsValues(i, values[i]));
@@ -140,7 +140,7 @@ public class Calc {
         return actualExpression.toString();
     }
 
-    public char getSymbolol_SaveToMnemonicsValues(int i, String value) {
+    protected char getSymbolol_SaveToMnemonicsValues(int i, String value) {
         char symbol;
         try {
             intMnemonicsAndValues.put(i, Integer.parseInt(value));
@@ -155,7 +155,7 @@ public class Calc {
         return 'n';
     }
 
-    boolean isOperation(char symbol) {
+    private boolean isOperation(char symbol) {
         StringBuffer operationsBuffer = new StringBuffer(symbolsOperations);
         for(int i=0;i<operationsBuffer.length();i++)
             if(operationsBuffer.charAt(i) == symbol)
@@ -178,7 +178,7 @@ public class Calc {
         }
     }*/
 
-    public String oparate(Integer mnemonicOperation, Integer operand1, Integer operand2) {
+    private String oparate(Integer mnemonicOperation, Integer operand1, Integer operand2) {
         String result = null;
         operationClass = mnemonicsOperations.get(mnemonicOperation).getClass();
         paramTypesMethod = new Class[]{Integer.class, Integer.class};
