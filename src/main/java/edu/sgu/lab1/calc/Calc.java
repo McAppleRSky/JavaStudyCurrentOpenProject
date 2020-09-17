@@ -1,5 +1,6 @@
 package edu.sgu.lab1.calc;
 
+import edu.sgu.lab1.calc.operations.Div;
 import edu.sgu.lab1.calc.operations.Operation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -9,26 +10,27 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 
 public class Calc {
 
     static Logger logger = LogManager.getLogger("Calc");
 
-    private String prefixPackage = "edu.sgu.lab1.calc.operations";
-    private String symbolsOperations = null;
-    private HashMap<String, Integer> symbolsMnemonics = null;
-    private HashMap<Integer, Object> mnemonicsOperations = null;
-
-    private Method getSymbolsMethod = null,
-            getIntMnemonicsMethod = null,
-            getOperationsMethod = null,
-            getMnemonicMethod = null,
-            getResultMethod = null;
-    private Object instanceCurrentLastOperation = null;
-    private Class[] paramTypesMethod = null;
-    private Class<?> operationClass = null;
+    protected String prefixPackage = "edu.sgu.lab1.calc.operations";
+    protected HashMap<Integer, Integer> intsMnemonicAndValues = new HashMap<>();
+    protected HashMap<Character, Integer> listSymbolsMnemonics = null;
+    protected HashMap<Integer, Object> listMnemonicsOperations = null;
+    protected HashMap<String, Method> method = new HashMap<>();
+    protected String //getSymbols = "getSymbols",
+            getMnemonics = "getMnemonics",
+            getOperations = "getOperations",
+            mnemonic = "mnemonic",
+            getResult = "getResult",
+            getMnemonic = "getMnemonic";
+    protected Class<?> operationClass = null;
+    protected Object operationInstance = null;
+    protected Class[] paramTypes = null;
+    protected Object[] param = null;
 
     protected Calc() {
         Set<Class<? extends Operation>> operations;
@@ -39,91 +41,67 @@ public class Calc {
             while (operation.hasNext()) {
                 try {
                     operationClass = Class.forName(operation.next().getName());
-                    instanceCurrentLastOperation = operationClass.getDeclaredConstructor().newInstance();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                } catch (InstantiationException e) {
-                    e.printStackTrace();
-                } catch (InvocationTargetException e) {
-                    e.printStackTrace();
-                } catch (NoSuchMethodException e) {
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
+                    operationInstance = operationClass.getDeclaredConstructor().newInstance();
+                } catch (ClassNotFoundException | IllegalAccessException | NoSuchMethodException | InvocationTargetException | InstantiationException e) {
                     e.printStackTrace();
                 }
             }
         }
         try {
-            getSymbolsMethod = operationClass.getMethod("getSymbols", null);
-            getIntMnemonicsMethod = operationClass.getMethod("getIntMnemonics", null);
-            getOperationsMethod = operationClass.getMethod("getOperations", null);
-            paramTypesMethod = new Class[]{char.class};
-            getMnemonicMethod = operationClass.getMethod("getMnemonic", paramTypesMethod);
+            paramTypes = (Class<?>[]) null;
+            method.put(getMnemonics, operationClass.getMethod(getMnemonics, paramTypes));
+            method.put(getOperations, operationClass.getMethod(getOperations, paramTypes));
+            method.put(getMnemonic, operationClass.getMethod(getMnemonic, paramTypes));
+            paramTypes = new Class[]{char.class};
+            method.put(mnemonic, operationClass.getMethod(mnemonic, paramTypes));
+            paramTypes = new Class[]{int.class, int.class};
+            method.put(getResult, operationClass.getMethod(getResult, paramTypes));
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
         try {
-            symbolsOperations = (String) getSymbolsMethod.invoke(instanceCurrentLastOperation, null);
-            symbolsMnemonics = (HashMap<String, Integer>) getIntMnemonicsMethod.invoke(instanceCurrentLastOperation, null);
-            mnemonicsOperations = (HashMap<Integer, Object>) getOperationsMethod.invoke(instanceCurrentLastOperation, null);
-        } catch (IllegalAccessException e) {
+            param =  new Object[] {};
+            listSymbolsMnemonics
+                = (HashMap<Character, Integer>) method.get(getMnemonics)
+                    .invoke(operationInstance, param);
+            listMnemonicsOperations
+                = (HashMap<Integer, Object>) method.get(getOperations)
+                    .invoke(operationInstance, param);
+        } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException e) {
             e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (IllegalArgumentException e) {
+        } catch (NullPointerException e) {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    protected Integer getMnemonicInvoker(char symbol){
+    /*
+     *  reference to Operation.class
+     * */
+    protected Integer mnemonicInvoker(char symbol) {
         Integer result = null;
         try {
-            // reference to Operation.class
-            result = (Integer) getOperationsMethod.invoke(instanceCurrentLastOperation, symbol);
-        } catch (IllegalAccessException e) {
+            param = new Object[]{symbol};
+            result = (Integer) method.get(mnemonic).invoke(operationInstance, param);
+        } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException e) {
             e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (IllegalArgumentException e) {
+        } catch (NullPointerException e) {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if ((result == null) || (result==0)) throw new NullPointerException("No mnemonics");
+        if ((result == null) || (result == 0)) throw new NullPointerException("No mnemonics");
         return result;
     }
 
-
-
-//    private String result = null;
-//    private final String defaultResult = "nothing";
-
-//    private final String allOperationsInString = "+-*/";
-    /*    private final int intPlus = (byte)allOperationsInString.charAt(0);
-    private final int intMinus = (byte)allOperationsInString.charAt(1);
-    private final int intMult = (byte)allOperationsInString.charAt(2);
-    private final int intAmult = (byte)allOperationsInString.charAt(3);
-*/
-
-
-    private HashMap<Integer, Integer> intMnemonicsAndValues = new HashMap<>();
-//    private List<Class<?>> OpreationClass;
-
-    //private int getIntValueForIndex (int i){return intMnemonicAndValues.get(i);}
-    //private int getIntValuesCount (){return intMnemonicAndValues.size();}
-
-    protected String solve(String[] Args //, String sympols, HashMap<String, Integer> intMnemonics, HashMap<Integer, Object> operatoons
-    ) {
+    protected String solve(String[] Args) {
         String expectedSymbolExpression = "ioi";
         if (!tstArgsCount(Args)) return ("Too many parameters");
         else if (!expectedSymbolExpression.equals(getActualSymbolExpression(Args)))
             return ("Can not solve expression for this parameters");
         else
-            return oparate(intMnemonicsAndValues.get(1),
-                            intMnemonicsAndValues.get(0),
-                            intMnemonicsAndValues.get(2));
+            return oparate(intsMnemonicAndValues.get(1), intsMnemonicAndValues.get(0), intsMnemonicAndValues.get(2));
     }
 
     protected boolean tstArgsCount(String[] tstStrs) {
@@ -133,7 +111,7 @@ public class Calc {
     }
 
     protected String getActualSymbolExpression(String[] values) {
-        StringBuffer actualExpression = new StringBuffer("   ");
+        StringBuilder actualExpression = new StringBuilder("   ");
         for (int i = 0; i < actualExpression.length(); i++) {
             actualExpression.setCharAt(i, getSymbolol_SaveToMnemonicsValues(i, values[i]));
         }
@@ -142,87 +120,73 @@ public class Calc {
 
     protected char getSymbolol_SaveToMnemonicsValues(int i, String value) {
         char symbol;
-        try {
-            intMnemonicsAndValues.put(i, Integer.parseInt(value));
+        try{intsMnemonicAndValues.put(i, Integer.parseInt(value));
             return 'i';
         } catch (NumberFormatException numberFormatException) {
             symbol = value.charAt(0);
-            if ( isOperation(symbol) ) {
-                intMnemonicsAndValues.put(i, getMnemonicInvoker(symbol));
+            if (isOperation(symbol)) {
+                intsMnemonicAndValues.put(i, mnemonicInvoker(symbol));
                 return 'o';
-            }
+            }else return 'n';
         }
-        return 'n';
     }
 
-    private boolean isOperation(char symbol) {
-        StringBuffer operationsBuffer = new StringBuffer(symbolsOperations);
-        for(int i=0;i<operationsBuffer.length();i++)
-            if(operationsBuffer.charAt(i) == symbol)
-                return true;
-        return false;
+    protected boolean isOperation(char symbol) {
+        return listSymbolsMnemonics.containsKey(symbol);
     }
 
-    /*    public int getOperationIntByString(String oparationInString) {
-        switch (oparationInString.charAt(0)) {
-            case '+':
-                return 0;//intPlus;
-            case '-':
-                return 0;//intMinus;
-            case '*':
-                return 0;//intMult;
-            case '/':
-                return 0;//intAmult;
-            default:
-                throw new NullPointerException("Unsupported opearation");
-        }
-    }*/
-
-    private String oparate(Integer mnemonicOperation, Integer operand1, Integer operand2) {
+    protected String oparate(Integer mnemonicOperation, Integer operand1, Integer operand2) {
         String result = null;
-        operationClass = mnemonicsOperations.get(mnemonicOperation).getClass();
-        paramTypesMethod = new Class[]{Integer.class, Integer.class};
+        param =  new Object[] {};
+        Integer lastMnemonicOperation = null;
         try {
-            getResultMethod = operationClass.getMethod("getResult", paramTypesMethod);
-        } catch (NoSuchMethodException e) {
+            lastMnemonicOperation = (Integer) method.get(getMnemonic).invoke(operationInstance, param);
+        } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException e) {
             e.printStackTrace();
-        }
-        try {
-            result = (String) getResultMethod.invoke(operationClass, operand1, operand2);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (IllegalArgumentException e) {
+        } catch (NullPointerException e) {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if (result == null) throw new NullPointerException("result = null");
+        if (lastMnemonicOperation == null) throw new NullPointerException("Can't mnemonic read last");
+        else {
+            param =  new Object[] {operand1, operand2};
+            if (mnemonicOperation == lastMnemonicOperation){
+                try {
+                    result = (String) method.get(getResult).invoke(operationInstance, param);
+                } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException e) {
+                    e.printStackTrace();
+                } catch (NullPointerException e) {
+                    e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+/*        operationClass.
+        operationInstance
+//        if(operationInstance)
+        operationClass = listMnemonicsOperations.get(mnemonicOperation).getClass();
+        try {
+            operationInstance = operationClass.getDeclaredConstructor().newInstance();
+        } catch (IllegalAccessException | NoSuchMethodException | InvocationTargetException | InstantiationException e) {
+            e.printStackTrace();
+        }
+        paramTypes = new Class[]{int.class, int.class};
+        try {
+            method.put(getResult, operationClass.getMethod(getResult, paramTypes));
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+        param = new Object[]{operand1, operand2};
+        try {
+            result = (String) method.get(getResult).invoke(operationClass, param);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+*/
+        //if (result == null) throw new NullPointerException("result = null");
         return result;
     }
-
-    //public void setOperationsList(List<Class<?>> allClassesFrom) {this.OpreationClass = allClassesFrom;}
-
-
-
-
-    /*    public boolean isOperation(int actualIntOperation, String ExpectedOparationInString){
-        if (getOperationIntByString(ExpectedOparationInString) == actualIntOperation)
-            return (true);
-        else return false;
-*/
-
-
-
-
-
-
-/*    public String getResult() {
-        if (result == null) return (defaultResult);
-        return result;
-    }
-*/
-
 
 }
