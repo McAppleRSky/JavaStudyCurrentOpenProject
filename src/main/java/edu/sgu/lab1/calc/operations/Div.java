@@ -7,7 +7,8 @@ public class Div extends Operation {
 
     public Div(){
         symbol = '/';
-        operationAdd(symbol, this);
+        operationAdd(symbol//, this
+                            );
     }
 
     @Override

@@ -4,9 +4,11 @@ public class Minus extends Operation {
 
     //private char symbol = '-';
     private int intMnemonic = Integer.MAX_VALUE;
+
     public Minus(){
         symbol = '-';
-        operationAdd(symbol, this);
+        operationAdd(symbol//, this
+                            );
     }
 
     @Override

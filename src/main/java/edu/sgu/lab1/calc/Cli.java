@@ -1,21 +1,22 @@
 package edu.sgu.lab1.calc;
 
-import edu.sgu.lab1.calc.operations.Operation;
-import org.reflections.Reflections;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.Iterator;
-import java.util.Set;
 
 public class Cli {
 
-    private static Calc calc = new Calc();
-    //private static OparationsBuilder oparationsBuilder = new OparationsBuilder("");
+    private static Calc calc;
 
     public static void main(String[] args) {
 
-        System.out.println( calc.solve(args) );
+        try {
+            calc = new Calc();
+            System.out.println( calc.solve(args) );
+        } catch (ClassNotFoundException | InstantiationException | InvocationTargetException | IllegalAccessException | NoSuchMethodException e) {
+            e.printStackTrace();
+        }
     }
 }
 

@@ -14,17 +14,19 @@ public abstract class Operation {
 //    public String getSymbols(){return symbols;};
 
     protected static HashMap<Character, Integer> intMnemonics = new HashMap<>();
-    protected static HashMap<Integer, Object> operations = new HashMap<>();
+//    protected static HashMap<Integer, Object> operations = new HashMap<>();
 
-    protected void operationAdd(char symbol, Object operation){
+        protected void operationAdd(char symbol//, Object operation
+                                                ){
         //StringBuilder stringBuilder = new StringBuilder(symbols);
         //symbols = stringBuilder.append(symbol).toString();
-        Integer intMnemonic = mnemonic(symbol);
+        Integer intMnemonic = genMnemonic(symbol);
         intMnemonics.put(symbol, intMnemonic);
-        operations.put(intMnemonic, operation);
+        //operations.put(intMnemonic, operation);
     }
 
-    public Integer mnemonic(char symbol){
+
+    public Integer genMnemonic(char symbol){
         Integer result = null;
         result = Integer.valueOf((byte)symbol);
         if ((result == null) || (result==0)) throw new NullPointerException("No mnemonics");
@@ -33,7 +35,7 @@ public abstract class Operation {
 
     public Integer getMnemonic(){
         Integer result = null;
-        result = mnemonic(symbol);
+        result = genMnemonic(symbol);
         if ((result == null) || (result==0)) throw new NullPointerException("Can't return mnemonics");
         return result;
     }
@@ -43,8 +45,9 @@ public abstract class Operation {
         return intMnemonics;
     };
 
-    public HashMap<Integer, Object> getOperations(){
+    /*    public HashMap<Integer, Object> getOperations(){
         if (operations == null ) throw new NullPointerException("No operations");
         return operations;
     };
+*/
 }
