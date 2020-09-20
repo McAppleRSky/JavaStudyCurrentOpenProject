@@ -1,8 +1,6 @@
 package edu.sgu.lab1.calc;
 
 import edu.sgu.lab1.calc.operations.Operation;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.reflections.Reflections;
 
 import java.lang.reflect.InvocationTargetException;
@@ -10,10 +8,12 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.logging.Logger;
 
 public class Calc {
 
-    private static final Logger logger = LogManager.getLogger(Cli.class);
+    //private static final Logger logger = LogManager.getLogger(Cli.class);
+    private static final java.util.logging.Logger logger = Logger.getLogger(Cli.class.getName());
 
     protected String prefixPackage = "edu.sgu.lab1.calc.operations";
     protected HashMap<Integer, Integer> intsMnemonicAndValues = new HashMap<>();
@@ -81,7 +81,7 @@ public class Calc {
 
     protected boolean tstArgsCount(String[] tstStrs) {
         if (tstStrs.length < 3) return false;
-        else if (tstStrs.length > 3) logger.warn("Too match parameters");
+        else if (tstStrs.length > 3) logger.info("Too match parameters");
         return true;
     }
 

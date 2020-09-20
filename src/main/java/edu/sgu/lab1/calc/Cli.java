@@ -1,11 +1,11 @@
 package edu.sgu.lab1.calc;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.lang.reflect.InvocationTargetException;
+import java.util.logging.Logger;
 
 public class Cli {
+
+    private static final Logger logger = Logger.getLogger(Calc.class.getName());
 
     private static Calc calc;
 
