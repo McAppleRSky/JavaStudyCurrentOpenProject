@@ -1,4 +1,0 @@
-edu/sgu/lab1/calc/CalcTest.java
- edu.sgu.lab1.calc.CalcTest
-edu/sgu/lab1/calc/operations/OperationsTest.java
- edu.sgu.lab1.calc.operations.OperationsTest

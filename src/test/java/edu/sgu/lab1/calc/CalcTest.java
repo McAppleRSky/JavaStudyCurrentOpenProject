@@ -126,7 +126,7 @@ public class CalcTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertEquals("1.0", calc.solve(args));
+        assertEquals("1", calc.solve(args));
     }
     @Test
     public void testMinus() throws Exception {

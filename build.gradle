@@ -1,15 +1,43 @@
 plugins {
     id 'java'
+//    id 'net.nemerosa.versioning' version '2.14.0'
 }
 
 group 'edu.sgu'
 version '1.0-SNAPSHOT'
+//sourceCompatibility = 11
+//targetCompatibility = 11
 
-jar {
+//create a single Jar with all dependencies
+task extJar(type: Jar, dependsOn: build) {
     manifest {
-        attributes 'Main-Class': 'edu.sgu.lab1.calc.Cli'
+        attributes 'Implementation-Title': 'Calc cli 4 lab1',
+//                'Implementation-Version': version,
+                'Main-Class': 'edu.sgu.lab1.calc.Cli',
+                'Class-Path': '../../repository/lib',
+                'Built-By'       : System.properties['user.name'],
+                'Build-Timestamp': new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").format(new Date()),
+//        'Build-Revision' : versioning.info.commit,
+                'Created-By': "Gradle ${gradle.gradleVersion}",
+                'Build-Jdk': "${System.properties['java.version']} (${System.properties['java.vendor']} ${System.properties['java.vm.version']})",
+                'Build-OS': "${System.properties['os.name']} ${System.properties['os.arch']} ${System.properties['os.version']}"
     }
+    baseName = project.name + '-full'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
 }
+/*jar {
+    manifest {
+        attributes 'Main-Class': 'edu.sgu.lab1.calc.Cli',
+        'Class-Path': '../../repository/lib',
+        'Built-By'       : System.properties['user.name'],
+        'Build-Timestamp': new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").format(new Date()),
+//        'Build-Revision' : versioning.info.commit,
+        'Created-By': "Gradle ${gradle.gradleVersion}",
+        'Build-Jdk': "${System.properties['java.version']} (${System.properties['java.vendor']} ${System.properties['java.vm.version']})",
+        'Build-OS': "${System.properties['os.name']} ${System.properties['os.arch']} ${System.properties['os.version']}"
+    }
+}*/
 
 repositories {
     flatDir {
@@ -32,10 +60,11 @@ dependencies {
 //    compile group: 'org.slf4j', name: 'slf4j-api', version: '2.0.0-alpha1'
 }
 
-defaultTasks 'runCalc'
+defaultTasks 'extJar'
 
 //application {mainClassName = "org.example,lab1.calc.Cli"}
 task runCalc(type: JavaExec, dependsOn: build){
-  main = 'edu.sgu.lab1.calc.Cli'
-  classpath sourceSets.main.runtimeClasspath
+    classpath sourceSets.main.runtimeClasspath
+    main = 'edu.sgu.lab1.calc.Cli'
+    args "2 * 2"
 }

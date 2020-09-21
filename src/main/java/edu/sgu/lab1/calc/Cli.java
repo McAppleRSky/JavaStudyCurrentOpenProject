@@ -10,13 +10,14 @@ public class Cli {
     private static Calc calc;
 
     public static void main(String[] args) {
-
-        try {
+        if(args.length == 0) System.out.println("?! Need input parameters (type trough delimiter whitespace. Mask: digit, operation, digit). ");
+        else try {
             calc = new Calc();
-            System.out.println( calc.solve(args) );
+            System.out.println( " "+args[0] + " = " + calc.solve(args[0].split(" ")) );
         } catch (ClassNotFoundException | InstantiationException | InvocationTargetException | IllegalAccessException | NoSuchMethodException e) {
             e.printStackTrace();
         }
+
     }
 }
 

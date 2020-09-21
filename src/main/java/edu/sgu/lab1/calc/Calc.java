@@ -81,7 +81,7 @@ public class Calc {
 
     protected boolean tstArgsCount(String[] tstStrs) {
         if (tstStrs.length < 3) return false;
-        else if (tstStrs.length > 3) logger.info("Too match parameters");
+        else if (tstStrs.length > 3) logger.warning("Too match parameters");
         return true;
     }
 

@@ -13,7 +13,7 @@ public class Div extends Operation {
 
     @Override
     public String getResult(int operand1, int operand2) {
-        return Double.toString(operand1 / operand2);
+        return Integer.toString(operand1 / operand2);
     }
 
 }
