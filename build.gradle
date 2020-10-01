@@ -61,10 +61,11 @@ dependencies {
 }
 
 defaultTasks 'extJar'
+//defaultTasks 'runCalc'
 
 //application {mainClassName = "org.example,lab1.calc.Cli"}
 task runCalc(type: JavaExec, dependsOn: build){
     classpath sourceSets.main.runtimeClasspath
     main = 'edu.sgu.lab1.calc.Cli'
-    args "2 * 2"
+    args "11 + 1"
 }

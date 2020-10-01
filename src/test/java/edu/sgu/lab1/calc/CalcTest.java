@@ -10,9 +10,9 @@ public class CalcTest {
 
     @Test
     public void testConstructor() {
-        Calc calc = null;
+        edu.sgu.lab1.calc.Calc calc = null;
         try {
-            calc = new Calc();
+            calc = new edu.sgu.lab1.calc.Calc();
         } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException | NullPointerException e) {
             e.printStackTrace();
         } catch (Exception e) {
@@ -20,14 +20,14 @@ public class CalcTest {
         }
         assertEquals("edu.sgu.lab1.calc.operations", calc.prefixPackage);
         assertEquals(4, calc.method.size());
-        assertEquals(4, calc.listSymbolsMnemonics.size());
-        assertEquals(4, calc.listMnemonicsOperations.size());
+        assertEquals(8, calc.listSymbolsMnemonics.size());
+        assertEquals(8, calc.listMnemonicsOperations.size());
     }
     @Test
     public void testSymbolOperation() {
-        Calc calc = null;
+        edu.sgu.lab1.calc.Calc calc = null;
         try {
-            calc = new Calc();
+            calc = new edu.sgu.lab1.calc.Calc();
         } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException | NullPointerException e) {
             e.printStackTrace();
         } catch (Exception e) {
@@ -41,9 +41,9 @@ public class CalcTest {
     }
     @Test
     public void testMnemonic() {
-        Calc calc = null;
+        edu.sgu.lab1.calc.Calc calc = null;
         try {
-            calc = new Calc();
+            calc = new edu.sgu.lab1.calc.Calc();
         } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException | NullPointerException e) {
             e.printStackTrace();
         } catch (Exception e) {
@@ -65,9 +65,9 @@ public class CalcTest {
     }
     @Test
     public void testMnemonicValue() {
-        Calc calc = null;
+        edu.sgu.lab1.calc.Calc calc = null;
         try {
-            calc = new Calc();
+            calc = new edu.sgu.lab1.calc.Calc();
         } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException | NullPointerException e) {
             e.printStackTrace();
         } catch (Exception e) {
@@ -92,9 +92,9 @@ public class CalcTest {
     @Test
     public void testExpression() throws Exception {
         String[] args = {"1","/","1"};
-        Calc calc = null;
+        edu.sgu.lab1.calc.Calc calc = null;
         try {
-            calc = new Calc();
+            calc = new edu.sgu.lab1.calc.Calc();
         } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException | NullPointerException e) {
             e.printStackTrace();
         } catch (Exception e) {
@@ -105,9 +105,9 @@ public class CalcTest {
     @Test
     public void testNotExpression() throws Exception {
         String[] args = {"/","0","_"};
-        Calc calc = null;
+        edu.sgu.lab1.calc.Calc calc = null;
         try {
-            calc = new Calc();
+            calc = new edu.sgu.lab1.calc.Calc();
         } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException | NullPointerException e) {
             e.printStackTrace();
         } catch (Exception e) {
@@ -118,9 +118,9 @@ public class CalcTest {
     @Test
     public void testSimpleDiv() throws Exception {
         String[] args = {"1","/","1"};
-        Calc calc = null;
+        edu.sgu.lab1.calc.Calc calc = null;
         try {
-            calc = new Calc();
+            calc = new edu.sgu.lab1.calc.Calc();
         } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException | NullPointerException e) {
             e.printStackTrace();
         } catch (Exception e) {
@@ -131,9 +131,9 @@ public class CalcTest {
     @Test
     public void testMinus() throws Exception {
         String[] args = {"1","-","1"};
-        Calc calc = null;
+        edu.sgu.lab1.calc.Calc calc = null;
         try {
-            calc = new Calc();
+            calc = new edu.sgu.lab1.calc.Calc();
         } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException | NullPointerException e) {
             e.printStackTrace();
         } catch (Exception e) {
@@ -144,9 +144,9 @@ public class CalcTest {
     @Test
     public void testPlus() throws Exception {
         String[] args = {"1","+","1"};
-        Calc calc = null;
+        edu.sgu.lab1.calc.Calc calc = null;
         try {
-            calc = new Calc();
+            calc = new edu.sgu.lab1.calc.Calc();
         } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException | NullPointerException e) {
             e.printStackTrace();
         } catch (Exception e) {
@@ -157,14 +157,56 @@ public class CalcTest {
     @Test
     public void testMult() throws Exception {
         String[] args = {"1","*","1"};
-        Calc calc = null;
+        edu.sgu.lab1.calc.Calc calc = null;
         try {
-            calc = new Calc();
+            calc = new edu.sgu.lab1.calc.Calc();
         } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException | NullPointerException e) {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }
         assertEquals("1", calc.solve(args));
+    }
+    @Test
+    public void testDegree() throws Exception {
+        String[] args = new String[1];
+        args[0] = "3 ^ 3";
+        edu.sgu.lab1.calc.Calc calc = null;
+        try {
+            calc = new edu.sgu.lab1.calc.Calc();
+        } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException | NullPointerException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        assertEquals("27", calc.solve(args[0].split(" ")));
+    }
+    @Test
+    public void testPerimeter() throws Exception {
+        String[] args = new String[1];
+        args[0] = "S 13 5";
+        edu.sgu.lab1.calc.Calc calc = null;
+        try {
+            calc = new edu.sgu.lab1.calc.Calc();
+        } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException | NullPointerException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        assertEquals("32", calc.solve(args[0].split(" ")));
+    }
+    @Test
+    public void testArea() throws Exception {
+        String[] args = new String[1];
+        args[0] = "P 13 5";
+        edu.sgu.lab1.calc.Calc calc = null;
+        try {
+            calc = new edu.sgu.lab1.calc.Calc();
+        } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException | NullPointerException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        assertEquals("31", calc.solve(args[0].split(" ")));
     }
 }

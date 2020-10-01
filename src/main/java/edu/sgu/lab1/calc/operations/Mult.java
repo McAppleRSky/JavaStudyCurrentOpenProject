@@ -2,13 +2,11 @@ package edu.sgu.lab1.calc.operations;
 
 public class Mult extends Operation {
 
-    //private char symbol = '*';
     private int intMnemonic = Integer.MAX_VALUE;
 
     public Mult(){
         symbol = '*';
-        operationAdd(symbol//, this
-                            );
+        operationAdd(symbol);
     }
 
     @Override

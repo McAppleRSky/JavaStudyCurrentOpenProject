@@ -71,12 +71,24 @@ public class Calc {
     }
 
     protected String solve(String[] Args) throws InvocationTargetException, IllegalAccessException {
-        String expectedSymbolExpression = "ioi";
-        if (!tstArgsCount(Args)) return ("Too many parameters");
-        else if (!expectedSymbolExpression.equals(getActualSymbolExpression(Args)))
-            return ("Can not solve expression for this parameters");
-        else
-            return oparate(intsMnemonicAndValues.get(1), intsMnemonicAndValues.get(0), intsMnemonicAndValues.get(2));
+ /*       String expectedSymbolExpression = "ioi";
+  *     if (!tstArgsCount(Args)) return ("Too many parameters");
+  *     else if (!expectedSymbolExpression.equals(getActualSymbolExpression(Args)))
+  *         return ("Can not solve expression for this parameters");
+  *     else
+  *         return oparate(intsMnemonicAndValues.get(1), intsMnemonicAndValues.get(0), intsMnemonicAndValues.get(2));
+  ***********/
+        String result;
+        switch (getActualSymbolExpression(Args)) {
+            case "ioi": result = oparate(intsMnemonicAndValues.get(1), intsMnemonicAndValues.get(0), intsMnemonicAndValues.get(2));
+                break;
+            case "oii": result = oparate(intsMnemonicAndValues.get(0), intsMnemonicAndValues.get(1), intsMnemonicAndValues.get(2));
+                break;
+            default:
+                result = ("Can not solve expression for this parameters");
+                break;
+        }
+        return result;
     }
 
     protected boolean tstArgsCount(String[] tstStrs) {
@@ -112,10 +124,9 @@ public class Calc {
     }
 
     protected String oparate(Integer mnemonicOperation, Integer operand1, Integer operand2) throws InvocationTargetException, IllegalAccessException {
-        String result = null;
+        String result;
         param = new Object[]{};
-        Integer lastMnemonicOperation = null;
-        lastMnemonicOperation = (Integer) method.get(getMnemonic).invoke(operationInstance, param);
+        Integer lastMnemonicOperation = (Integer) method.get(getMnemonic).invoke(operationInstance, param);
         if (lastMnemonicOperation == null) throw new NullPointerException("Can't mnemonic read last");
         else {
             param = new Object[]{operand1, operand2};
