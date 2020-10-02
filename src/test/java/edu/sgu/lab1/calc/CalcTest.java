@@ -20,8 +20,8 @@ public class CalcTest {
         }
         assertEquals("edu.sgu.lab1.calc.operations", calc.prefixPackage);
         assertEquals(4, calc.method.size());
-        assertEquals(9, calc.listSymbolsMnemonics.size());
-        assertEquals(9, calc.listMnemonicsOperations.size());
+        assertEquals(11, calc.listSymbolsMnemonics.size());
+        assertEquals(11, calc.listMnemonicsOperations.size());
     }
     @Test
     public void testSymbolOperation() {
@@ -239,7 +239,7 @@ public class CalcTest {
         assertEquals("oi ", calc.getActualSymbolExpression(arg.split(" ")));
     }
     @Test
-    public void testfibonacci() throws Exception {
+    public void testFibonacci() throws Exception {
         String[] args = new String[1];
         args[0] = "F 10";
         edu.sgu.lab1.calc.Calc calc = null;
@@ -277,6 +277,34 @@ public class CalcTest {
             e.printStackTrace();
         }
         assertEquals("6", calc.solve(args));
+    }
+    @Test
+    public void testRound() throws Exception {
+        String[] args = new String[1];
+        args[0] = "C 13";
+        edu.sgu.lab1.calc.Calc calc = null;
+        try {
+            calc = new edu.sgu.lab1.calc.Calc();
+        } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException | NullPointerException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        assertEquals("81,7", calc.solve(args[0].split(" ")));
+    }
+    @Test
+    public void testAreaRound() throws Exception {
+        String[] args = new String[1];
+        args[0] = "R 13";
+        edu.sgu.lab1.calc.Calc calc = null;
+        try {
+            calc = new edu.sgu.lab1.calc.Calc();
+        } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException | NullPointerException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        assertEquals("530,93", calc.solve(args[0].split(" ")));
     }
 
 }
