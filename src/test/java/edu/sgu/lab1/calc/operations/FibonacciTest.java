@@ -2,50 +2,50 @@ package edu.sgu.lab1.calc.operations;
 
 import org.junit.Test;
 
-import java.lang.reflect.InvocationTargetException;
+//import java.lang.reflect.InvocationTargetException;
 
 import static org.junit.Assert.*;
 
 public class FibonacciTest {
 
     @Test
-    public void testIsFibonacciMax() {
-        Fibonacci fibonacci = new Fibonacci();
-        assertFalse(fibonacci.isFibonacci(Integer.MAX_VALUE, 0));
-    }
-    @Test
     public void testIsFibonacci0() {
         Fibonacci fibonacci = new Fibonacci();
-        assertFalse(fibonacci.isFibonacci(1, 0));
+        assertEquals(fibonacci.getResult(0, 0), fibonacci.unSolveMsg);
+        assertEquals(fibonacci.getResult(-1, 0), fibonacci.unSolveMsg);
+        //assertEquals(0, fibonacci.fibonacciSumm(1,1,0));
     }
     @Test
     public void testIsFibonacci1() {
         Fibonacci fibonacci = new Fibonacci();
-        assertTrue (fibonacci.isFibonacci(1, 1));
+        assertEquals(2, fibonacci.fibonacciSumm(1,1,1));
+    }
+    @Test
+    public void testIsFibonacci2() {
+        Fibonacci fibonacci = new Fibonacci();
+        assertEquals(3, fibonacci.fibonacciSumm(1,1,2));
     }
     @Test
     public void testIsFibonacci3() {
         Fibonacci fibonacci = new Fibonacci();
-        assertTrue (fibonacci.isFibonacci(1, 3));
+        assertEquals(5, fibonacci.fibonacciSumm(1,1,3));
     }
     @Test
-    public void testIsFibonacci4() {
+    public void testIsFibonacci9() {
         Fibonacci fibonacci = new Fibonacci();
-        assertFalse(fibonacci.isFibonacci(1,4));
+        assertEquals(89, fibonacci.fibonacciSumm(1,1,9));
     }
     @Test
-    public void testIsFibonacci5() {
+    public void testIsFibonacciMax() {
         Fibonacci fibonacci = new Fibonacci();
-        assertTrue (fibonacci.isFibonacci(1,5));
+        assertTrue(fibonacci.fibonacciSumm(1,1,44)>0);
+        assertEquals(1836311903, fibonacci.fibonacciSumm(1,1,44));
     }
     @Test
-    public void testIsFibonacci8() {
+    public void testIsFibonacciOver() {
         Fibonacci fibonacci = new Fibonacci();
-        assertTrue (fibonacci.isFibonacci(1,8));
+        assertTrue(fibonacci.fibonacciSumm(1,1,45)<0);
+        assertEquals(-1323752223, fibonacci.fibonacciSumm(1,1,45));
     }
-    @Test
-    public void testIsFibonacci17711() {
-        Fibonacci fibonacci = new Fibonacci();
-        assertTrue (fibonacci.isFibonacci(1,17711));
-    }
+
 }

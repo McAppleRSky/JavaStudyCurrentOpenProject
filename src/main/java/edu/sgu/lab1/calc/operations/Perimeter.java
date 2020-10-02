@@ -7,6 +7,7 @@ public class Perimeter extends Operation {
     public Perimeter(){
         symbol = 'P';
         operationAdd(symbol);
+        name = "Perimeter";
     }
 
     @Override

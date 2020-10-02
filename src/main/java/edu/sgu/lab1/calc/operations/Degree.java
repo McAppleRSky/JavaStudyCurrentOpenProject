@@ -7,6 +7,7 @@ public class Degree extends Operation {
     public Degree(){
         symbol = '^';
         operationAdd(symbol);
+        name = "Degree";
     }
 
     @Override

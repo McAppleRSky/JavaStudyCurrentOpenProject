@@ -209,4 +209,34 @@ public class CalcTest {
         }
         assertEquals("31", calc.solve(args[0].split(" ")));
     }
+
+    @Test
+    public void testOneOperand() throws Exception {
+//        String[] args = new String[1];
+        String arg = "F 1";
+        edu.sgu.lab1.calc.Calc calc = null;
+        try {
+            calc = new edu.sgu.lab1.calc.Calc();
+        } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException | NullPointerException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        assertEquals("oi ", calc.getActualSymbolExpression(arg.split(" ")));
+    }
+    @Test
+    public void testfibonacci() throws Exception {
+        String[] args = new String[1];
+        args[0] = "F 10";
+        edu.sgu.lab1.calc.Calc calc = null;
+        try {
+            calc = new edu.sgu.lab1.calc.Calc();
+        } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException | NullPointerException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        assertEquals("144", calc.solve(args[0].split(" ")));
+    }
+
 }

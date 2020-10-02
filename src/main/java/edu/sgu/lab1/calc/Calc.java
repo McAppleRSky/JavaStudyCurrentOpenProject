@@ -70,7 +70,7 @@ public class Calc {
         return result;
     }
 
-    protected String solve(String[] Args) throws InvocationTargetException, IllegalAccessException {
+    protected String solve(String[] args) throws InvocationTargetException, IllegalAccessException {
  /*       String expectedSymbolExpression = "ioi";
   *     if (!tstArgsCount(Args)) return ("Too many parameters");
   *     else if (!expectedSymbolExpression.equals(getActualSymbolExpression(Args)))
@@ -78,29 +78,40 @@ public class Calc {
   *     else
   *         return oparate(intsMnemonicAndValues.get(1), intsMnemonicAndValues.get(0), intsMnemonicAndValues.get(2));
   ***********/
-        String result;
-        switch (getActualSymbolExpression(Args)) {
-            case "ioi": result = oparate(intsMnemonicAndValues.get(1), intsMnemonicAndValues.get(0), intsMnemonicAndValues.get(2));
+        String result, actualSymbolExpression = getActualSymbolExpression(args)
+                //,sub
+                ;
+        if (args.length > 3) logger.warning("Too match parameters (more then 3)");
+        switch (actualSymbolExpression) {
+            case "ioi":
+                result = oparate(intsMnemonicAndValues.get(1), intsMnemonicAndValues.get(0), intsMnemonicAndValues.get(2));
                 break;
             case "oii": result = oparate(intsMnemonicAndValues.get(0), intsMnemonicAndValues.get(1), intsMnemonicAndValues.get(2));
                 break;
             default:
+                //sub = actualSymbolExpression.substring(0, 2);
+                if (actualSymbolExpression.substring(0, 2).equals("oi")) {
+                    if (args.length > 2) logger.warning("Too match parameters (more then 2)");
+                    result = oparate(intsMnemonicAndValues.get(0), intsMnemonicAndValues.get(1), 0);
+                    break;
+                }
                 result = ("Can not solve expression for this parameters");
                 break;
         }
         return result;
     }
-
-    protected boolean tstArgsCount(String[] tstStrs) {
+/*    protected boolean tstArgsCount(String[] tstStrs) {
         if (tstStrs.length < 3) return false;
         else if (tstStrs.length > 3) logger.warning("Too match parameters");
         return true;
     }
+*/
 
     protected String getActualSymbolExpression(String[] values) throws InvocationTargetException, IllegalAccessException {
         StringBuilder actualExpression = new StringBuilder("   ");
         for (int i = 0; i < actualExpression.length(); i++) {
-            actualExpression.setCharAt(i, getSymbolol_saveToMnemonicsValues(i, values[i]));
+            if(i<values.length) //for one operand (two arguments)
+                actualExpression.setCharAt(i, getSymbolol_saveToMnemonicsValues(i, values[i]));
         }
         return actualExpression.toString();
     }

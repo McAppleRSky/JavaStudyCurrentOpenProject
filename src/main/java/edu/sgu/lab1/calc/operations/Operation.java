@@ -4,9 +4,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-public abstract class Operation {
+public abstract class Operation{
+
+    protected String unSolveMsg = "Can't solve";
 
     protected char symbol;
+
+    protected String name;
 
     public abstract String getResult(int operand1, int operand2);
 

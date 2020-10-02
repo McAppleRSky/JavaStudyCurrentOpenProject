@@ -10,8 +10,8 @@ public class Cli {
 
     private static Calc calc;
     final private static String[] msg = {"Variant 1:", " + plus; - minus; * multiply; / division;",
-            "Variant 2:"," ^ degree;","Variant 3"," P - perimeter, S - square of right triangle;",
-    "Variant 4:", " F - Fibonacci summ sequence (positive) (aruments: source element, number elements. Source element mast be 1)."};
+            "Variant 2:"," ^ degree;","Variant 3:"," P - perimeter of right triangle by cathetuses, S - square of right triangle by cathetuses;",
+    "Variant 4:", " F - Fibonacci summ sequence (positive). Arguments: number iteration summ."};
 
     public static void main(String[] args) {
         if(args.length == 0) {

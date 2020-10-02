@@ -7,6 +7,7 @@ public class Div extends Operation {
     public Div(){
         symbol = '/';
         operationAdd(symbol);
+        name = "Div";
     }
 
     @Override
