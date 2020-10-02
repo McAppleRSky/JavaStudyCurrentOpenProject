@@ -20,8 +20,8 @@ public class CalcTest {
         }
         assertEquals("edu.sgu.lab1.calc.operations", calc.prefixPackage);
         assertEquals(4, calc.method.size());
-        assertEquals(8, calc.listSymbolsMnemonics.size());
-        assertEquals(8, calc.listMnemonicsOperations.size());
+        assertEquals(9, calc.listSymbolsMnemonics.size());
+        assertEquals(9, calc.listMnemonicsOperations.size());
     }
     @Test
     public void testSymbolOperation() {
@@ -251,6 +251,32 @@ public class CalcTest {
             e.printStackTrace();
         }
         assertEquals("144", calc.solve(args[0].split(" ")).substring(30, 33));
+    }
+    @Test
+    public void testNodFull() throws Exception {
+        String[] args = {"N","20","4"};
+        edu.sgu.lab1.calc.Calc calc = null;
+        try {
+            calc = new edu.sgu.lab1.calc.Calc();
+        } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException | NullPointerException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        assertEquals("4", calc.solve(args));
+    }
+    @Test
+    public void testNodPart() throws Exception {
+        String[] args = {"N","12","18"};
+        edu.sgu.lab1.calc.Calc calc = null;
+        try {
+            calc = new edu.sgu.lab1.calc.Calc();
+        } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException | NullPointerException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        assertEquals("6", calc.solve(args));
     }
 
 }
