@@ -116,8 +116,8 @@ public class CalcTest {
         assertEquals(calc.getActualSymbolExpression(args),"oin");
     }
     @Test
-    public void testSimpleDiv() throws Exception {
-        String[] args = {"1","/","1"};
+    public void testFullDiv() throws Exception {
+        String[] args = {"20","/","4"};
         edu.sgu.lab1.calc.Calc calc = null;
         try {
             calc = new edu.sgu.lab1.calc.Calc();
@@ -126,7 +126,21 @@ public class CalcTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertEquals("1", calc.solve(args));
+        assertEquals("5", calc.solve(args).substring(0,1));
+    }
+    @Test
+    public void testPartDiv() throws Exception {
+        String[] args = {"14","/","3"};
+        edu.sgu.lab1.calc.Calc calc = null;
+        try {
+            calc = new edu.sgu.lab1.calc.Calc();
+        } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException | NullPointerException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        assertEquals("4", calc.solve(args).substring(7, 8));
+        assertEquals("2", calc.solve(args).substring(19));
     }
     @Test
     public void testMinus() throws Exception {
@@ -236,7 +250,7 @@ public class CalcTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertEquals("144", calc.solve(args[0].split(" ")));
+        assertEquals("144", calc.solve(args[0].split(" ")).substring(30, 33));
     }
 
 }

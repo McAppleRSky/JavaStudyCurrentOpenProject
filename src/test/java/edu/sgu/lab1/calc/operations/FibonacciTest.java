@@ -13,7 +13,6 @@ public class FibonacciTest {
         Fibonacci fibonacci = new Fibonacci();
         assertEquals(fibonacci.getResult(0, 0), fibonacci.unSolveMsg);
         assertEquals(fibonacci.getResult(-1, 0), fibonacci.unSolveMsg);
-        //assertEquals(0, fibonacci.fibonacciSumm(1,1,0));
     }
     @Test
     public void testIsFibonacci1() {

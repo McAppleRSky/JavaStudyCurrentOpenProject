@@ -7,7 +7,6 @@ public class Plus extends Operation {
     public Plus(){
         symbol = '+';
         operationAdd(symbol);
-        name = "Plus";
     }
 
     @Override

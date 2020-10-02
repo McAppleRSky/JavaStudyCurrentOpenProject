@@ -7,7 +7,6 @@ public class Area extends Operation {
     public Area(){
         symbol = 'S';
         operationAdd(symbol);
-        name = "Area";
     }
 
     @Override

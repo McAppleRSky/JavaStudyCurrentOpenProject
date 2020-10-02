@@ -7,7 +7,6 @@ public class Mult extends Operation {
     public Mult(){
         symbol = '*';
         operationAdd(symbol);
-        name = "Mult";
     }
 
     @Override

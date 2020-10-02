@@ -12,7 +12,6 @@ import java.util.logging.Logger;
 
 public class Calc {
 
-    //private static final Logger logger = LogManager.getLogger(Cli.class);
     private static final java.util.logging.Logger logger = Logger.getLogger(Cli.class.getName());
 
     protected String prefixPackage = "edu.sgu.lab1.calc.operations";
@@ -71,16 +70,7 @@ public class Calc {
     }
 
     protected String solve(String[] args) throws InvocationTargetException, IllegalAccessException {
- /*       String expectedSymbolExpression = "ioi";
-  *     if (!tstArgsCount(Args)) return ("Too many parameters");
-  *     else if (!expectedSymbolExpression.equals(getActualSymbolExpression(Args)))
-  *         return ("Can not solve expression for this parameters");
-  *     else
-  *         return oparate(intsMnemonicAndValues.get(1), intsMnemonicAndValues.get(0), intsMnemonicAndValues.get(2));
-  ***********/
-        String result, actualSymbolExpression = getActualSymbolExpression(args)
-                //,sub
-                ;
+        String result, actualSymbolExpression = getActualSymbolExpression(args);
         if (args.length > 3) logger.warning("Too match parameters (more then 3)");
         switch (actualSymbolExpression) {
             case "ioi":
@@ -89,7 +79,6 @@ public class Calc {
             case "oii": result = oparate(intsMnemonicAndValues.get(0), intsMnemonicAndValues.get(1), intsMnemonicAndValues.get(2));
                 break;
             default:
-                //sub = actualSymbolExpression.substring(0, 2);
                 if (actualSymbolExpression.substring(0, 2).equals("oi")) {
                     if (args.length > 2) logger.warning("Too match parameters (more then 2)");
                     result = oparate(intsMnemonicAndValues.get(0), intsMnemonicAndValues.get(1), 0);
@@ -100,12 +89,6 @@ public class Calc {
         }
         return result;
     }
-/*    protected boolean tstArgsCount(String[] tstStrs) {
-        if (tstStrs.length < 3) return false;
-        else if (tstStrs.length > 3) logger.warning("Too match parameters");
-        return true;
-    }
-*/
 
     protected String getActualSymbolExpression(String[] values) throws InvocationTargetException, IllegalAccessException {
         StringBuilder actualExpression = new StringBuilder("   ");

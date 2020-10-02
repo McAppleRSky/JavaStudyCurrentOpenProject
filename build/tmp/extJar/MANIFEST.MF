@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: Calc cli 4 lab1
+Main-Class: edu.sgu.lab1.calc.Cli
+Class-Path: ../../repository/lib
+Built-By: user1
+Build-Timestamp: 2020-10-02T18:43:59.065+0300
+Created-By: Gradle 6.6.1
+Build-Jdk: 11.0.8 (Oracle Corporation 11.0.8+10-LTS)
+Build-OS: Windows 10 amd64 10.0
+

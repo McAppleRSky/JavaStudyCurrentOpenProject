@@ -1,0 +1,4 @@
+edu/sgu/lab1/calc/operations/FibonacciTest.java
+ edu.sgu.lab1.calc.operations.FibonacciTest
+edu/sgu/lab1/calc/CalcTest.java
+ edu.sgu.lab1.calc.CalcTest

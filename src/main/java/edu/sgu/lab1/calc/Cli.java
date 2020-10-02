@@ -11,7 +11,8 @@ public class Cli {
     private static Calc calc;
     final private static String[] msg = {"Variant 1:", " + plus; - minus; * multiply; / division;",
             "Variant 2:"," ^ degree;","Variant 3:"," P - perimeter of right triangle by cathetuses, S - square of right triangle by cathetuses;",
-    "Variant 4:", " F - Fibonacci summ sequence (positive). Arguments: number iteration summ."};
+    "Variant 4:", " F - Fibonacci summ sequence (positive). Arguments: number iteration summ;",
+    "Variant 5:", " M - mod"};
 
     public static void main(String[] args) {
         if(args.length == 0) {
