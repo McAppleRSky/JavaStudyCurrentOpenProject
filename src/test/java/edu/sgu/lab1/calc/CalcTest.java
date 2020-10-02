@@ -3,6 +3,8 @@ package edu.sgu.lab1.calc;
 import org.junit.Test;
 
 import java.lang.reflect.InvocationTargetException;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 
 import static org.junit.Assert.*;
 
@@ -282,6 +284,10 @@ public class CalcTest {
     public void testRound() throws Exception {
         String[] args = new String[1];
         args[0] = "C 13";
+        StringBuilder expectedValue = new StringBuilder("81,7");
+        DecimalFormat format = new DecimalFormat();
+        DecimalFormatSymbols symbols = format.getDecimalFormatSymbols();
+        expectedValue.setCharAt(2,  symbols.getDecimalSeparator());
         edu.sgu.lab1.calc.Calc calc = null;
         try {
             calc = new edu.sgu.lab1.calc.Calc();
@@ -290,12 +296,16 @@ public class CalcTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertEquals("81,7", calc.solve(args[0].split(" ")));
+        assertEquals(expectedValue.toString(), calc.solve(args[0].split(" ")));
     }
     @Test
     public void testAreaRound() throws Exception {
         String[] args = new String[1];
         args[0] = "R 13";
+        StringBuilder expectedValue = new StringBuilder("530,93");
+        DecimalFormat format = new DecimalFormat();
+        DecimalFormatSymbols symbols = format.getDecimalFormatSymbols();
+        expectedValue.setCharAt(3,  symbols.getDecimalSeparator());
         edu.sgu.lab1.calc.Calc calc = null;
         try {
             calc = new edu.sgu.lab1.calc.Calc();
@@ -304,7 +314,7 @@ public class CalcTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertEquals("530,93", calc.solve(args[0].split(" ")));
+        assertEquals(expectedValue.toString(), calc.solve(args[0].split(" ")));
     }
     @Test
     public void testPerimeter() throws Exception {
