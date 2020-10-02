@@ -20,8 +20,8 @@ public class CalcTest {
         }
         assertEquals("edu.sgu.lab1.calc.operations", calc.prefixPackage);
         assertEquals(4, calc.method.size());
-        assertEquals(11, calc.listSymbolsMnemonics.size());
-        assertEquals(11, calc.listMnemonicsOperations.size());
+        assertEquals(13, calc.listSymbolsMnemonics.size());
+        assertEquals(13, calc.listMnemonicsOperations.size());
     }
     @Test
     public void testSymbolOperation() {
@@ -196,7 +196,7 @@ public class CalcTest {
         assertEquals("27", calc.solve(args[0].split(" ")));
     }
     @Test
-    public void testPerimeter() throws Exception {
+    public void testPerimeterT() throws Exception {
         String[] args = new String[1];
         args[0] = "S 13 5";
         edu.sgu.lab1.calc.Calc calc = null;
@@ -210,7 +210,7 @@ public class CalcTest {
         assertEquals("32", calc.solve(args[0].split(" ")));
     }
     @Test
-    public void testArea() throws Exception {
+    public void testAreaT() throws Exception {
         String[] args = new String[1];
         args[0] = "P 13 5";
         edu.sgu.lab1.calc.Calc calc = null;
@@ -305,6 +305,34 @@ public class CalcTest {
             e.printStackTrace();
         }
         assertEquals("530,93", calc.solve(args[0].split(" ")));
+    }
+    @Test
+    public void testPerimeter() throws Exception {
+        String[] args = new String[1];
+        args[0] = "p 2 2";
+        edu.sgu.lab1.calc.Calc calc = null;
+        try {
+            calc = new edu.sgu.lab1.calc.Calc();
+        } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException | NullPointerException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        assertEquals("8", calc.solve(args[0].split(" ")));
+    }
+    @Test
+    public void testArea() throws Exception {
+        String[] args = new String[1];
+        args[0] = "q 2 2";
+        edu.sgu.lab1.calc.Calc calc = null;
+        try {
+            calc = new edu.sgu.lab1.calc.Calc();
+        } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException | NullPointerException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        assertEquals("4", calc.solve(args[0].split(" ")));
     }
 
 }
