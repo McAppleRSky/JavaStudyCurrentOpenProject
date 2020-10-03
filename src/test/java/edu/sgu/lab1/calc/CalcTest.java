@@ -22,8 +22,8 @@ public class CalcTest {
         }
         assertEquals("edu.sgu.lab1.calc.operations", calc.prefixPackage);
         assertEquals(4, calc.method.size());
-        assertEquals(15, calc.listSymbolsMnemonics.size());
-        assertEquals(15, calc.listMnemonicsOperations.size());
+        assertEquals(16, calc.listSymbolsMnemonics.size());
+        assertEquals(16, calc.listMnemonicsOperations.size());
     }
     @Test
     public void testSymbolOperation() {
@@ -399,6 +399,20 @@ public class CalcTest {
             e.printStackTrace();
         }
         assertEquals("212", calc.solve(args[0].split(" ")));
+    }
+    @Test
+    public void testLinear() throws Exception {
+        String[] args = new String[1];
+        args[0] = "L 3 -24";
+        edu.sgu.lab1.calc.Calc calc = null;
+        try {
+            calc = new edu.sgu.lab1.calc.Calc();
+        } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException | NullPointerException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        assertEquals("8", calc.solve(args[0].split(" ")));
     }
 
 }
