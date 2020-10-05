@@ -19,7 +19,7 @@ public class Divs extends Operation {
         for (int div = operands[0]; div>0;div--)
             if(operands[0] % div == 0)
                 divList.add(Integer.toString(div));
-        for (Object item:divList.toArray()){
+        for (Object item:divList){
             if(result.length()==0)
                 result.append(item);
             else result.append(", " + item);

@@ -11,7 +11,7 @@ public class Linear extends Operation {
 
     @Override
     public String getResult(int ... operands) {
-        return Integer.toString(0 - operands[1]/operands[0]);
+        return Integer.toString(- operands[1]/operands[0]);
     }
 
 }

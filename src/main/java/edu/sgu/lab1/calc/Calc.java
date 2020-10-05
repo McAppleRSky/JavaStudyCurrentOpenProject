@@ -82,6 +82,9 @@ public class Calc {
         String result, actualSymbolExpression = getActualSymbolExpression(args);
         if (args.length > 4) logger.warning("Too match parameters (more then 3)");
         else switch (args.length) {
+            case 4:
+                logger.info("3 parameters");
+                break;
             case 3:
                 logger.info("2 parameters");
                 break;

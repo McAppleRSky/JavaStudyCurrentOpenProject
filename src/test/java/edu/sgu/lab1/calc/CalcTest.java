@@ -469,9 +469,9 @@ public class CalcTest {
         assertEquals("65536, 32768, 16384, 8192, 4096, 2048, 1024, 512, 256, 128, 64, 32, 16, 8, 4, 2, 1", calc.solve(args[0].split(" ")));
     }
     @Test
-    public void testQuadratic() throws Exception {
+    public void testQuadraticOne() throws Exception {
         String[] args = new String[1];
-        args[0] = "Q 1 2 3";
+        args[0] = "Q 1 -6 9";
         edu.sgu.lab1.calc.Calc calc = null;
         try {
             calc = new edu.sgu.lab1.calc.Calc();
@@ -480,7 +480,35 @@ public class CalcTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertEquals("6", calc.solve(args[0].split(" ")));
+        assertEquals("3.0", calc.solve(args[0].split(" ")));
+    }
+    @Test
+    public void testQuadraticTwo() throws Exception {
+        String[] args = new String[1];
+        args[0] = "Q 1 -8 12";
+        edu.sgu.lab1.calc.Calc calc = null;
+        try {
+            calc = new edu.sgu.lab1.calc.Calc();
+        } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException | NullPointerException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        assertEquals("6.0, 2.0", calc.solve(args[0].split(" ")));
+    }
+    @Test
+    public void testQuadraticEmpty() throws Exception {
+        String[] args = new String[1];
+        args[0] = "Q 5 3 7";
+        edu.sgu.lab1.calc.Calc calc = null;
+        try {
+            calc = new edu.sgu.lab1.calc.Calc();
+        } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException | NullPointerException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        assertEquals("no roots", calc.solve(args[0].split(" ")));
     }
 
 }
