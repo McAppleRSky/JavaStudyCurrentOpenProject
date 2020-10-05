@@ -10,8 +10,8 @@ public class Nod extends Operation {
     }
 
     @Override
-    public String getResult(int operand1, int operand2) {
-        return Integer.toString(NOD(operand1, operand2));
+    public String getResult(int ... operands) {
+        return Integer.toString(NOD(operands[0], operands[1]));
     }
 
     protected int NOD(int m, int n) {

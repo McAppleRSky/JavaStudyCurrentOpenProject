@@ -10,8 +10,8 @@ public class AreaR extends Operation {
     }
 
     @Override
-    public String getResult(int operand1, int operand2) {
-        float value =(float)Math.PI * operand1 * operand1;
+    public String getResult(int ... operands) {
+        float value =(float)Math.PI * operands[0] * operands[0];
       return String.format("%.2f", value);
     }
 

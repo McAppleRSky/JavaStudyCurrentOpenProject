@@ -10,8 +10,8 @@ public class Fahrenheit extends Operation {
     }
 
     @Override
-    public String getResult(int operand1, int operand2) {
-        return Integer.toString((int) (operand1 * 9.0/5 + 32));
+    public String getResult(int ... operands) {
+        return Integer.toString((int) (operands[0] * 9.0/5 + 32));
     }
 
  }

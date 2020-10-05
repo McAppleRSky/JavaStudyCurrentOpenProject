@@ -10,12 +10,12 @@ public class Div extends Operation {
     }
 
     @Override
-    public String getResult(int operand1, int operand2) {
-        int value = operand1 / operand2, operand1Fact = operand2 * value;
-        if (operand1 == operand1Fact)
+    public String getResult(int ... operands) {
+        int value = operands[0] / operands[1], operand1Fact = operands[1] * value;
+        if (operands[0] == operand1Fact)
             return Integer.toString(value) + " (full)";
         else return "part : " + Integer.toString(value)
-                + ", remain : " + Integer.toString(operand1 - operand1Fact);
+                + ", remain : " + Integer.toString(operands[0] - operand1Fact);
     }
 
 }

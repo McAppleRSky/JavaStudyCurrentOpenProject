@@ -1,6 +1,7 @@
 package edu.sgu.lab1.calc;
 
 import edu.sgu.lab1.calc.operations.Operation;
+//import org.apache.commons.lang3.ArrayUtils;
 import org.reflections.Reflections;
 
 import java.lang.reflect.InvocationTargetException;
@@ -8,11 +9,19 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Calc {
 
-    private static final java.util.logging.Logger logger = Logger.getLogger(Cli.class.getName());
+    private static final java.util.logging.Logger logger;
+    static {
+        System.setProperty("java.util.logging.SimpleFormatter.format",
+                "[%1$tF %1$tT] [%4$-7s] %5$s %n");
+        logger = Logger.getLogger(Cli.class.getName());
+        logger.setLevel(Level.WARNING);
+    }
 
     protected String prefixPackage = "edu.sgu.lab1.calc.operations";
     protected HashMap<Integer, Integer> intsMnemonicAndValues = new HashMap<>();
@@ -20,9 +29,9 @@ public class Calc {
     protected HashMap<Integer, PlainOperation> listMnemonicsOperations = new HashMap<>();
     protected HashMap<String, Method> method = new HashMap<>();
     protected String getResult = "getResult",
-                genMnemonic = "genMnemonic",
-                getMnemonic = "getMnemonic",
-                getMnemonics = "getMnemonics";
+            genMnemonic = "genMnemonic",
+            getMnemonic = "getMnemonic",
+            getMnemonics = "getMnemonics";
     protected Class<?> operationClass = null;
     protected Object operationInstance = null;
     protected Class[] paramTypes = null;
@@ -41,7 +50,7 @@ public class Calc {
                     paramTypes = (Class<?>[]) null;
                     method.put(getMnemonic, operationClass.getMethod(getMnemonic, paramTypes));
                 }
-                paramTypes = new Class[]{int.class, int.class};
+                paramTypes = new Class[]{int[].class};
                 method.put(getResult, operationClass.getMethod(getResult, paramTypes));
                 param = new Object[]{};
                 Integer mn = 0;
@@ -71,17 +80,38 @@ public class Calc {
 
     protected String solve(String[] args) throws InvocationTargetException, IllegalAccessException {
         String result, actualSymbolExpression = getActualSymbolExpression(args);
-        if (args.length > 3) logger.warning("Too match parameters (more then 3)");
+        if (args.length > 4) logger.warning("Too match parameters (more then 3)");
+        else switch (args.length) {
+            case 3:
+                logger.info("2 parameters");
+                break;
+            case 2:
+                logger.info("1 parameters");
+                break;
+            case 1:
+                logger.info("No parameters");
+                break;
+            default:
+                logger.warning("No operation");
+                break;
+            }
         switch (actualSymbolExpression) {
             case "ioi":
+                if (args.length > 3) logger.warning("More then 2 parameters");
                 result = oparate(intsMnemonicAndValues.get(1), intsMnemonicAndValues.get(0), intsMnemonicAndValues.get(2));
                 break;
-            case "oii": result = oparate(intsMnemonicAndValues.get(0), intsMnemonicAndValues.get(1), intsMnemonicAndValues.get(2));
+            case "oii":
+                if (args.length > 3) logger.warning("More then 2 parameters");
+                result = oparate(intsMnemonicAndValues.get(0), intsMnemonicAndValues.get(1), intsMnemonicAndValues.get(2));
+                break;
+            case "oiii":
+                if (args.length > 4) logger.warning("More then 3 parameters");
+                result = oparate(intsMnemonicAndValues.get(0), intsMnemonicAndValues.get(1), intsMnemonicAndValues.get(2), intsMnemonicAndValues.get(3));
                 break;
             default:
                 if (actualSymbolExpression.substring(0, 2).equals("oi")) {
-                    if (args.length > 2) logger.warning("Too match parameters (more then 2)");
-                    result = oparate(intsMnemonicAndValues.get(0), intsMnemonicAndValues.get(1), 0);
+                    if (args.length > 2) logger.warning("Too match parameters (more then 1)");
+                    result = oparate(intsMnemonicAndValues.get(0), intsMnemonicAndValues.get(1));
                     break;
                 }
                 result = ("Can not solve expression for this parameters");
@@ -91,11 +121,11 @@ public class Calc {
     }
 
     protected String getActualSymbolExpression(String[] values) throws InvocationTargetException, IllegalAccessException {
-        StringBuilder actualExpression = new StringBuilder("   ");
-        for (int i = 0; i < actualExpression.length(); i++) {
-            if(i<values.length) //for one operand (two arguments)
-                actualExpression.setCharAt(i, getSymbolol_saveToMnemonicsValues(i, values[i]));
-        }
+        StringBuilder actualExpression = new StringBuilder();
+        for (int i = 0; i < values.length; i++)
+//            if (i < values.length) //for count operand (less than four arguments)
+            actualExpression.append(getSymbolol_saveToMnemonicsValues(i, values[i])); //.setCharAt(i, getSymbolol_saveToMnemonicsValues(i, values[i]));
+
         return actualExpression.toString();
     }
 
@@ -117,13 +147,15 @@ public class Calc {
         return listSymbolsMnemonics.containsKey(symbol);
     }
 
-    protected String oparate(Integer mnemonicOperation, Integer operand1, Integer operand2) throws InvocationTargetException, IllegalAccessException {
+    protected String oparate(Integer mnemonicOperation, Integer... operands) throws InvocationTargetException, IllegalAccessException {
         String result;
         param = new Object[]{};
         Integer lastMnemonicOperation = (Integer) method.get(getMnemonic).invoke(operationInstance, param);
         if (lastMnemonicOperation == null) throw new NullPointerException("Can't mnemonic read last");
         else {
-            param = new Object[]{operand1, operand2};
+            int[] intPrimitive = new int[operands.length];
+            for (int i = 0; i < operands.length; i++) intPrimitive[i] = operands[i];
+            param = new Object[]{intPrimitive};
             if (mnemonicOperation == lastMnemonicOperation) {
                 result = (String) method.get(getResult).invoke(operationInstance, param);
             } else {

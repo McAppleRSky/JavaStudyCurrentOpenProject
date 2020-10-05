@@ -1,12 +1,18 @@
 package edu.sgu.lab1.calc;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.IntStream;
 
 public class Cli {
 
-    private static final Logger logger = Logger.getLogger(Calc.class.getName());
+    private static final Logger logger;
+    static {
+        System.setProperty("java.util.logging.SimpleFormatter.format",
+                "[%1$tF %1$tT] [%4$-7s] %5$s %n");
+        logger = Logger.getLogger(Cli.class.getName());
+        logger.setLevel(Level.WARNING);
+    }
 
     private static Calc calc;
     final private static String[] msg = {"Variant 1:", " + plus; - minus; * multiply; / division;",
@@ -14,7 +20,7 @@ public class Cli {
     "Variant 4:", " F - Fibonacci summ sequence (positive). Arguments: number iteration summ;",
     "Variant 5:", " M - mod", "Variant 7:", " N - NOD m, n;", "Variant 8: C - Round by radius; R Round area by radius;",
     "Variant 9: q - area of square; p - perimeter of square;", "Variant 11: c - Fahrenheit to Celsius; f - Celsius to Fahrenheit;",
-    "Variant 14: d - Divisions;",
+    "Variant 13: Q - Quadratic;", "Variant 14: d - Divisions;",
     "Variant 15: linear equation kX+b=0."};
 
     public static void main(String[] args) {

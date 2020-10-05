@@ -10,8 +10,8 @@ public class Minus extends Operation {
     }
 
     @Override
-    public String getResult(int operand1, int operand2)  {
-        return Integer.toString(operand1 - operand2);
+    public String getResult(int ... operands)  {
+        return Integer.toString(operands[0] - operands[1]);
     }
 
 }

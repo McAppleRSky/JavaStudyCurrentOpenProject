@@ -58,6 +58,8 @@ dependencies {
     compile group: 'org.javassist', name: 'javassist', version: '3.27.0-GA'
 // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
 //    compile group: 'org.slf4j', name: 'slf4j-api', version: '2.0.0-alpha1'
+// https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
+//    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.11'
 }
 
 defaultTasks 'extJar'

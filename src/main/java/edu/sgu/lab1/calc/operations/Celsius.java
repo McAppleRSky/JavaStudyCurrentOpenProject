@@ -10,8 +10,8 @@ public class Celsius extends Operation {
     }
 
     @Override
-    public String getResult(int operand1, int operand2) {
-        return Integer.toString((int) (5.0/9*(operand1 - 32)));
+    public String getResult(int ... operands) {
+        return Integer.toString((int) (5.0/9*(operands[0] - 32)));
     }
 
  }

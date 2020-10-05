@@ -10,9 +10,9 @@ public class Round extends Operation {
     }
 
     @Override
-    public String getResult(int operand1, int operand2) {
-        float value = (float)Math.PI * 2 * operand1;
-      return String.format("%.1f", value);
+    public String getResult(int ... operands) {
+        float value = (float)Math.PI * 2 * operands[0];
+        return String.format("%.1f", value);
     }
 
 }

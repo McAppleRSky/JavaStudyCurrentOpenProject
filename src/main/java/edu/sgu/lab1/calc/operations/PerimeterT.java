@@ -10,9 +10,9 @@ public class PerimeterT extends Operation {
     }
 
     @Override
-    public String getResult(int operand1, int operand2) {
-      double c =  Math.sqrt(Math.pow(operand1, 2) + Math.pow(operand2, 2));
-      return Integer.toString((int) c + operand1 + operand2);
+    public String getResult(int ... operands) {
+        double c =  Math.sqrt(Math.pow(operands[0], 2) + Math.pow(operands[1], 2));
+        return Integer.toString((int) c + operands[0] + operands[1]);
     }
 
 }

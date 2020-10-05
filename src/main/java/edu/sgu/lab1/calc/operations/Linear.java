@@ -10,8 +10,8 @@ public class Linear extends Operation {
     }
 
     @Override
-    public String getResult(int operand1, int operand2) {
-      return Integer.toString(0 - operand2/operand1);
+    public String getResult(int ... operands) {
+        return Integer.toString(0 - operands[1]/operands[0]);
     }
 
 }

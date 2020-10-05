@@ -22,8 +22,8 @@ public class CalcTest {
         }
         assertEquals("edu.sgu.lab1.calc.operations", calc.prefixPackage);
         assertEquals(4, calc.method.size());
-        assertEquals(17, calc.listSymbolsMnemonics.size());
-        assertEquals(17, calc.listMnemonicsOperations.size());
+        assertEquals(18, calc.listSymbolsMnemonics.size());
+        assertEquals(18, calc.listMnemonicsOperations.size());
     }
     @Test
     public void testSymbolOperation() {
@@ -228,7 +228,6 @@ public class CalcTest {
 
     @Test
     public void testOneOperand() throws Exception {
-//        String[] args = new String[1];
         String arg = "F 1";
         edu.sgu.lab1.calc.Calc calc = null;
         try {
@@ -238,7 +237,20 @@ public class CalcTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertEquals("oi ", calc.getActualSymbolExpression(arg.split(" ")));
+        assertEquals("oi", calc.getActualSymbolExpression(arg.split(" ")));
+    }
+    @Test
+    public void testThreeOperand() throws Exception {
+        String arg = "Q 0 0 0";
+        edu.sgu.lab1.calc.Calc calc = null;
+        try {
+            calc = new edu.sgu.lab1.calc.Calc();
+        } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException | NullPointerException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        assertEquals("oiii", calc.getActualSymbolExpression(arg.split(" ")));
     }
     @Test
     public void testFibonacci() throws Exception {
@@ -455,6 +467,20 @@ public class CalcTest {
             e.printStackTrace();
         }
         assertEquals("65536, 32768, 16384, 8192, 4096, 2048, 1024, 512, 256, 128, 64, 32, 16, 8, 4, 2, 1", calc.solve(args[0].split(" ")));
+    }
+    @Test
+    public void testQuadratic() throws Exception {
+        String[] args = new String[1];
+        args[0] = "Q 1 2 3";
+        edu.sgu.lab1.calc.Calc calc = null;
+        try {
+            calc = new edu.sgu.lab1.calc.Calc();
+        } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException | NullPointerException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        assertEquals("6", calc.solve(args[0].split(" ")));
     }
 
 }
