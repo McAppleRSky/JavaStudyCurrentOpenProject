@@ -7,11 +7,13 @@ public class Nod extends Operation {
     public Nod(){
         symbol = 'N';//GCD
         operationAdd(symbol);
+        result = new String[1];
     }
 
     @Override
-    public String getResult(int ... operands) {
-        return Integer.toString(NOD(operands[0], operands[1]));
+    public String[] getResult(int ... operands) {
+        result[0] = Integer.toString(NOD(operands[0], operands[1]));
+        return result;
     }
 
     protected int NOD(int m, int n) {

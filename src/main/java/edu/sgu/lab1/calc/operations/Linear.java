@@ -7,11 +7,13 @@ public class Linear extends Operation {
     public Linear (){
         symbol = 'L';
         operationAdd(symbol);
+        result = new String[1];
     }
 
     @Override
-    public String getResult(int ... operands) {
-        return Integer.toString(- operands[1]/operands[0]);
+    public String[] getResult(int ... operands) {
+        result[0] = Integer.toString(- operands[1]/operands[0]);
+        return result;
     }
 
 }

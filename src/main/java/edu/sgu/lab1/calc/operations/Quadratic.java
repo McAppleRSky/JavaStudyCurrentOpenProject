@@ -10,15 +10,16 @@ public class Quadratic  extends Operation {
     public Quadratic (){
         symbol = 'Q';
         operationAdd(symbol);
+        result = new String[1];
     }
 
     @Override
-    public String getResult(int ... operands) {
+    public String[] getResult(int ... operands) {
         List<Float> roots = new ArrayList<>();
         List<Double> sqrtDiscriminants = new ArrayList<>();
-        StringBuilder result = new StringBuilder();
+        StringBuilder resultString = new StringBuilder();
         float discriminant = operands[1]*operands[1]-4*operands[0]*operands[2];
-        if(discriminant < 0) result.append("no roots");
+        if(discriminant < 0) resultString.append("no roots");
         else {
             if(discriminant > 0){
                 sqrtDiscriminants.add(Math.sqrt(discriminant));
@@ -28,11 +29,12 @@ public class Quadratic  extends Operation {
                 roots.add(
                         (float)((-operands[1]+sqrtDiscriminant)/(2*operands[0])) );
             for (float root:roots){
-                if(result.length()==0) result.append(Double.toString(root));
-                else result.append(", " + Float.toString(root));
+                if(resultString.length()==0) resultString.append(Double.toString(root));
+                else resultString.append(", " + Float.toString(root));
             }
         }
-        return result.toString();
+        result[0] = resultString.toString();
+        return result;
     }
 
 }

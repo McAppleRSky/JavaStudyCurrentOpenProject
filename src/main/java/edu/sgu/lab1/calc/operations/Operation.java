@@ -10,7 +10,9 @@ public abstract class Operation{
 
     protected char symbol;
 
-    public abstract String getResult(int ... operands);
+    protected String[] result;
+
+    public abstract String[] getResult(int ... operands);
 
     protected static HashMap<Character, Integer> intMnemonics = new HashMap<>();
 

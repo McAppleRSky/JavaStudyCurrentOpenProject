@@ -7,15 +7,16 @@ public class Fibonacci extends Operation {
     public Fibonacci(){
         symbol = 'F';
         operationAdd(symbol);
+        result = new String[1];
     }
 
     @Override
-    public String getResult(int ... operands) {
+    public String[] getResult(int ... operands) {
         int value;
-        String result = unSolveMsg;
-        if(operands[0]<1)return result;
+        result[0] = unSolveMsg;
+        if (operands[0]<1) return result;
         value = fibonacciSumm(1, 1, operands[0]);
-        result = "value of element #" + operands[0] + " is dec : " + Integer.toString(value)
+        result[0] = "value of element #" + operands[0] + " is dec : " + Integer.toString(value)
                 + ", hex : "+ Integer.toHexString(value)
                 + ", oct : "+ Integer.toOctalString(value)
                 + ", bin : "+ Integer.toBinaryString(value);

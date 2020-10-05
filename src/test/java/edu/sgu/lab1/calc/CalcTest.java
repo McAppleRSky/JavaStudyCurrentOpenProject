@@ -128,7 +128,7 @@ public class CalcTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertEquals("5", calc.solve(args).substring(0,1));
+        assertEquals("5", calc.solve(args)[0].substring(0,1));
     }
     @Test
     public void testPartDiv() throws Exception {
@@ -141,8 +141,8 @@ public class CalcTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertEquals("4", calc.solve(args).substring(7, 8));
-        assertEquals("2", calc.solve(args).substring(19));
+        assertEquals("4", calc.solve(args)[0].substring(7, 8));
+        assertEquals("2", calc.solve(args)[0].substring(19));
     }
     @Test
     public void testMinus() throws Exception {
@@ -155,7 +155,7 @@ public class CalcTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertEquals("0", calc.solve(args));
+        assertEquals("0", calc.solve(args)[0]);
     }
     @Test
     public void testPlus() throws Exception {
@@ -168,7 +168,7 @@ public class CalcTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertEquals("2", calc.solve(args));
+        assertEquals("2", calc.solve(args)[0]);
     }
     @Test
     public void testMult() throws Exception {
@@ -181,7 +181,7 @@ public class CalcTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertEquals("1", calc.solve(args));
+        assertEquals("1", calc.solve(args)[0]);
     }
     @Test
     public void testDegree() throws Exception {
@@ -195,7 +195,7 @@ public class CalcTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertEquals("27", calc.solve(args[0].split(" ")));
+        assertEquals("27", calc.solve(args[0].split(" "))[0]);
     }
     @Test
     public void testPerimeterT() throws Exception {
@@ -209,7 +209,7 @@ public class CalcTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertEquals("32", calc.solve(args[0].split(" ")));
+        assertEquals("32", calc.solve(args[0].split(" "))[0]);
     }
     @Test
     public void testAreaT() throws Exception {
@@ -223,7 +223,7 @@ public class CalcTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertEquals("31", calc.solve(args[0].split(" ")));
+        assertEquals("31", calc.solve(args[0].split(" "))[0]);
     }
 
     @Test
@@ -264,7 +264,7 @@ public class CalcTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertEquals("144", calc.solve(args[0].split(" ")).substring(30, 33));
+        assertEquals("144", calc.solve(args[0].split(" "))[0].substring(30, 33));
     }
     @Test
     public void testNodFull() throws Exception {
@@ -277,7 +277,7 @@ public class CalcTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertEquals("4", calc.solve(args));
+        assertEquals("4", calc.solve(args)[0]);
     }
     @Test
     public void testNodPart() throws Exception {
@@ -290,7 +290,7 @@ public class CalcTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertEquals("6", calc.solve(args));
+        assertEquals("6", calc.solve(args)[0]);
     }
     @Test
     public void testRound() throws Exception {
@@ -308,7 +308,7 @@ public class CalcTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertEquals(expectedValue.toString(), calc.solve(args[0].split(" ")));
+        assertEquals(expectedValue.toString(), calc.solve(args[0].split(" "))[0]);
     }
     @Test
     public void testAreaRound() throws Exception {
@@ -326,7 +326,7 @@ public class CalcTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertEquals(expectedValue.toString(), calc.solve(args[0].split(" ")));
+        assertEquals(expectedValue.toString(), calc.solve(args[0].split(" "))[0]);
     }
     @Test
     public void testPerimeter() throws Exception {
@@ -340,7 +340,7 @@ public class CalcTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertEquals("8", calc.solve(args[0].split(" ")));
+        assertEquals("8", calc.solve(args[0].split(" "))[0]);
     }
     @Test
     public void testArea() throws Exception {
@@ -354,7 +354,7 @@ public class CalcTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertEquals("4", calc.solve(args[0].split(" ")));
+        assertEquals("4", calc.solve(args[0].split(" "))[0]);
     }
     @Test
     public void testCelsius() throws Exception {
@@ -368,7 +368,7 @@ public class CalcTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertEquals("426", calc.solve(args[0].split(" ")));
+        assertEquals("426", calc.solve(args[0].split(" "))[0]);
     }
     @Test
     public void testFahrenheitTree() throws Exception {
@@ -382,7 +382,7 @@ public class CalcTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertEquals("798", calc.solve(args[0].split(" ")));
+        assertEquals("798", calc.solve(args[0].split(" "))[0]);
     }
     @Test
     public void testFahrenheit0() throws Exception {
@@ -396,7 +396,7 @@ public class CalcTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertEquals("32", calc.solve(args[0].split(" ")));
+        assertEquals("32", calc.solve(args[0].split(" "))[0]);
     }
     @Test
     public void testFahrenheit100() throws Exception {
@@ -410,7 +410,7 @@ public class CalcTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertEquals("212", calc.solve(args[0].split(" ")));
+        assertEquals("212", calc.solve(args[0].split(" "))[0]);
     }
     @Test
     public void testLinear() throws Exception {
@@ -424,7 +424,7 @@ public class CalcTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertEquals("8", calc.solve(args[0].split(" ")));
+        assertEquals("8", calc.solve(args[0].split(" "))[0]);
     }
     @Test
     public void testDivsSimple() throws Exception {
@@ -438,7 +438,7 @@ public class CalcTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertEquals("1", calc.solve(args[0].split(" ")));
+        assertEquals("1", calc.solve(args[0].split(" "))[0]);
     }
     @Test
     public void testDivs() throws Exception {
@@ -452,12 +452,13 @@ public class CalcTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertEquals("4, 2, 1", calc.solve(args[0].split(" ")));
+        assertEquals("4, 2, 1", calc.solve(args[0].split(" "))[0]);
     }
     @Test
     public void testDivsBig() throws Exception {
         String[] args = new String[1];
         args[0] = "d 65536";
+        String expectedValue = "65536, 32768, 16384, 8192, 4096, 2048, 1024, 512, 256, 128, 64, 32, 16, 8, 4, 2, 1";
         edu.sgu.lab1.calc.Calc calc = null;
         try {
             calc = new edu.sgu.lab1.calc.Calc();
@@ -466,7 +467,7 @@ public class CalcTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertEquals("65536, 32768, 16384, 8192, 4096, 2048, 1024, 512, 256, 128, 64, 32, 16, 8, 4, 2, 1", calc.solve(args[0].split(" ")));
+        assertEquals(expectedValue, calc.solve(args[0].split(" "))[0]);
     }
     @Test
     public void testQuadraticOne() throws Exception {
@@ -480,7 +481,7 @@ public class CalcTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertEquals("3.0", calc.solve(args[0].split(" ")));
+        assertEquals("3.0", calc.solve(args[0].split(" "))[0]);
     }
     @Test
     public void testQuadraticTwo() throws Exception {
@@ -494,7 +495,7 @@ public class CalcTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertEquals("6.0, 2.0", calc.solve(args[0].split(" ")));
+        assertEquals("6.0, 2.0", calc.solve(args[0].split(" "))[0]);
     }
     @Test
     public void testQuadraticEmpty() throws Exception {
@@ -508,7 +509,7 @@ public class CalcTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertEquals("no roots", calc.solve(args[0].split(" ")));
+        assertEquals("no roots", calc.solve(args[0].split(" "))[0]);
     }
     @Test
     public void testDegreeD1() throws Exception {
@@ -522,7 +523,7 @@ public class CalcTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertEquals("1", calc.solve(args[0].split(" ")));
+        assertEquals("1", calc.solve(args[0].split(" "))[0]);
     }
     @Test
     public void testDegreeD0() throws Exception {
@@ -536,12 +537,13 @@ public class CalcTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertEquals("no pow", calc.solve(args[0].split(" ")));
+        assertEquals("no pow", calc.solve(args[0].split(" "))[0]);
     }
     @Test
     public void testDegreeDBig() throws Exception {
         String[] args = new String[1];
         args[0] = "D 65536";
+        String expectedValue = "1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536";
         edu.sgu.lab1.calc.Calc calc = null;
         try {
             calc = new edu.sgu.lab1.calc.Calc();
@@ -550,7 +552,7 @@ public class CalcTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertEquals("1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536", calc.solve(args[0].split(" ")));
+        assertEquals(expectedValue, calc.solve(args[0].split(" "))[0]);
     }
 
 }

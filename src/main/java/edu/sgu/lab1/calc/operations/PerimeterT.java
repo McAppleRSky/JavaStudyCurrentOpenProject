@@ -7,12 +7,14 @@ public class PerimeterT extends Operation {
     public PerimeterT(){
         symbol = 'P';
         operationAdd(symbol);
+        result = new String[1];
     }
 
     @Override
-    public String getResult(int ... operands) {
+    public String[] getResult(int ... operands) {
         double c =  Math.sqrt(Math.pow(operands[0], 2) + Math.pow(operands[1], 2));
-        return Integer.toString((int) c + operands[0] + operands[1]);
+        result[0] = Integer.toString((int) c + operands[0] + operands[1]);
+        return result;
     }
 
 }

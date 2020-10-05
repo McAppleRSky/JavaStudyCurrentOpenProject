@@ -10,21 +10,23 @@ public class Divs extends Operation {
     public Divs(){
         symbol = 'd';
         operationAdd(symbol);
+        result = new String[1];
     }
 
     @Override
-    public String getResult(int ... operands) {
-        StringBuilder result = new StringBuilder();
+    public String[] getResult(int ... operands) {
+        StringBuilder resultString = new StringBuilder();
         List<String> divList = new ArrayList<>();
         for (int div = operands[0]; div>0;div--)
             if(operands[0] % div == 0)
                 divList.add(Integer.toString(div));
         for (Object item:divList){
-            if(result.length()==0)
-                result.append(item);
-            else result.append(", " + item);
+            if(resultString.length()==0)
+                resultString.append(item);
+            else resultString.append(", " + item);
         }
-        return result.toString();
+        result[0] = resultString.toString();
+        return result;
     }
 
 }

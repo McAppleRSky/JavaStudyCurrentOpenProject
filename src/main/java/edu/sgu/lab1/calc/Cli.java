@@ -20,7 +20,7 @@ public class Cli {
     "Variant 4:", " F - Fibonacci summ sequence (positive). Arguments: number iteration summ;",
     "Variant 5:", " M - mod", "Variant 7:", " N - NOD m, n;", "Variant 8: C - Round by radius; R - Round area by radius;",
     "Variant 9: q - area of square; p - perimeter of square;",
-    "Variant 10:", "Variant 11: d - positiv degree of two;",
+    "Variant 10: s - Symbol of string", "Variant 11: D - positiv degree of two;",
             "Variant 12: c - Fahrenheit to Celsius; f - Celsius to Fahrenheit;",
     "Variant 13: Q - Quadratic;", "Variant 14: d - Divisions;",
     "Variant 15: linear equation kX+b=0."};
@@ -33,7 +33,20 @@ public class Cli {
         else try {
             if (args[0].split(" ").length==1) logger.warning("Receive one argument : " + args[0].split(" ")[0]);
             calc = new Calc();
-            System.out.println( " " + args[0] + " = " + calc.solve(args[0].split(" ")) );
+            String[] results= calc.solve(args[0].split(" "));
+            for (String result:results){
+                switch (results.length){
+                    case 0:
+                        System.out.println("calc no return result");
+                        break;
+                    case 1:
+                        System.out.println(" " + args[0] + " = " + result);
+                        break;
+                    default:
+                        System.out.println(result);
+                        break;
+                }
+            }
         } catch (ClassNotFoundException | InstantiationException | InvocationTargetException | IllegalAccessException | NoSuchMethodException e) {
             e.printStackTrace();
         }

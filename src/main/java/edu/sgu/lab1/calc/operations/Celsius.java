@@ -7,11 +7,13 @@ public class Celsius extends Operation {
     public Celsius(){
         symbol = 'c';
         operationAdd(symbol);
+        result = new String[1];
     }
 
     @Override
-    public String getResult(int ... operands) {
-        return Integer.toString((int) (5.0/9*(operands[0] - 32)));
+    public String[] getResult(int ... operands) {
+        result[0] = Integer.toString((int) (5.0/9*(operands[0] - 32)));
+        return result;
     }
 
  }

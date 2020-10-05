@@ -11,8 +11,8 @@ public class FibonacciTest {
     @Test
     public void testIsFibonacci0() {
         Fibonacci fibonacci = new Fibonacci();
-        assertEquals(fibonacci.getResult(0, 0), fibonacci.unSolveMsg);
-        assertEquals(fibonacci.getResult(-1, 0), fibonacci.unSolveMsg);
+        assertEquals(fibonacci.getResult(0, 0)[0], fibonacci.unSolveMsg);
+        assertEquals(fibonacci.getResult(-1, 0)[0], fibonacci.unSolveMsg);
     }
     @Test
     public void testIsFibonacci1() {

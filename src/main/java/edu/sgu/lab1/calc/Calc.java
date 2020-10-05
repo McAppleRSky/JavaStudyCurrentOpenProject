@@ -1,7 +1,6 @@
 package edu.sgu.lab1.calc;
 
 import edu.sgu.lab1.calc.operations.Operation;
-//import org.apache.commons.lang3.ArrayUtils;
 import org.reflections.Reflections;
 
 import java.lang.reflect.InvocationTargetException;
@@ -9,7 +8,6 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
-import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -78,8 +76,9 @@ public class Calc {
         return result;
     }
 
-    protected String solve(String[] args) throws InvocationTargetException, IllegalAccessException {
-        String result, actualSymbolExpression = getActualSymbolExpression(args);
+    protected String[] solve(String[] args) throws InvocationTargetException, IllegalAccessException {
+        String[] result;
+        String actualSymbolExpression = getActualSymbolExpression(args);
         if (args.length > 4) logger.warning("Too match parameters (more then 3)");
         else switch (args.length) {
             case 4:
@@ -117,7 +116,8 @@ public class Calc {
                     result = oparate(intsMnemonicAndValues.get(0), intsMnemonicAndValues.get(1));
                     break;
                 }
-                result = ("Can not solve expression for this parameters");
+                result = new String[1];
+                result[0] = "Can not solve expression for this parameters";
                 break;
         }
         return result;
@@ -126,9 +126,7 @@ public class Calc {
     protected String getActualSymbolExpression(String[] values) throws InvocationTargetException, IllegalAccessException {
         StringBuilder actualExpression = new StringBuilder();
         for (int i = 0; i < values.length; i++)
-//            if (i < values.length) //for count operand (less than four arguments)
             actualExpression.append(getSymbolol_saveToMnemonicsValues(i, values[i])); //.setCharAt(i, getSymbolol_saveToMnemonicsValues(i, values[i]));
-
         return actualExpression.toString();
     }
 
@@ -150,8 +148,8 @@ public class Calc {
         return listSymbolsMnemonics.containsKey(symbol);
     }
 
-    protected String oparate(Integer mnemonicOperation, Integer... operands) throws InvocationTargetException, IllegalAccessException {
-        String result;
+    protected String[] oparate(Integer mnemonicOperation, Integer... operands) throws InvocationTargetException, IllegalAccessException {
+        String[] result;
         param = new Object[]{};
         Integer lastMnemonicOperation = (Integer) method.get(getMnemonic).invoke(operationInstance, param);
         if (lastMnemonicOperation == null) throw new NullPointerException("Can't mnemonic read last");
@@ -160,10 +158,10 @@ public class Calc {
             for (int i = 0; i < operands.length; i++) intPrimitive[i] = operands[i];
             param = new Object[]{intPrimitive};
             if (mnemonicOperation == lastMnemonicOperation) {
-                result = (String) method.get(getResult).invoke(operationInstance, param);
+                result = (String[]) method.get(getResult).invoke(operationInstance, param);
             } else {
                 plainOperation = listMnemonicsOperations.get(mnemonicOperation);
-                result = (String) plainOperation.getMethod().invoke(plainOperation.getInstance(), param);
+                result = (String[]) plainOperation.getMethod().invoke(plainOperation.getInstance(), param);
             }
         }
         if (lastMnemonicOperation == null) throw new NullPointerException("Can't invoke operation");

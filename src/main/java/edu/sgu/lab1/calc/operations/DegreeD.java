@@ -13,21 +13,23 @@ public class DegreeD extends Operation {
     }
 
     @Override
-    public String getResult(int ... operands) {
-        StringBuilder result = new StringBuilder();
+    public String[] getResult(int ... operands) {
+        result = new String[1];
+        StringBuilder resultString = new StringBuilder();
         List<Integer> pows = new ArrayList<>();
         for (int i=0;i>=0;i++){
             int pow = (int) Math.pow(2, i);
             if (pow>operands[0]) {
-                if(pows.size()==0) result.append("no pow");
+                if(pows.size()==0) resultString.append("no pow");
                 break;
             } else pows.add(pow);
         }
         for (int pow:pows){
-            if (result.length()==0) result.append(Integer.toString(pow));
-            else result.append(", " + Integer.toString(pow));
+            if (resultString.length()==0) resultString.append(Integer.toString(pow));
+            else resultString.append(", " + Integer.toString(pow));
         }
-        return result.toString();
+        result[0] = resultString.toString();
+        return result;
     }
 
 }
