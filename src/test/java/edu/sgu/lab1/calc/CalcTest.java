@@ -22,8 +22,8 @@ public class CalcTest {
         }
         assertEquals("edu.sgu.lab1.calc.operations", calc.prefixPackage);
         assertEquals(4, calc.method.size());
-        assertEquals(18, calc.listSymbolsMnemonics.size());
-        assertEquals(18, calc.listMnemonicsOperations.size());
+        assertEquals(19, calc.listSymbolsMnemonics.size());
+        assertEquals(19, calc.listMnemonicsOperations.size());
     }
     @Test
     public void testSymbolOperation() {
@@ -509,6 +509,48 @@ public class CalcTest {
             e.printStackTrace();
         }
         assertEquals("no roots", calc.solve(args[0].split(" ")));
+    }
+    @Test
+    public void testDegreeD1() throws Exception {
+        String[] args = new String[1];
+        args[0] = "D 1";
+        edu.sgu.lab1.calc.Calc calc = null;
+        try {
+            calc = new edu.sgu.lab1.calc.Calc();
+        } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException | NullPointerException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        assertEquals("1", calc.solve(args[0].split(" ")));
+    }
+    @Test
+    public void testDegreeD0() throws Exception {
+        String[] args = new String[1];
+        args[0] = "D 0";
+        edu.sgu.lab1.calc.Calc calc = null;
+        try {
+            calc = new edu.sgu.lab1.calc.Calc();
+        } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException | NullPointerException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        assertEquals("no pow", calc.solve(args[0].split(" ")));
+    }
+    @Test
+    public void testDegreeDBig() throws Exception {
+        String[] args = new String[1];
+        args[0] = "D 65536";
+        edu.sgu.lab1.calc.Calc calc = null;
+        try {
+            calc = new edu.sgu.lab1.calc.Calc();
+        } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException | NullPointerException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        assertEquals("1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536", calc.solve(args[0].split(" ")));
     }
 
 }

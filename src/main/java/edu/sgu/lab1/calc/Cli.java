@@ -18,8 +18,10 @@ public class Cli {
     final private static String[] msg = {"Variant 1:", " + plus; - minus; * multiply; / division;",
             "Variant 2:"," ^ degree;","Variant 3:"," P - perimeter of right triangle by cathetuses, S - square of right triangle by cathetuses;",
     "Variant 4:", " F - Fibonacci summ sequence (positive). Arguments: number iteration summ;",
-    "Variant 5:", " M - mod", "Variant 7:", " N - NOD m, n;", "Variant 8: C - Round by radius; R Round area by radius;",
-    "Variant 9: q - area of square; p - perimeter of square;", "Variant 11: c - Fahrenheit to Celsius; f - Celsius to Fahrenheit;",
+    "Variant 5:", " M - mod", "Variant 7:", " N - NOD m, n;", "Variant 8: C - Round by radius; R - Round area by radius;",
+    "Variant 9: q - area of square; p - perimeter of square;",
+    "Variant 10:", "Variant 11: d - positiv degree of two;",
+            "Variant 12: c - Fahrenheit to Celsius; f - Celsius to Fahrenheit;",
     "Variant 13: Q - Quadratic;", "Variant 14: d - Divisions;",
     "Variant 15: linear equation kX+b=0."};
 

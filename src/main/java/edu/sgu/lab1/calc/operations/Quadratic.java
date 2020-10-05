@@ -28,8 +28,7 @@ public class Quadratic  extends Operation {
                 roots.add(
                         (float)((-operands[1]+sqrtDiscriminant)/(2*operands[0])) );
             for (float root:roots){
-                if(result.length()==0)
-                    result.append(Double.toString(root));
+                if(result.length()==0) result.append(Double.toString(root));
                 else result.append(", " + Float.toString(root));
             }
         }
