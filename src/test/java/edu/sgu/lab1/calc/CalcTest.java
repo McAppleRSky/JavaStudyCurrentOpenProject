@@ -22,8 +22,8 @@ public class CalcTest {
         }
         assertEquals("edu.sgu.lab1.calc.operations", calc.prefixPackage);
         assertEquals(4, calc.method.size());
-        assertEquals(16, calc.listSymbolsMnemonics.size());
-        assertEquals(16, calc.listMnemonicsOperations.size());
+        assertEquals(17, calc.listSymbolsMnemonics.size());
+        assertEquals(17, calc.listMnemonicsOperations.size());
     }
     @Test
     public void testSymbolOperation() {
@@ -413,6 +413,48 @@ public class CalcTest {
             e.printStackTrace();
         }
         assertEquals("8", calc.solve(args[0].split(" ")));
+    }
+    @Test
+    public void testDivsSimple() throws Exception {
+        String[] args = new String[1];
+        args[0] = "d 1";
+        edu.sgu.lab1.calc.Calc calc = null;
+        try {
+            calc = new edu.sgu.lab1.calc.Calc();
+        } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException | NullPointerException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        assertEquals("1", calc.solve(args[0].split(" ")));
+    }
+    @Test
+    public void testDivs() throws Exception {
+        String[] args = new String[1];
+        args[0] = "d 4";
+        edu.sgu.lab1.calc.Calc calc = null;
+        try {
+            calc = new edu.sgu.lab1.calc.Calc();
+        } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException | NullPointerException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        assertEquals("4, 2, 1", calc.solve(args[0].split(" ")));
+    }
+    @Test
+    public void testDivsBig() throws Exception {
+        String[] args = new String[1];
+        args[0] = "d 65536";
+        edu.sgu.lab1.calc.Calc calc = null;
+        try {
+            calc = new edu.sgu.lab1.calc.Calc();
+        } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException | NullPointerException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        assertEquals("65536, 32768, 16384, 8192, 4096, 2048, 1024, 512, 256, 128, 64, 32, 16, 8, 4, 2, 1", calc.solve(args[0].split(" ")));
     }
 
 }

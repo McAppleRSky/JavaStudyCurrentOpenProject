@@ -14,6 +14,7 @@ public class Cli {
     "Variant 4:", " F - Fibonacci summ sequence (positive). Arguments: number iteration summ;",
     "Variant 5:", " M - mod", "Variant 7:", " N - NOD m, n;", "Variant 8: C - Round by radius; R Round area by radius;",
     "Variant 9: q - area of square; p - perimeter of square;", "Variant 11: c - Fahrenheit to Celsius; f - Celsius to Fahrenheit;",
+    "Variant 14: d - Divisions;",
     "Variant 15: linear equation kX+b=0."};
 
     public static void main(String[] args) {
