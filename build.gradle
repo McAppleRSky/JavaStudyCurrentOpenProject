@@ -61,5 +61,5 @@ defaultTasks 'extJar'
 task runCalc(type: JavaExec, dependsOn: build){
     classpath sourceSets.main.runtimeClasspath
     main = 'edu.sgu.lab1.calc.Cli'
-    args "F 10"
+    args "b Z"
 }

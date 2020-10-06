@@ -142,10 +142,12 @@ public class Calc {
     }
 
     protected char getSymbolol_saveToMnemonicsValues(int i, String value) throws InvocationTargetException, IllegalAccessException {
-        Integer mnemonic = genMnemonicInvoker('s');
+        Integer mnemonicS = genMnemonicInvoker('s'),
+                mnemonicB = genMnemonicInvoker('b');
         boolean condition1 = intsMnemonicAndValues.size()==1,
         condition2 = intsMnemonicAndValues.containsKey(0),
-        condition3 = intsMnemonicAndValues.get(0)==mnemonic;
+        condition3 = (intsMnemonicAndValues.get(0)==mnemonicS)
+                ||(intsMnemonicAndValues.get(0)==mnemonicB);
         if( condition1 && condition2 && condition3){
             for(;i<=value.length();i++)
                 intsMnemonicAndValues.put(i,genMnemonicInvoker(value.charAt(i-1)));

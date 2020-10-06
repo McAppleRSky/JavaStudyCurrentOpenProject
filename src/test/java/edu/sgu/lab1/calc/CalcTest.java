@@ -1,5 +1,6 @@
 package edu.sgu.lab1.calc;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.lang.reflect.InvocationTargetException;
@@ -22,8 +23,8 @@ public class CalcTest {
         }
         assertEquals("edu.sgu.lab1.calc.operations", calc.prefixPackage);
         assertEquals(4, calc.method.size());
-        assertEquals(20, calc.listSymbolsMnemonics.size());
-        assertEquals(20, calc.listMnemonicsOperations.size());
+        assertEquals(21, calc.listSymbolsMnemonics.size());
+        assertEquals(21, calc.listMnemonicsOperations.size());
     }
     @Test
     public void testSymbolOperation() {
@@ -570,6 +571,68 @@ public class CalcTest {
             new String[]{" q, 1110001, 113, 161", " w, 1110111, 119, 167",
                 " e, 1100101, 101, 145", " r, 1110010, 114, 162",
                 " t, 1110100, 116, 164", " y, 1111001, 121, 171"});
+    }
+    @Test
+    public void testSymbolsOne() throws Exception {
+        String[] args = new String[1];
+        args[0] = "s A";
+        edu.sgu.lab1.calc.Calc calc = null;
+        try {
+            calc = new edu.sgu.lab1.calc.Calc();
+        } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException | NullPointerException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        assertArrayEquals(calc.solve(args[0].split(" ")),
+                new String[]{" A, 1000001, 65, 101"});
+    }
+    @Test
+    public void testBeforeNotAlphabet() throws Exception {
+        String[] args = new String[1];
+        args[0] = "b ?";
+        edu.sgu.lab1.calc.Calc calc = null;
+        try {
+            calc = new edu.sgu.lab1.calc.Calc();
+        } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException | NullPointerException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        assertEquals("Not a alphabet symbol",
+                calc.solve(args[0].split(" "))[0]);
+    }
+    @Test
+    public void testBeforeA() throws Exception {
+        String[] args = new String[1];
+        args[0] = "b A";
+        edu.sgu.lab1.calc.Calc calc = null;
+        try {
+            calc = new edu.sgu.lab1.calc.Calc();
+        } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException | NullPointerException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        assertArrayEquals( new String[]{" 1. A, 41, 101, 1000001"},
+                calc.solve(args[0].split(" ")) );
+    }
+    @Test
+    public void testBeforeZ() throws Exception {
+        String[] args = new String[1];
+        args[0] = "b C";
+        edu.sgu.lab1.calc.Calc calc = null;
+        try {
+            calc = new edu.sgu.lab1.calc.Calc();
+        } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException | NullPointerException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        assertArrayEquals(
+                new String[]{" 1. A, 41, 101, 1000001",
+                " 2. B, 42, 102, 1000010"," 3. C, 43, 103, 1000011"},
+                calc.solve(args[0].split(" ")) );
     }
 
 }
