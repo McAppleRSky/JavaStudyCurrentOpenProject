@@ -22,8 +22,8 @@ public class CalcTest {
         }
         assertEquals("edu.sgu.lab1.calc.operations", calc.prefixPackage);
         assertEquals(4, calc.method.size());
-        assertEquals(19, calc.listSymbolsMnemonics.size());
-        assertEquals(19, calc.listMnemonicsOperations.size());
+        assertEquals(20, calc.listSymbolsMnemonics.size());
+        assertEquals(20, calc.listMnemonicsOperations.size());
     }
     @Test
     public void testSymbolOperation() {
@@ -543,7 +543,6 @@ public class CalcTest {
     public void testDegreeDBig() throws Exception {
         String[] args = new String[1];
         args[0] = "D 65536";
-        String expectedValue = "1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536";
         edu.sgu.lab1.calc.Calc calc = null;
         try {
             calc = new edu.sgu.lab1.calc.Calc();
@@ -552,7 +551,25 @@ public class CalcTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assertEquals(expectedValue, calc.solve(args[0].split(" "))[0]);
+        assertEquals("1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536",
+                calc.solve(args[0].split(" "))[0]);
+    }
+    @Test
+    public void testSymbols() throws Exception {
+        String[] args = new String[1];
+        args[0] = "s qwerty";
+        edu.sgu.lab1.calc.Calc calc = null;
+        try {
+            calc = new edu.sgu.lab1.calc.Calc();
+        } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException | NullPointerException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        assertArrayEquals(calc.solve(args[0].split(" ")),
+            new String[]{" q, 1110001, 113, 161", " w, 1110111, 119, 167",
+                " e, 1100101, 101, 145", " r, 1110010, 114, 162",
+                " t, 1110100, 116, 164", " y, 1111001, 121, 171"});
     }
 
 }

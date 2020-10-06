@@ -102,20 +102,31 @@ public class Calc {
                 if (args.length > 3) logger.warning("More then 2 parameters");
                 result = oparate(intsMnemonicAndValues.get(1), intsMnemonicAndValues.get(0), intsMnemonicAndValues.get(2));
                 break;
-            case "oii":
-                if (args.length > 3) logger.warning("More then 2 parameters");
-                result = oparate(intsMnemonicAndValues.get(0), intsMnemonicAndValues.get(1), intsMnemonicAndValues.get(2));
-                break;
             case "oiii":
                 if (args.length > 4) logger.warning("More then 3 parameters");
                 result = oparate(intsMnemonicAndValues.get(0), intsMnemonicAndValues.get(1), intsMnemonicAndValues.get(2), intsMnemonicAndValues.get(3));
                 break;
+            case "oii":
+                if (args.length > 3) logger.warning("More then 2 parameters");
+                result = oparate(intsMnemonicAndValues.get(0), intsMnemonicAndValues.get(1), intsMnemonicAndValues.get(2));
+                break;
+            case "oi":
+                if (args.length > 2) logger.warning("Too match parameters (more then 1)");
+                result = oparate(intsMnemonicAndValues.get(0), intsMnemonicAndValues.get(1));
+                break;
+            case "os":
+                if (args.length > 2) logger.warning("Too match parameters (more then 1)");
+                Integer mnemonicOperation = intsMnemonicAndValues.remove(0);
+                Integer[] operands = new Integer[intsMnemonicAndValues.size()];
+                for (int i = 0; i < operands.length; i++)
+                    operands[i] = (Integer) intsMnemonicAndValues.values().toArray()[i];
+                result = oparate(mnemonicOperation, operands);
+                break;
             default:
-                if (actualSymbolExpression.substring(0, 2).equals("oi")) {
+                /*if (actualSymbolExpression.substring(0, 2).equals("oi")) {
                     if (args.length > 2) logger.warning("Too match parameters (more then 1)");
                     result = oparate(intsMnemonicAndValues.get(0), intsMnemonicAndValues.get(1));
-                    break;
-                }
+                    break;}*/
                 result = new String[1];
                 result[0] = "Can not solve expression for this parameters";
                 break;
@@ -131,16 +142,27 @@ public class Calc {
     }
 
     protected char getSymbolol_saveToMnemonicsValues(int i, String value) throws InvocationTargetException, IllegalAccessException {
-        char symbol;
-        try {
-            intsMnemonicAndValues.put(i, Integer.parseInt(value));
-            return 'i';
-        } catch (NumberFormatException numberFormatException) {
-            symbol = value.charAt(0);
-            if (isOperation(symbol)) {
-                intsMnemonicAndValues.put(i, genMnemonicInvoker(symbol));
-                return 'o';
-            } else return 'n';
+        Integer mnemonic = genMnemonicInvoker('s');
+        boolean condition1 = intsMnemonicAndValues.size()==1,
+        condition2 = intsMnemonicAndValues.containsKey(0),
+        condition3 = intsMnemonicAndValues.get(0)==mnemonic;
+        if( condition1 && condition2 && condition3){
+            for(;i<=value.length();i++)
+                intsMnemonicAndValues.put(i,genMnemonicInvoker(value.charAt(i-1)));
+        //if( (intsMnemonicAndValues.size()==1)&&(intsMnemonicAndValues.containsKey(genMnemonicInvoker('s'))) ){
+            //intsMnemonicAndValues.put(i, genMnemonicInvoker(symbol));
+            return 's';
+        } else {
+            try {
+                intsMnemonicAndValues.put(i, Integer.parseInt(value));
+                return 'i';
+            } catch (NumberFormatException numberFormatException) {
+                char symbol = value.charAt(0);
+                if (isOperation(symbol)) {
+                    intsMnemonicAndValues.put(i, genMnemonicInvoker(symbol));
+                    return 'o';
+                } else return 'n';
+            }
         }
     }
 

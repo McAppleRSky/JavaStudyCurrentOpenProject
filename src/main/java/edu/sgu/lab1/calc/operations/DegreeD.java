@@ -10,11 +10,11 @@ public class DegreeD extends Operation {
     public DegreeD(){
         symbol = 'D';
         operationAdd(symbol);
+        result = new String[1];
     }
 
     @Override
     public String[] getResult(int ... operands) {
-        result = new String[1];
         StringBuilder resultString = new StringBuilder();
         List<Integer> pows = new ArrayList<>();
         for (int i=0;i>=0;i++){

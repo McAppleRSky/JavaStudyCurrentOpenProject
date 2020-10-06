@@ -15,15 +15,29 @@ public class Cli {
     }
 
     private static Calc calc;
-    final private static String[] msg = {"Variant 1:", " + plus; - minus; * multiply; / division;",
-            "Variant 2:"," ^ degree;","Variant 3:"," P - perimeter of right triangle by cathetuses, S - square of right triangle by cathetuses;",
-    "Variant 4:", " F - Fibonacci summ sequence (positive). Arguments: number iteration summ;",
-    "Variant 5:", " M - mod", "Variant 7:", " N - NOD m, n;", "Variant 8: C - Round by radius; R - Round area by radius;",
-    "Variant 9: q - area of square; p - perimeter of square;",
-    "Variant 10: s - Symbol of string", "Variant 11: D - positiv degree of two;",
-            "Variant 12: c - Fahrenheit to Celsius; f - Celsius to Fahrenheit;",
-    "Variant 13: Q - Quadratic;", "Variant 14: d - Divisions;",
-    "Variant 15: linear equation kX+b=0."};
+    final private static String[] msg = {
+        "Variant 1:",
+            " + plus; - minus; * multiply; / division;",
+        "Variant 2:",
+            " ^ degree;",
+        "Variant 3:",
+            " P - perimeter of right triangle by cathetuses, S - square of right triangle by cathetuses;",
+        "Variant 4:",
+            " F - Fibonacci summ sequence (positive). Arguments: number iteration summ;",
+        "Variant 5:",
+            " M - mod",
+        "Variant 6:" +
+            " b - symbols before;",
+        "Variant 7:",
+            " N - NOD m, n;",
+        "Variant 8:" +
+            " C - Round by radius; R - Round area by radius;",
+        "Variant 9: q - area of square; p - perimeter of square;",
+        "Variant 10: s - Symbol of string",
+        "Variant 11: D - positiv degree of two;",
+        "Variant 12: c - Fahrenheit to Celsius; f - Celsius to Fahrenheit;",
+        "Variant 13: Q - Quadratic;", "Variant 14: d - Divisions;",
+        "Variant 15: L - linear equation kX+b=0."};
 
     public static void main(String[] args) {
         if(args.length == 0) {
