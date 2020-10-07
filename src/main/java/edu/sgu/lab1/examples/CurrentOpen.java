@@ -1,4 +1,4 @@
-package edu.sgu.lab1.currentExamples;
+package edu.sgu.lab1.examples;
 
 import java.io.*;
 import java.util.Scanner;
