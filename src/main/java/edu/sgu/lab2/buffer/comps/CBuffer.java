@@ -18,6 +18,7 @@ public abstract class CBuffer implements IBufferPrintable{
 
     public CBuffer(int count) {
         bufID   = ++bufCount;
+        bufSize = count;
     }
 
     public abstract void generate(int count);

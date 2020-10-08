@@ -2,6 +2,7 @@ package edu.sgu.lab2.buffer;
 
 //import edu.sgu.lab2.buffer.variant1.Buffer;
 import edu.sgu.lab2.buffer.*;
+import edu.sgu.lab2.buffer.variant1.Buffer;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -11,139 +12,337 @@ import static org.junit.Assert.*;
 
 public class BufferTest {
 
+    String[][] expected = new String[][]{
+/* 1*/  {"3", "Integer", "50", "bubble", "min", "oneLine"},
+/* 2*/  {"4", "Long", "60", "select", "max", "separateLines"},
+/* 3*/  {"5", "Float", "70", "shell", "sum", "oneLine"},
+/* 4*/  {"6", "Double", "80", "quick", "min", "separateLines"},
+/* 5*/  {"7", "Long", "90", "bubble", "max", "oneLine"},
+/* 6*/  {"3", "Float", "80", "select", "sum", "separateLines"},
+/* 7*/  {"4", "Double", "70", "shell", "min", "oneLine"},
+/* 8*/  {"5", "Integer", "60", "quick", "max", "separateLines"},
+/* 9*/  {"6", "Float", "50", "bubble", "sum", "oneLine"},
+/*10*/  {"7", "Double", "40", "select", "min", "separateLines"},
+/*11*/  {"3", "Long", "90", "bubble", "max", "oneLine"},
+/*12*/  {"4", "Integer", "70", "select", "sum", "separateLines"},
+/*13*/  {"5", "Double", "50", "shell", "min", "oneLine"},
+/*14*/  {"6", "Long", "30", "quick", "max", "separateLines"},
+/*15*/  {"7", "Integer", "60", "bubble", "sum", "oneLine"}
+    };
+
     @Test
     public void testVariant1() {
-        edu.sgu.lab2.buffer.variant1.Buffer buffer;
-        buffer = new edu.sgu.lab2.buffer.variant1.Buffer(11);
-        assertEquals(1, buffer.getBufCount());
-        assertEquals(1, buffer.getBufID());
-        buffer.close();
+        int var = 1, count=3, size=50;
+        edu.sgu.lab2.buffer.variant1.Buffer[] buffer = new
+                edu.sgu.lab2.buffer.variant1.Buffer[count];
+        for(int i=0;i<count;i++) {
+            buffer[i] = new edu.sgu.lab2.buffer.variant1.Buffer(size);
+            assertEquals(i+1,buffer[i].getBufID());
+        }
+        for(edu.sgu.lab2.buffer.variant1.Buffer buf:buffer)
+            assertArrayEquals(expected[var-1], new String[]{
+                        Integer.toString(buf.getBufCount()),
+                        buf.getLast().getClass().toString().substring(16),
+                        Integer.toString(buf.getLastNum()+1),
+                        buf.getSortAlgorithmName(),
+                        buf.getComputMethod(),
+                        buf.getStoreMethod()});
+        for(edu.sgu.lab2.buffer.variant1.Buffer buf:buffer)
+            buf.close();
         buffer=null;
     }
     @Test
     public void testVariant2() {
-        edu.sgu.lab2.buffer.variant2.Buffer buffer;
-        buffer = new edu.sgu.lab2.buffer.variant2.Buffer(11);
-        assertEquals(1, buffer.getBufCount());
-        assertEquals(1, buffer.getBufID());
-        buffer.close();
+        int var = 2, count=4, size=60;
+        edu.sgu.lab2.buffer.variant2.Buffer[] buffer
+                = new edu.sgu.lab2.buffer.variant2.Buffer[count];
+        for(int i=0;i<count;i++) {
+            buffer[i] = new edu.sgu.lab2.buffer.variant2.Buffer(size);
+            assertEquals(i+1,buffer[i].getBufID());
+        }
+        for(edu.sgu.lab2.buffer.variant2.Buffer buf:buffer)
+            assertArrayEquals(expected[var-1], new String[]{
+                    Integer.toString(buf.getBufCount()),
+                    buf.getLast().getClass().toString().substring(16),
+                    Integer.toString(buf.getLastNum()+1),
+                    buf.getSortAlgorithmName(),
+                    buf.getComputMethod(),
+                    buf.getStoreMethod()});
+        for(edu.sgu.lab2.buffer.variant2.Buffer buf:buffer)
+            buf.close();
         buffer=null;
     }
     @Test
     public void testVariant3() {
-        edu.sgu.lab2.buffer.variant3.Buffer buffer;
-        buffer = new edu.sgu.lab2.buffer.variant3.Buffer(11);
-        assertEquals(1, buffer.getBufCount());
-        assertEquals(1, buffer.getBufID());
-        buffer.close();
+        int var = 3, count=5, size=70;
+        edu.sgu.lab2.buffer.variant3.Buffer[] buffer
+                = new edu.sgu.lab2.buffer.variant3.Buffer[count];
+        for(int i=0;i<count;i++) {
+            buffer[i] = new edu.sgu.lab2.buffer.variant3.Buffer(size);
+            assertEquals(i+1,buffer[i].getBufID());
+        }
+        for(edu.sgu.lab2.buffer.variant3.Buffer buf:buffer)
+            assertArrayEquals(expected[var-1], new String[]{
+                    Integer.toString(buf.getBufCount()),
+                    buf.getLast().getClass().toString().substring(16),
+                    Integer.toString(buf.getLastNum()+1),
+                    buf.getSortAlgorithmName(),
+                    buf.getComputMethod(),
+                    buf.getStoreMethod()});
+        for(edu.sgu.lab2.buffer.variant3.Buffer buf:buffer)
+            buf.close();
         buffer=null;
     }
     @Test
     public void testVariant4() {
-        edu.sgu.lab2.buffer.variant4.Buffer buffer;
-        buffer = new edu.sgu.lab2.buffer.variant4.Buffer(11);
-        assertEquals(1, buffer.getBufCount());
-        assertEquals(1, buffer.getBufID());
-        buffer.close();
+        int var = 4, count=6, size=80;
+        edu.sgu.lab2.buffer.variant4.Buffer[] buffer
+                = new edu.sgu.lab2.buffer.variant4.Buffer[count];
+        for(int i=0;i<count;i++) {
+            buffer[i] = new edu.sgu.lab2.buffer.variant4.Buffer(size);
+            assertEquals(i+1,buffer[i].getBufID());
+        }
+        for(edu.sgu.lab2.buffer.variant4.Buffer buf:buffer)
+            assertArrayEquals(expected[var-1], new String[]{
+                    Integer.toString(buf.getBufCount()),
+                    buf.getLast().getClass().toString().substring(16),
+                    Integer.toString(buf.getLastNum()+1),
+                    buf.getSortAlgorithmName(),
+                    buf.getComputMethod(),
+                    buf.getStoreMethod()});
+        for(edu.sgu.lab2.buffer.variant4.Buffer buf:buffer)
+            buf.close();
         buffer=null;
     }
     @Test
     public void testVariant5() {
-        edu.sgu.lab2.buffer.variant5.Buffer buffer;
-        buffer = new edu.sgu.lab2.buffer.variant5.Buffer(11);
-        assertEquals(1, buffer.getBufCount());
-        assertEquals(1, buffer.getBufID());
-        buffer.close();
+        int var = 5, count=7, size=90;
+        edu.sgu.lab2.buffer.variant5.Buffer[] buffer
+                = new edu.sgu.lab2.buffer.variant5.Buffer[count];
+        for(int i=0;i<count;i++) {
+            buffer[i] = new edu.sgu.lab2.buffer.variant5.Buffer(size);
+            assertEquals(i+1,buffer[i].getBufID());
+        }
+        for(edu.sgu.lab2.buffer.variant5.Buffer buf:buffer)
+            assertArrayEquals(expected[var-1], new String[]{
+                    Integer.toString(buf.getBufCount()),
+                    buf.getLast().getClass().toString().substring(16),
+                    Integer.toString(buf.getLastNum()+1),
+                    buf.getSortAlgorithmName(),
+                    buf.getComputMethod(),
+                    buf.getStoreMethod()});
+        for(edu.sgu.lab2.buffer.variant5.Buffer buf:buffer)
+            buf.close();
         buffer=null;
     }
     @Test
     public void testVariant6() {
-        edu.sgu.lab2.buffer.variant6.Buffer buffer;
-        buffer = new edu.sgu.lab2.buffer.variant6.Buffer(11);
-        assertEquals(1, buffer.getBufCount());
-        assertEquals(1, buffer.getBufID());
-        buffer.close();
+        int var = 6, count=3, size=80;
+        edu.sgu.lab2.buffer.variant6.Buffer[] buffer
+                = new edu.sgu.lab2.buffer.variant6.Buffer[count];
+        for(int i=0;i<count;i++) {
+            buffer[i] = new edu.sgu.lab2.buffer.variant6.Buffer(size);
+            assertEquals(i+1,buffer[i].getBufID());
+        }
+        for(edu.sgu.lab2.buffer.variant6.Buffer buf:buffer)
+            assertArrayEquals(expected[var-1], new String[]{
+                    Integer.toString(buf.getBufCount()),
+                    buf.getLast().getClass().toString().substring(16),
+                    Integer.toString(buf.getLastNum()+1),
+                    buf.getSortAlgorithmName(),
+                    buf.getComputMethod(),
+                    buf.getStoreMethod()});
+        for(edu.sgu.lab2.buffer.variant6.Buffer buf:buffer)
+            buf.close();
         buffer=null;
     }
     @Test
     public void testVariant7() {
-        edu.sgu.lab2.buffer.variant7.Buffer buffer;
-        buffer = new edu.sgu.lab2.buffer.variant7.Buffer(11);
-        assertEquals(1, buffer.getBufCount());
-        assertEquals(1, buffer.getBufID());
-        buffer.close();
+        int var = 7, count=4, size=70;
+        edu.sgu.lab2.buffer.variant7.Buffer[] buffer
+                = new edu.sgu.lab2.buffer.variant7.Buffer[count];
+        for(int i=0;i<count;i++) {
+            buffer[i] = new edu.sgu.lab2.buffer.variant7.Buffer(size);
+            assertEquals(i+1,buffer[i].getBufID());
+        }
+        for(edu.sgu.lab2.buffer.variant7.Buffer buf:buffer)
+            assertArrayEquals(expected[var-1], new String[]{
+                    Integer.toString(buf.getBufCount()),
+                    buf.getLast().getClass().toString().substring(16),
+                    Integer.toString(buf.getLastNum()+1),
+                    buf.getSortAlgorithmName(),
+                    buf.getComputMethod(),
+                    buf.getStoreMethod()});
+        for(edu.sgu.lab2.buffer.variant7.Buffer buf:buffer)
+            buf.close();
         buffer=null;
     }
     @Test
     public void testVariant8() {
-        edu.sgu.lab2.buffer.variant8.Buffer buffer;
-        buffer = new edu.sgu.lab2.buffer.variant8.Buffer(11);
-        assertEquals(1, buffer.getBufCount());
-        assertEquals(1, buffer.getBufID());
-        buffer.close();
+        int var = 8, count=5, size=60;
+        edu.sgu.lab2.buffer.variant8.Buffer[] buffer
+                = new edu.sgu.lab2.buffer.variant8.Buffer[count];
+        for(int i=0;i<count;i++) {
+            buffer[i] = new edu.sgu.lab2.buffer.variant8.Buffer(size);
+            assertEquals(i+1,buffer[i].getBufID());
+        }
+        for(edu.sgu.lab2.buffer.variant8.Buffer buf:buffer)
+            assertArrayEquals(expected[var-1], new String[]{
+                    Integer.toString(buf.getBufCount()),
+                    buf.getLast().getClass().toString().substring(16),
+                    Integer.toString(buf.getLastNum()+1),
+                    buf.getSortAlgorithmName(),
+                    buf.getComputMethod(),
+                    buf.getStoreMethod()});
+        for(edu.sgu.lab2.buffer.variant8.Buffer buf:buffer)
+            buf.close();
         buffer=null;
     }
     @Test
     public void testVariant9() {
-        edu.sgu.lab2.buffer.variant9.Buffer buffer;
-        buffer = new edu.sgu.lab2.buffer.variant9.Buffer(11);
-        assertEquals(1, buffer.getBufCount());
-        assertEquals(1, buffer.getBufID());
-        buffer.close();
+        int var = 9, count=6, size=50;
+        edu.sgu.lab2.buffer.variant9.Buffer[] buffer
+                = new edu.sgu.lab2.buffer.variant9.Buffer[count];
+        for(int i=0;i<count;i++) {
+            buffer[i] = new edu.sgu.lab2.buffer.variant9.Buffer(size);
+            assertEquals(i+1,buffer[i].getBufID());
+        }
+        for(edu.sgu.lab2.buffer.variant9.Buffer buf:buffer)
+            assertArrayEquals(expected[var-1], new String[]{
+                    Integer.toString(buf.getBufCount()),
+                    buf.getLast().getClass().toString().substring(16),
+                    Integer.toString(buf.getLastNum()+1),
+                    buf.getSortAlgorithmName(),
+                    buf.getComputMethod(),
+                    buf.getStoreMethod()});
+        for(edu.sgu.lab2.buffer.variant9.Buffer buf:buffer)
+            buf.close();
         buffer=null;
     }
     @Test
     public void testVariant10() {
-        edu.sgu.lab2.buffer.variant10.Buffer buffer;
-        buffer = new edu.sgu.lab2.buffer.variant10.Buffer(11);
-        assertEquals(1, buffer.getBufCount());
-        assertEquals(1, buffer.getBufID());
-        buffer.close();
+        int var = 10, count=7, size=40;
+        edu.sgu.lab2.buffer.variant10.Buffer[] buffer
+                = new edu.sgu.lab2.buffer.variant10.Buffer[count];
+        for(int i=0;i<count;i++) {
+            buffer[i] = new edu.sgu.lab2.buffer.variant10.Buffer(size);
+            assertEquals(i+1,buffer[i].getBufID());
+        }
+        for(edu.sgu.lab2.buffer.variant10.Buffer buf:buffer)
+            assertArrayEquals(expected[var-1], new String[]{
+                    Integer.toString(buf.getBufCount()),
+                    buf.getLast().getClass().toString().substring(16),
+                    Integer.toString(buf.getLastNum()+1),
+                    buf.getSortAlgorithmName(),
+                    buf.getComputMethod(),
+                    buf.getStoreMethod()});
+        for(edu.sgu.lab2.buffer.variant10.Buffer buf:buffer)
+            buf.close();
         buffer=null;
     }
     @Test
     public void testVariant11() {
-        edu.sgu.lab2.buffer.variant11.Buffer buffer;
-        buffer = new edu.sgu.lab2.buffer.variant11.Buffer(11);
-        assertEquals(1, buffer.getBufCount());
-        assertEquals(1, buffer.getBufID());
-        buffer.close();
+        int var = 11, count=3, size=90;
+        edu.sgu.lab2.buffer.variant11.Buffer[] buffer
+                = new edu.sgu.lab2.buffer.variant11.Buffer[count];
+        for(int i=0;i<count;i++) {
+            buffer[i] = new edu.sgu.lab2.buffer.variant11.Buffer(size);
+            assertEquals(i+1,buffer[i].getBufID());
+        }
+        for(edu.sgu.lab2.buffer.variant11.Buffer buf:buffer)
+            assertArrayEquals(expected[var-1], new String[]{
+                    Integer.toString(buf.getBufCount()),
+                    buf.getLast().getClass().toString().substring(16),
+                    Integer.toString(buf.getLastNum()+1),
+                    buf.getSortAlgorithmName(),
+                    buf.getComputMethod(),
+                    buf.getStoreMethod()});
+        for(edu.sgu.lab2.buffer.variant11.Buffer buf:buffer)
+            buf.close();
         buffer=null;
     }
     @Test
     public void testVariant12() {
-        edu.sgu.lab2.buffer.variant12.Buffer buffer;
-        buffer = new edu.sgu.lab2.buffer.variant12.Buffer(11);
-        assertEquals(1, buffer.getBufCount());
-        assertEquals(1, buffer.getBufID());
-        buffer.close();
+        int var = 12, count=4, size=70;
+        edu.sgu.lab2.buffer.variant12.Buffer[] buffer
+                = new edu.sgu.lab2.buffer.variant12.Buffer[count];
+        for(int i=0;i<count;i++) {
+            buffer[i] = new edu.sgu.lab2.buffer.variant12.Buffer(size);
+            assertEquals(i+1,buffer[i].getBufID());
+        }
+        for(edu.sgu.lab2.buffer.variant12.Buffer buf:buffer)
+            assertArrayEquals(expected[var-1], new String[]{
+                    Integer.toString(buf.getBufCount()),
+                    buf.getLast().getClass().toString().substring(16),
+                    Integer.toString(buf.getLastNum()+1),
+                    buf.getSortAlgorithmName(),
+                    buf.getComputMethod(),
+                    buf.getStoreMethod()});
+        for(edu.sgu.lab2.buffer.variant12.Buffer buf:buffer)
+            buf.close();
         buffer=null;
     }
     @Test
     public void testVariant13() {
-        edu.sgu.lab2.buffer.variant13.Buffer buffer;
-        buffer = new edu.sgu.lab2.buffer.variant13.Buffer(11);
-        assertEquals(1, buffer.getBufCount());
-        assertEquals(1, buffer.getBufID());
-        buffer.close();
+        int var = 13, count=5, size=50;
+        edu.sgu.lab2.buffer.variant13.Buffer[] buffer
+                = new edu.sgu.lab2.buffer.variant13.Buffer[count];
+        for(int i=0;i<count;i++) {
+            buffer[i] = new edu.sgu.lab2.buffer.variant13.Buffer(size);
+            assertEquals(i+1,buffer[i].getBufID());
+        }
+        for(edu.sgu.lab2.buffer.variant13.Buffer buf:buffer)
+            assertArrayEquals(expected[var-1], new String[]{
+                    Integer.toString(buf.getBufCount()),
+                    buf.getLast().getClass().toString().substring(16),
+                    Integer.toString(buf.getLastNum()+1),
+                    buf.getSortAlgorithmName(),
+                    buf.getComputMethod(),
+                    buf.getStoreMethod()});
+        for(edu.sgu.lab2.buffer.variant13.Buffer buf:buffer)
+            buf.close();
         buffer=null;
     }
     @Test
     public void testVariant14() {
-        edu.sgu.lab2.buffer.variant14.Buffer buffer;
-        buffer = new edu.sgu.lab2.buffer.variant14.Buffer(11);
-        assertEquals(1, buffer.getBufCount());
-        assertEquals(1, buffer.getBufID());
-        buffer.close();
+        int var = 14, count=6, size=30;
+        edu.sgu.lab2.buffer.variant14.Buffer[] buffer
+                = new edu.sgu.lab2.buffer.variant14.Buffer[count];
+        for(int i=0;i<count;i++) {
+            buffer[i] = new edu.sgu.lab2.buffer.variant14.Buffer(size);
+            assertEquals(i+1,buffer[i].getBufID());
+        }
+        for(edu.sgu.lab2.buffer.variant14.Buffer buf:buffer)
+            assertArrayEquals(expected[var-1], new String[]{
+                    Integer.toString(buf.getBufCount()),
+                    buf.getLast().getClass().toString().substring(16),
+                    Integer.toString(buf.getLastNum()+1),
+                    buf.getSortAlgorithmName(),
+                    buf.getComputMethod(),
+                    buf.getStoreMethod()});
+        for(edu.sgu.lab2.buffer.variant14.Buffer buf:buffer)
+            buf.close();
         buffer=null;
     }
     @Test
     public void testVariant15() {
-        edu.sgu.lab2.buffer.variant15.Buffer buffer;
-        buffer = new edu.sgu.lab2.buffer.variant15.Buffer(11);
-        assertEquals(1, buffer.getBufCount());
-        assertEquals(1, buffer.getBufID());
-        buffer.close();
+        int var = 15, count=7, size=60;
+        edu.sgu.lab2.buffer.variant15.Buffer[] buffer
+                = new edu.sgu.lab2.buffer.variant15.Buffer[count];
+        for(int i=0;i<count;i++) {
+            buffer[i] = new edu.sgu.lab2.buffer.variant15.Buffer(size);
+            assertEquals(i+1,buffer[i].getBufID());
+        }
+        for(edu.sgu.lab2.buffer.variant15.Buffer buf:buffer)
+            assertArrayEquals(expected[var-1], new String[]{
+                    Integer.toString(buf.getBufCount()),
+                    buf.getLast().getClass().toString().substring(16),
+                    Integer.toString(buf.getLastNum()+1),
+                    buf.getSortAlgorithmName(),
+                    buf.getComputMethod(),
+                    buf.getStoreMethod()});
+        for(edu.sgu.lab2.buffer.variant15.Buffer buf:buffer)
+            buf.close();
         buffer=null;
     }
 

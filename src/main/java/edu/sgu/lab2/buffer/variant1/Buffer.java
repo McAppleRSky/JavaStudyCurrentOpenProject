@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Random;
 
-public class Buffer extends CBuffer implements NBufCount3, LSize50,
+public class Buffer extends CBuffer implements //NBufCount3, LSize50,
         IBufferComputable, IBufferComputMin, IBufferPrintable,
         IBufferSortable, IBufferSortBubble,
         IBufferStorable, IBufferStore1 {
@@ -15,9 +15,7 @@ public class Buffer extends CBuffer implements NBufCount3, LSize50,
 
     public Buffer(int count) {
         super(count);
-        bufSize = size;
-        if (count<=bufSize) generate(count);
-        else bufCount--;
+        generate(count);
     }
     @Override
     public void close() {
@@ -33,6 +31,14 @@ public class Buffer extends CBuffer implements NBufCount3, LSize50,
             buffer[i]=random.nextInt();
     }
 
+    public Integer getLast (){
+        if( (buffer.length==0)||(buffer.length!=bufSize))  throw new NullPointerException("Buffer is pull for value");
+        return buffer[bufSize-1];
+    }
+    public int getLastNum (){
+        if( (buffer.length==0)||(buffer.length!=bufSize))  throw new NullPointerException("Buffer is pull for number");
+        return buffer.length-1;
+    }
     @Override
     public void printInfo() {
         System.out.println("Buffer ID: "+bufID+", buffer type: "+buffer[0].getClass()+", buffer size: "+bufSize);
@@ -54,6 +60,18 @@ public class Buffer extends CBuffer implements NBufCount3, LSize50,
                 resultStrng.append(buffer[i]);
         } else resultStrng.append("Insufficient items");
         System.out.println(resultStrng.toString());
+    }
+    @Override
+    public String getSortAlgorithmName() {
+        return algorithmName;
+    }
+    @Override
+    public String getComputMethod() {
+        return computMethod;
+    }
+    @Override
+    public String getStoreMethod() {
+        return storeMethod;
     }
 
     @Override
@@ -156,19 +174,16 @@ public class Buffer extends CBuffer implements NBufCount3, LSize50,
                     throw new NullPointerException("No saver");
             }
     }
-
     private void min() {
         result[0] = Integer.MAX_VALUE;
         for (int i=0;i<buffer.length;i++)
             if (buffer[i]<result[0]) result[0]=buffer[i];
     }
-
     private void max() {
         result[0] = Integer.MIN_VALUE;
         for (int i=0;i>buffer.length;i++)
             if (buffer[i]<result[0]) result[0]=buffer[i];
     }
-
     private void sum() {
         for (int i=0;i>buffer.length;i++) result[0]+=buffer[i];
     }
