@@ -18,50 +18,51 @@ public class Buffer extends CBuffer implements //NBufCount3, LSize90,
         generate(count);
     }
     @Override
+    public void generate(int count) {
+        buffer = new Long[count];
+        Random random = new Random();
+        for(int i=0;i<count;i++)
+            buffer[i]=random.nextLong();
+    }
+    @Override
     public void close() {
         buffer = null;
         bufSize = 0;
         bufCount--;
-    }
-    @Override
-    public void generate(int count) {
-        buffer = new Long[count];
-        Random random = new Random();
-        for(int i=0;i<count;i++){
-            buffer[i]=random.nextLong();
-        }
     }
 
     public Long getLast (){
         if( (buffer.length==0)||(buffer.length!=bufSize))  throw new NullPointerException("Buffer is pull for value");
         return buffer[bufSize-1];
     }
-    public int getLastNum (){
+    public int getLastN (){
         if( (buffer.length==0)||(buffer.length!=bufSize))  throw new NullPointerException("Buffer is pull for number");
         return buffer.length-1;
     }
     @Override
     public void printInfo() {
         System.out.println("Buffer ID: "+bufID+", buffer type: "+buffer[0].getClass()+", buffer size: "+bufSize);
+        System.out.println("Total buffers: "+getBufCount());
     }
 
     @Override
     public void print() {
-        StringBuffer resultStrng = new StringBuffer();
-        for(int i=0;i<buffer.length;i++)
-            resultStrng.append(buffer[i]);
-        System.out.println(resultStrng.toString());
+        System.out.println("Full count buffer ("+buffer[0].getClass().toString().substring(16)+"):");
+        printFirstN(buffer.length);
     }
 
     @Override
     public void printFirstN(int n) {
         StringBuffer resultStrng = new StringBuffer();
-        if(n<buffer.length) {
-            for(int i=0;i<n;i++)
-                resultStrng.append(buffer[i]);
-        } else resultStrng.append("Insufficient items");
-        System.out.println(resultStrng.toString());
+        for(int i=0;i<n;i++)
+            if(i==0) resultStrng.append(buffer[i]);
+            else
+                resultStrng
+                        .append(", ")
+                        .append(buffer[i]);
+        System.out.println("Count "+n+": "+resultStrng.toString());
     }
+
     @Override
     public String getSortAlgorithmName() {
         return algorithmName;
@@ -80,21 +81,22 @@ public class Buffer extends CBuffer implements //NBufCount3, LSize90,
         int count = buffer.length;
         if(count>1) {
             switch (algorithmName){
-                case "Bubble":
+                case "bubble":
                     bubble(count);
                     break;
-                case "Quick":
+                case "quick":
                     quick(0, count-1);
                     break;
-                case "Select":
+                case "select":
                     select(count);
                     break;
-                case "Shell":
+                case "shell":
                     shell(count);
                     break;
                 default:
                     throw new NullPointerException("Nothing to sort");
             }
+            System.out.println("Sorting algorithm: "+algorithmName);
         } else throw new NullPointerException("Nothing sort");
     }
     private void bubble(int count){
@@ -143,24 +145,25 @@ public class Buffer extends CBuffer implements //NBufCount3, LSize90,
         }
     }
     private void shell(int count){
-        int i, j, gap, k;
-        int[] arr = {9,5,3,2,1};
-        for(k=0;k<5;k++){
-            gap=arr[k];
-            for(i=gap;i<count;++i){
+        int[] gaps = //{9,5,3,2,1}
+                {23,10,4,1};
+        for(int gap:gaps){
+            for(int i=gap;i<count;i++){
                 result[0]=buffer[i];
-                for(j=i-gap;(result[0]<buffer[j])&&(j>=0);j=j-gap)
+                int j=i-gap;
+                for(;j>=0 && result[0]<buffer[j];j-=gap)
                     buffer[j+gap]=buffer[j];
                 buffer[j+gap]=result[0];
             }
         }
     }
 
+
     @Override
     public void comput() {
-        if(buffer.length<2) {
+        if(buffer.length<2)
             System.out.println("Too small buffer fo compute");
-        } else
+        else {
             switch (computMethod){
                 case "max":
                     max();
@@ -174,6 +177,8 @@ public class Buffer extends CBuffer implements //NBufCount3, LSize90,
                 default:
                     throw new NullPointerException("No saver");
             }
+            System.out.println(computMethod+": "+result[0]);
+        }
     }
     private void min() {
         result[0] = Long.MAX_VALUE;
@@ -182,11 +187,12 @@ public class Buffer extends CBuffer implements //NBufCount3, LSize90,
     }
     private void max() {
         result[0] = Long.MIN_VALUE;
-        for (int i=0;i>buffer.length;i++)
-            if (buffer[i]<result[0]) result[0]=buffer[i];
+        for (int i=0;i<buffer.length;i++)
+            if (buffer[i]>result[0]) result[0]=buffer[i];
     }
     private void sum() {
-        for (int i=0;i>buffer.length;i++) result[0]+=buffer[i];
+        result[0] = result[0] = Long.valueOf(0);
+        for (int i=0;i<buffer.length;i++) result[0]+=buffer[i];
     }
 
     @Override
@@ -223,4 +229,5 @@ public class Buffer extends CBuffer implements //NBufCount3, LSize90,
             out.println(buffer[i].toString());
         out.close();
     }
+
 }
