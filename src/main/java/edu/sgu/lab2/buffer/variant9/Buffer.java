@@ -197,16 +197,16 @@ public class Buffer extends CBuffer implements //NBufCount6, LSize50,
 
     @Override
     public void store(String filename) {
-        if( filename.isEmpty()||buffer.length<2)
+        if( filename.isEmpty()||buffer.length<2) {
             System.out.println("No file or buffer");
-        else
+        } else
             try {
                 switch (storeMethod){
                     case "oneLine":
-                        saveOneLine(filename);
+                        saveOneLine(path+"/"+filename);
                         break;
                     case "separateLines":
-                        saveSeparateLines(filename);
+                        saveSeparateLines(path+"/"+filename);
                         break;
                     default:
                         throw new NullPointerException("No saver");
@@ -218,14 +218,18 @@ public class Buffer extends CBuffer implements //NBufCount6, LSize50,
     private void saveOneLine(String filename) throws FileNotFoundException {
         StringBuilder resultString = new StringBuilder();
         PrintWriter out = new PrintWriter(filename);
-        for(int i=1;i<buffer.length;i++)
+        for(int i=0;i<buffer.length;i++) {
+            if(i>0)
+                resultString
+                        .append((char)0x09);
             resultString.append(buffer[i]);
+        }
         out.println(resultString);
         out.close();
     }
     private void saveSeparateLines(String filename) throws FileNotFoundException {
         PrintWriter out = new PrintWriter(filename);
-        for(int i=1;i<buffer.length;i++)
+        for(int i=0;i<buffer.length;i++)
             out.println(buffer[i].toString());
         out.close();
     }

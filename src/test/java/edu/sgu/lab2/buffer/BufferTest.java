@@ -2,6 +2,12 @@ package edu.sgu.lab2.buffer;
 
 import org.junit.Ignore;
 import org.junit.Test;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import static org.junit.Assert.*;
 
 public class BufferTest {
@@ -28,14 +34,18 @@ public class BufferTest {
     public void testVariant1() {
         int var = 1, count=3, size=50;
         System.out.println("Variant: "+var);
-        edu.sgu.lab2.buffer.variant1.Buffer[] buffer = new
-                edu.sgu.lab2.buffer.variant1.Buffer[count];
+        edu.sgu.lab2.buffer.variant1.Buffer[] buffer
+                = new edu.sgu.lab2.buffer.variant1.Buffer[count];
         for(int i=0;i<count;i++) {
             buffer[i] = new edu.sgu.lab2.buffer.variant1.Buffer(size);
             assertEquals(i+1,buffer[i].getBufID());
         }
-        int i=0; String n;
+        String suffixSubnameVarcount, name;
+        int varcount=0;
+        FileInputStream fileInputStream = null;
         for(edu.sgu.lab2.buffer.variant1.Buffer buf:buffer){
+            assertTrue(buf.getStoreMethod().equals("oneLine")
+                    || buf.getStoreMethod().equals("separateLines") );
             assertArrayEquals(expected[var-1], new String[]{
                     Integer.toString(buf.getBufCount()),
                     buf.getLast().getClass().toString().substring(16),
@@ -48,9 +58,36 @@ public class BufferTest {
             buf.comput();
             buf.sort();
             buf.printFirstN(10);
-            if(i<9)n="0";
-            else n="";
-            buf.store("buf-v"+var+"+N"+n+i++);
+            if(varcount<9)suffixSubnameVarcount="0";
+            else suffixSubnameVarcount="";
+            name = "buf-v"+var+"-N"+suffixSubnameVarcount+ ++varcount;
+            buf.store(name);
+            try {
+                assertTrue(new File("store/"+name).isFile());
+                fileInputStream = new FileInputStream("store/"+name);
+                int actualLinecount=0, streamPart=0;
+                byte[] fileBuffer = new byte[8192];
+                while ((streamPart = fileInputStream.read(fileBuffer)) > 0){
+                    byte filePrevByte=0;
+                    int tst = 0;
+                    for(byte fileByte:fileBuffer){
+                        tst++;
+                        if(filePrevByte==0x0d&&fileByte==0x0a)
+                            actualLinecount++;
+                        filePrevByte=fileByte;
+                    }
+                }
+                switch (buf.getStoreMethod()){
+                    case "oneLine":
+                        assertEquals(1, actualLinecount);
+                        break;
+                    case "separateLines":
+                        assertEquals(buf.getLastN()+1, actualLinecount);
+                        break;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         for(edu.sgu.lab2.buffer.variant1.Buffer buf:buffer)
             buf.close();
@@ -66,8 +103,12 @@ public class BufferTest {
             buffer[i] = new edu.sgu.lab2.buffer.variant2.Buffer(size);
             assertEquals(i+1,buffer[i].getBufID());
         }
-        int i=0; String n;
+        String suffixSubnameVarcount, name;
+        int varcount=0;
+        FileInputStream fileInputStream = null;
         for(edu.sgu.lab2.buffer.variant2.Buffer buf:buffer){
+            assertTrue(buf.getStoreMethod().equals("oneLine")
+                    || buf.getStoreMethod().equals("separateLines") );
             assertArrayEquals(expected[var-1], new String[]{
                     Integer.toString(buf.getBufCount()),
                     buf.getLast().getClass().toString().substring(16),
@@ -80,9 +121,36 @@ public class BufferTest {
             buf.comput();
             buf.sort();
             buf.printFirstN(10);
-            if(i<9)n="0";
-            else n="";
-            buf.store("buf-v"+var+"+N"+n+i++);
+            if(varcount<9)suffixSubnameVarcount="0";
+            else suffixSubnameVarcount="";
+            name = "buf-v"+var+"-N"+suffixSubnameVarcount+ ++varcount;
+            buf.store(name);
+            try {
+                assertTrue(new File("store/"+name).isFile());
+                fileInputStream = new FileInputStream("store/"+name);
+                int actualLinecount=0, streamPart=0;
+                byte[] fileBuffer = new byte[8192];
+                while ((streamPart = fileInputStream.read(fileBuffer)) > 0){
+                    byte filePrevByte=0;
+                    int tst = 0;
+                    for(byte fileByte:fileBuffer){
+                        tst++;
+                        if(filePrevByte==0x0d&&fileByte==0x0a)
+                            actualLinecount++;
+                        filePrevByte=fileByte;
+                    }
+                }
+                switch (buf.getStoreMethod()){
+                    case "oneLine":
+                        assertEquals(1, actualLinecount);
+                        break;
+                    case "separateLines":
+                        assertEquals(buf.getLastN()+1, actualLinecount);
+                        break;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         for(edu.sgu.lab2.buffer.variant2.Buffer buf:buffer)
             buf.close();
@@ -98,8 +166,12 @@ public class BufferTest {
             buffer[i] = new edu.sgu.lab2.buffer.variant3.Buffer(size);
             assertEquals(i+1,buffer[i].getBufID());
         }
-        int i=0; String n;
+        String suffixSubnameVarcount, name;
+        int varcount=0;
+        FileInputStream fileInputStream = null;
         for(edu.sgu.lab2.buffer.variant3.Buffer buf:buffer){
+            assertTrue(buf.getStoreMethod().equals("oneLine")
+                    || buf.getStoreMethod().equals("separateLines") );
             assertArrayEquals(expected[var-1], new String[]{
                     Integer.toString(buf.getBufCount()),
                     buf.getLast().getClass().toString().substring(16),
@@ -112,9 +184,36 @@ public class BufferTest {
             buf.comput();
             buf.sort();
             buf.printFirstN(10);
-            if(i<9)n="0";
-            else n="";
-            buf.store("buf-v"+var+"+N"+n+i++);
+            if(varcount<9)suffixSubnameVarcount="0";
+            else suffixSubnameVarcount="";
+            name = "buf-v"+var+"-N"+suffixSubnameVarcount+ ++varcount;
+            buf.store(name);
+            try {
+                assertTrue(new File("store/"+name).isFile());
+                fileInputStream = new FileInputStream("store/"+name);
+                int actualLinecount=0, streamPart=0;
+                byte[] fileBuffer = new byte[8192];
+                while ((streamPart = fileInputStream.read(fileBuffer)) > 0){
+                    byte filePrevByte=0;
+                    int tst = 0;
+                    for(byte fileByte:fileBuffer){
+                        tst++;
+                        if(filePrevByte==0x0d&&fileByte==0x0a)
+                            actualLinecount++;
+                        filePrevByte=fileByte;
+                    }
+                }
+                switch (buf.getStoreMethod()){
+                    case "oneLine":
+                        assertEquals(1, actualLinecount);
+                        break;
+                    case "separateLines":
+                        assertEquals(buf.getLastN()+1, actualLinecount);
+                        break;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         for(edu.sgu.lab2.buffer.variant3.Buffer buf:buffer)
             buf.close();
@@ -130,8 +229,12 @@ public class BufferTest {
             buffer[i] = new edu.sgu.lab2.buffer.variant4.Buffer(size);
             assertEquals(i+1,buffer[i].getBufID());
         }
-        int i=0; String n;
+        String suffixSubnameVarcount, name;
+        int varcount=0;
+        FileInputStream fileInputStream = null;
         for(edu.sgu.lab2.buffer.variant4.Buffer buf:buffer){
+            assertTrue(buf.getStoreMethod().equals("oneLine")
+                    || buf.getStoreMethod().equals("separateLines") );
             assertArrayEquals(expected[var-1], new String[]{
                     Integer.toString(buf.getBufCount()),
                     buf.getLast().getClass().toString().substring(16),
@@ -144,9 +247,36 @@ public class BufferTest {
             buf.comput();
             buf.sort();
             buf.printFirstN(10);
-            if(i<9)n="0";
-            else n="";
-            buf.store("buf-v"+var+"+N"+n+i++);
+            if(varcount<9)suffixSubnameVarcount="0";
+            else suffixSubnameVarcount="";
+            name = "buf-v"+var+"-N"+suffixSubnameVarcount+ ++varcount;
+            buf.store(name);
+            try {
+                assertTrue(new File("store/"+name).isFile());
+                fileInputStream = new FileInputStream("store/"+name);
+                int actualLinecount=0, streamPart=0;
+                byte[] fileBuffer = new byte[8192];
+                while ((streamPart = fileInputStream.read(fileBuffer)) > 0){
+                    byte filePrevByte=0;
+                    int tst = 0;
+                    for(byte fileByte:fileBuffer){
+                        tst++;
+                        if(filePrevByte==0x0d&&fileByte==0x0a)
+                            actualLinecount++;
+                        filePrevByte=fileByte;
+                    }
+                }
+                switch (buf.getStoreMethod()){
+                    case "oneLine":
+                        assertEquals(1, actualLinecount);
+                        break;
+                    case "separateLines":
+                        assertEquals(buf.getLastN()+1, actualLinecount);
+                        break;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         for(edu.sgu.lab2.buffer.variant4.Buffer buf:buffer)
             buf.close();
@@ -162,8 +292,12 @@ public class BufferTest {
             buffer[i] = new edu.sgu.lab2.buffer.variant5.Buffer(size);
             assertEquals(i+1,buffer[i].getBufID());
         }
-        int i=0; String n;
+        String suffixSubnameVarcount, name;
+        int varcount=0;
+        FileInputStream fileInputStream = null;
         for(edu.sgu.lab2.buffer.variant5.Buffer buf:buffer){
+            assertTrue(buf.getStoreMethod().equals("oneLine")
+                    || buf.getStoreMethod().equals("separateLines") );
             assertArrayEquals(expected[var-1], new String[]{
                     Integer.toString(buf.getBufCount()),
                     buf.getLast().getClass().toString().substring(16),
@@ -176,9 +310,36 @@ public class BufferTest {
             buf.comput();
             buf.sort();
             buf.printFirstN(10);
-            if(i<9)n="0";
-            else n="";
-            buf.store("buf-v"+var+"+N"+n+i++);
+            if(varcount<9)suffixSubnameVarcount="0";
+            else suffixSubnameVarcount="";
+            name = "buf-v"+var+"-N"+suffixSubnameVarcount+ ++varcount;
+            buf.store(name);
+            try {
+                assertTrue(new File("store/"+name).isFile());
+                fileInputStream = new FileInputStream("store/"+name);
+                int actualLinecount=0, streamPart=0;
+                byte[] fileBuffer = new byte[8192];
+                while ((streamPart = fileInputStream.read(fileBuffer)) > 0){
+                    byte filePrevByte=0;
+                    int tst = 0;
+                    for(byte fileByte:fileBuffer){
+                        tst++;
+                        if(filePrevByte==0x0d&&fileByte==0x0a)
+                            actualLinecount++;
+                        filePrevByte=fileByte;
+                    }
+                }
+                switch (buf.getStoreMethod()){
+                    case "oneLine":
+                        assertEquals(1, actualLinecount);
+                        break;
+                    case "separateLines":
+                        assertEquals(buf.getLastN()+1, actualLinecount);
+                        break;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         for(edu.sgu.lab2.buffer.variant5.Buffer buf:buffer)
             buf.close();
@@ -194,8 +355,12 @@ public class BufferTest {
             buffer[i] = new edu.sgu.lab2.buffer.variant6.Buffer(size);
             assertEquals(i+1,buffer[i].getBufID());
         }
-        int i=0; String n;
+        String suffixSubnameVarcount, name;
+        int varcount=0;
+        FileInputStream fileInputStream = null;
         for(edu.sgu.lab2.buffer.variant6.Buffer buf:buffer){
+            assertTrue(buf.getStoreMethod().equals("oneLine")
+                    || buf.getStoreMethod().equals("separateLines") );
             assertArrayEquals(expected[var-1], new String[]{
                     Integer.toString(buf.getBufCount()),
                     buf.getLast().getClass().toString().substring(16),
@@ -208,9 +373,36 @@ public class BufferTest {
             buf.comput();
             buf.sort();
             buf.printFirstN(10);
-            if(i<9)n="0";
-            else n="";
-            buf.store("buf-v"+var+"+N"+n+i++);
+            if(varcount<9)suffixSubnameVarcount="0";
+            else suffixSubnameVarcount="";
+            name = "buf-v"+var+"-N"+suffixSubnameVarcount+ ++varcount;
+            buf.store(name);
+            try {
+                assertTrue(new File("store/"+name).isFile());
+                fileInputStream = new FileInputStream("store/"+name);
+                int actualLinecount=0, streamPart=0;
+                byte[] fileBuffer = new byte[8192];
+                while ((streamPart = fileInputStream.read(fileBuffer)) > 0){
+                    byte filePrevByte=0;
+                    int tst = 0;
+                    for(byte fileByte:fileBuffer){
+                        tst++;
+                        if(filePrevByte==0x0d&&fileByte==0x0a)
+                            actualLinecount++;
+                        filePrevByte=fileByte;
+                    }
+                }
+                switch (buf.getStoreMethod()){
+                    case "oneLine":
+                        assertEquals(1, actualLinecount);
+                        break;
+                    case "separateLines":
+                        assertEquals(buf.getLastN()+1, actualLinecount);
+                        break;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         for(edu.sgu.lab2.buffer.variant6.Buffer buf:buffer)
             buf.close();
@@ -226,8 +418,12 @@ public class BufferTest {
             buffer[i] = new edu.sgu.lab2.buffer.variant7.Buffer(size);
             assertEquals(i+1,buffer[i].getBufID());
         }
-        int i=0; String n;
+        String suffixSubnameVarcount, name;
+        int varcount=0;
+        FileInputStream fileInputStream = null;
         for(edu.sgu.lab2.buffer.variant7.Buffer buf:buffer){
+            assertTrue(buf.getStoreMethod().equals("oneLine")
+                    || buf.getStoreMethod().equals("separateLines") );
             assertArrayEquals(expected[var-1], new String[]{
                     Integer.toString(buf.getBufCount()),
                     buf.getLast().getClass().toString().substring(16),
@@ -240,9 +436,36 @@ public class BufferTest {
             buf.comput();
             buf.sort();
             buf.printFirstN(10);
-            if(i<9)n="0";
-            else n="";
-            buf.store("buf-v"+var+"+N"+n+i++);
+            if(varcount<9)suffixSubnameVarcount="0";
+            else suffixSubnameVarcount="";
+            name = "buf-v"+var+"-N"+suffixSubnameVarcount+ ++varcount;
+            buf.store(name);
+            try {
+                assertTrue(new File("store/"+name).isFile());
+                fileInputStream = new FileInputStream("store/"+name);
+                int actualLinecount=0, streamPart=0;
+                byte[] fileBuffer = new byte[8192];
+                while ((streamPart = fileInputStream.read(fileBuffer)) > 0){
+                    byte filePrevByte=0;
+                    int tst = 0;
+                    for(byte fileByte:fileBuffer){
+                        tst++;
+                        if(filePrevByte==0x0d&&fileByte==0x0a)
+                            actualLinecount++;
+                        filePrevByte=fileByte;
+                    }
+                }
+                switch (buf.getStoreMethod()){
+                    case "oneLine":
+                        assertEquals(1, actualLinecount);
+                        break;
+                    case "separateLines":
+                        assertEquals(buf.getLastN()+1, actualLinecount);
+                        break;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         for(edu.sgu.lab2.buffer.variant7.Buffer buf:buffer)
             buf.close();
@@ -258,8 +481,12 @@ public class BufferTest {
             buffer[i] = new edu.sgu.lab2.buffer.variant8.Buffer(size);
             assertEquals(i+1,buffer[i].getBufID());
         }
-        int i=0; String n;
+        String suffixSubnameVarcount, name;
+        int varcount=0;
+        FileInputStream fileInputStream = null;
         for(edu.sgu.lab2.buffer.variant8.Buffer buf:buffer){
+            assertTrue(buf.getStoreMethod().equals("oneLine")
+                    || buf.getStoreMethod().equals("separateLines") );
             assertArrayEquals(expected[var-1], new String[]{
                     Integer.toString(buf.getBufCount()),
                     buf.getLast().getClass().toString().substring(16),
@@ -272,9 +499,36 @@ public class BufferTest {
             buf.comput();
             buf.sort();
             buf.printFirstN(10);
-            if(i<9)n="0";
-            else n="";
-            buf.store("buf-v"+var+"+N"+n+i++);
+            if(varcount<9)suffixSubnameVarcount="0";
+            else suffixSubnameVarcount="";
+            name = "buf-v"+var+"-N"+suffixSubnameVarcount+ ++varcount;
+            buf.store(name);
+            try {
+                assertTrue(new File("store/"+name).isFile());
+                fileInputStream = new FileInputStream("store/"+name);
+                int actualLinecount=0, streamPart=0;
+                byte[] fileBuffer = new byte[8192];
+                while ((streamPart = fileInputStream.read(fileBuffer)) > 0){
+                    byte filePrevByte=0;
+                    int tst = 0;
+                    for(byte fileByte:fileBuffer){
+                        tst++;
+                        if(filePrevByte==0x0d&&fileByte==0x0a)
+                            actualLinecount++;
+                        filePrevByte=fileByte;
+                    }
+                }
+                switch (buf.getStoreMethod()){
+                    case "oneLine":
+                        assertEquals(1, actualLinecount);
+                        break;
+                    case "separateLines":
+                        assertEquals(buf.getLastN()+1, actualLinecount);
+                        break;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         for(edu.sgu.lab2.buffer.variant8.Buffer buf:buffer)
             buf.close();
@@ -290,8 +544,12 @@ public class BufferTest {
             buffer[i] = new edu.sgu.lab2.buffer.variant9.Buffer(size);
             assertEquals(i+1,buffer[i].getBufID());
         }
-        int i=0; String n;
+        String suffixSubnameVarcount, name;
+        int varcount=0;
+        FileInputStream fileInputStream = null;
         for(edu.sgu.lab2.buffer.variant9.Buffer buf:buffer){
+            assertTrue(buf.getStoreMethod().equals("oneLine")
+                    || buf.getStoreMethod().equals("separateLines") );
             assertArrayEquals(expected[var-1], new String[]{
                     Integer.toString(buf.getBufCount()),
                     buf.getLast().getClass().toString().substring(16),
@@ -304,14 +562,42 @@ public class BufferTest {
             buf.comput();
             buf.sort();
             buf.printFirstN(10);
-            if(i<9)n="0";
-            else n="";
-            buf.store("buf-v"+var+"+N"+n+i++);
+            if(varcount<9)suffixSubnameVarcount="0";
+            else suffixSubnameVarcount="";
+            name = "buf-v"+var+"-N"+suffixSubnameVarcount+ ++varcount;
+            buf.store(name);
+            try {
+                assertTrue(new File("store/"+name).isFile());
+                fileInputStream = new FileInputStream("store/"+name);
+                int actualLinecount=0, streamPart=0;
+                byte[] fileBuffer = new byte[8192];
+                while ((streamPart = fileInputStream.read(fileBuffer)) > 0){
+                    byte filePrevByte=0;
+                    int tst = 0;
+                    for(byte fileByte:fileBuffer){
+                        tst++;
+                        if(filePrevByte==0x0d&&fileByte==0x0a)
+                            actualLinecount++;
+                        filePrevByte=fileByte;
+                    }
+                }
+                switch (buf.getStoreMethod()){
+                    case "oneLine":
+                        assertEquals(1, actualLinecount);
+                        break;
+                    case "separateLines":
+                        assertEquals(buf.getLastN()+1, actualLinecount);
+                        break;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         for(edu.sgu.lab2.buffer.variant9.Buffer buf:buffer)
             buf.close();
         buffer=null;
     }
+
     @Test
     public void testVariant10() {
         int var = 10, count=7, size=40;
@@ -322,8 +608,12 @@ public class BufferTest {
             buffer[i] = new edu.sgu.lab2.buffer.variant10.Buffer(size);
             assertEquals(i+1,buffer[i].getBufID());
         }
-        int i=0; String n;
+        String suffixSubnameVarcount, name;
+        int varcount=0;
+        FileInputStream fileInputStream = null;
         for(edu.sgu.lab2.buffer.variant10.Buffer buf:buffer){
+            assertTrue(buf.getStoreMethod().equals("oneLine")
+                    || buf.getStoreMethod().equals("separateLines") );
             assertArrayEquals(expected[var-1], new String[]{
                     Integer.toString(buf.getBufCount()),
                     buf.getLast().getClass().toString().substring(16),
@@ -336,9 +626,36 @@ public class BufferTest {
             buf.comput();
             buf.sort();
             buf.printFirstN(10);
-            if(i<9)n="0";
-            else n="";
-            buf.store("buf-v"+var+"+N"+n+i++);
+            if(varcount<9)suffixSubnameVarcount="0";
+            else suffixSubnameVarcount="";
+            name = "buf-v"+var+"-N"+suffixSubnameVarcount+ ++varcount;
+            buf.store(name);
+            try {
+                assertTrue(new File("store/"+name).isFile());
+                fileInputStream = new FileInputStream("store/"+name);
+                int actualLinecount=0, streamPart=0;
+                byte[] fileBuffer = new byte[8192];
+                while ((streamPart = fileInputStream.read(fileBuffer)) > 0){
+                    byte filePrevByte=0;
+                    int tst = 0;
+                    for(byte fileByte:fileBuffer){
+                        tst++;
+                        if(filePrevByte==0x0d&&fileByte==0x0a)
+                            actualLinecount++;
+                        filePrevByte=fileByte;
+                    }
+                }
+                switch (buf.getStoreMethod()){
+                    case "oneLine":
+                        assertEquals(1, actualLinecount);
+                        break;
+                    case "separateLines":
+                        assertEquals(buf.getLastN()+1, actualLinecount);
+                        break;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         for(edu.sgu.lab2.buffer.variant10.Buffer buf:buffer)
             buf.close();
@@ -354,8 +671,12 @@ public class BufferTest {
             buffer[i] = new edu.sgu.lab2.buffer.variant11.Buffer(size);
             assertEquals(i+1,buffer[i].getBufID());
         }
-        int i=0; String n;
+        String suffixSubnameVarcount, name;
+        int varcount=0;
+        FileInputStream fileInputStream = null;
         for(edu.sgu.lab2.buffer.variant11.Buffer buf:buffer){
+            assertTrue(buf.getStoreMethod().equals("oneLine")
+                    || buf.getStoreMethod().equals("separateLines") );
             assertArrayEquals(expected[var-1], new String[]{
                     Integer.toString(buf.getBufCount()),
                     buf.getLast().getClass().toString().substring(16),
@@ -368,9 +689,36 @@ public class BufferTest {
             buf.comput();
             buf.sort();
             buf.printFirstN(10);
-            if(i<9)n="0";
-            else n="";
-            buf.store("buf-v"+var+"+N"+n+i++);
+            if(varcount<9)suffixSubnameVarcount="0";
+            else suffixSubnameVarcount="";
+            name = "buf-v"+var+"-N"+suffixSubnameVarcount+ ++varcount;
+            buf.store(name);
+            try {
+                assertTrue(new File("store/"+name).isFile());
+                fileInputStream = new FileInputStream("store/"+name);
+                int actualLinecount=0, streamPart=0;
+                byte[] fileBuffer = new byte[8192];
+                while ((streamPart = fileInputStream.read(fileBuffer)) > 0){
+                    byte filePrevByte=0;
+                    int tst = 0;
+                    for(byte fileByte:fileBuffer){
+                        tst++;
+                        if(filePrevByte==0x0d&&fileByte==0x0a)
+                            actualLinecount++;
+                        filePrevByte=fileByte;
+                    }
+                }
+                switch (buf.getStoreMethod()){
+                    case "oneLine":
+                        assertEquals(1, actualLinecount);
+                        break;
+                    case "separateLines":
+                        assertEquals(buf.getLastN()+1, actualLinecount);
+                        break;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         for(edu.sgu.lab2.buffer.variant11.Buffer buf:buffer)
             buf.close();
@@ -386,8 +734,12 @@ public class BufferTest {
             buffer[i] = new edu.sgu.lab2.buffer.variant12.Buffer(size);
             assertEquals(i+1,buffer[i].getBufID());
         }
-        int i=0; String n;
+        String suffixSubnameVarcount, name;
+        int varcount=0;
+        FileInputStream fileInputStream = null;
         for(edu.sgu.lab2.buffer.variant12.Buffer buf:buffer){
+            assertTrue(buf.getStoreMethod().equals("oneLine")
+                    || buf.getStoreMethod().equals("separateLines") );
             assertArrayEquals(expected[var-1], new String[]{
                     Integer.toString(buf.getBufCount()),
                     buf.getLast().getClass().toString().substring(16),
@@ -400,9 +752,36 @@ public class BufferTest {
             buf.comput();
             buf.sort();
             buf.printFirstN(10);
-            if(i<9)n="0";
-            else n="";
-            buf.store("buf-v"+var+"+N"+n+i++);
+            if(varcount<9)suffixSubnameVarcount="0";
+            else suffixSubnameVarcount="";
+            name = "buf-v"+var+"-N"+suffixSubnameVarcount+ ++varcount;
+            buf.store(name);
+            try {
+                assertTrue(new File("store/"+name).isFile());
+                fileInputStream = new FileInputStream("store/"+name);
+                int actualLinecount=0, streamPart=0;
+                byte[] fileBuffer = new byte[8192];
+                while ((streamPart = fileInputStream.read(fileBuffer)) > 0){
+                    byte filePrevByte=0;
+                    int tst = 0;
+                    for(byte fileByte:fileBuffer){
+                        tst++;
+                        if(filePrevByte==0x0d&&fileByte==0x0a)
+                            actualLinecount++;
+                        filePrevByte=fileByte;
+                    }
+                }
+                switch (buf.getStoreMethod()){
+                    case "oneLine":
+                        assertEquals(1, actualLinecount);
+                        break;
+                    case "separateLines":
+                        assertEquals(buf.getLastN()+1, actualLinecount);
+                        break;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         for(edu.sgu.lab2.buffer.variant12.Buffer buf:buffer)
             buf.close();
@@ -418,8 +797,12 @@ public class BufferTest {
             buffer[i] = new edu.sgu.lab2.buffer.variant13.Buffer(size);
             assertEquals(i+1,buffer[i].getBufID());
         }
-        int i=0; String n;
+        String suffixSubnameVarcount, name;
+        int varcount=0;
+        FileInputStream fileInputStream = null;
         for(edu.sgu.lab2.buffer.variant13.Buffer buf:buffer){
+            assertTrue(buf.getStoreMethod().equals("oneLine")
+                    || buf.getStoreMethod().equals("separateLines") );
             assertArrayEquals(expected[var-1], new String[]{
                     Integer.toString(buf.getBufCount()),
                     buf.getLast().getClass().toString().substring(16),
@@ -432,9 +815,36 @@ public class BufferTest {
             buf.comput();
             buf.sort();
             buf.printFirstN(10);
-            if(i<9)n="0";
-            else n="";
-            buf.store("buf-v"+var+"+N"+n+i++);
+            if(varcount<9)suffixSubnameVarcount="0";
+            else suffixSubnameVarcount="";
+            name = "buf-v"+var+"-N"+suffixSubnameVarcount+ ++varcount;
+            buf.store(name);
+            try {
+                assertTrue(new File("store/"+name).isFile());
+                fileInputStream = new FileInputStream("store/"+name);
+                int actualLinecount=0, streamPart=0;
+                byte[] fileBuffer = new byte[8192];
+                while ((streamPart = fileInputStream.read(fileBuffer)) > 0){
+                    byte filePrevByte=0;
+                    int tst = 0;
+                    for(byte fileByte:fileBuffer){
+                        tst++;
+                        if(filePrevByte==0x0d&&fileByte==0x0a)
+                            actualLinecount++;
+                        filePrevByte=fileByte;
+                    }
+                }
+                switch (buf.getStoreMethod()){
+                    case "oneLine":
+                        assertEquals(1, actualLinecount);
+                        break;
+                    case "separateLines":
+                        assertEquals(buf.getLastN()+1, actualLinecount);
+                        break;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         for(edu.sgu.lab2.buffer.variant13.Buffer buf:buffer)
             buf.close();
@@ -450,8 +860,12 @@ public class BufferTest {
             buffer[i] = new edu.sgu.lab2.buffer.variant14.Buffer(size);
             assertEquals(i+1,buffer[i].getBufID());
         }
-        int i=0; String n;
+        String suffixSubnameVarcount, name;
+        int varcount=0;
+        FileInputStream fileInputStream = null;
         for(edu.sgu.lab2.buffer.variant14.Buffer buf:buffer){
+            assertTrue(buf.getStoreMethod().equals("oneLine")
+                    || buf.getStoreMethod().equals("separateLines") );
             assertArrayEquals(expected[var-1], new String[]{
                     Integer.toString(buf.getBufCount()),
                     buf.getLast().getClass().toString().substring(16),
@@ -464,9 +878,36 @@ public class BufferTest {
             buf.comput();
             buf.sort();
             buf.printFirstN(10);
-            if(i<9)n="0";
-            else n="";
-            buf.store("buf-v"+var+"+N"+n+i++);
+            if(varcount<9)suffixSubnameVarcount="0";
+            else suffixSubnameVarcount="";
+            name = "buf-v"+var+"-N"+suffixSubnameVarcount+ ++varcount;
+            buf.store(name);
+            try {
+                assertTrue(new File("store/"+name).isFile());
+                fileInputStream = new FileInputStream("store/"+name);
+                int actualLinecount=0, streamPart=0;
+                byte[] fileBuffer = new byte[8192];
+                while ((streamPart = fileInputStream.read(fileBuffer)) > 0){
+                    byte filePrevByte=0;
+                    int tst = 0;
+                    for(byte fileByte:fileBuffer){
+                        tst++;
+                        if(filePrevByte==0x0d&&fileByte==0x0a)
+                            actualLinecount++;
+                        filePrevByte=fileByte;
+                    }
+                }
+                switch (buf.getStoreMethod()){
+                    case "oneLine":
+                        assertEquals(1, actualLinecount);
+                        break;
+                    case "separateLines":
+                        assertEquals(buf.getLastN()+1, actualLinecount);
+                        break;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         for(edu.sgu.lab2.buffer.variant14.Buffer buf:buffer)
             buf.close();
@@ -482,8 +923,12 @@ public class BufferTest {
             buffer[i] = new edu.sgu.lab2.buffer.variant15.Buffer(size);
             assertEquals(i+1,buffer[i].getBufID());
         }
-        int i=0; String n;
+        String suffixSubnameVarcount, name;
+        int varcount=0;
+        FileInputStream fileInputStream = null;
         for(edu.sgu.lab2.buffer.variant15.Buffer buf:buffer){
+            assertTrue(buf.getStoreMethod().equals("oneLine")
+                    || buf.getStoreMethod().equals("separateLines") );
             assertArrayEquals(expected[var-1], new String[]{
                     Integer.toString(buf.getBufCount()),
                     buf.getLast().getClass().toString().substring(16),
@@ -496,9 +941,36 @@ public class BufferTest {
             buf.comput();
             buf.sort();
             buf.printFirstN(10);
-            if(i<9)n="0";
-            else n="";
-            buf.store("buf-v"+var+"+N"+n+i++);
+            if(varcount<9)suffixSubnameVarcount="0";
+            else suffixSubnameVarcount="";
+            name = "buf-v"+var+"-N"+suffixSubnameVarcount+ ++varcount;
+            buf.store(name);
+            try {
+                assertTrue(new File("store/"+name).isFile());
+                fileInputStream = new FileInputStream("store/"+name);
+                int actualLinecount=0, streamPart=0;
+                byte[] fileBuffer = new byte[8192];
+                while ((streamPart = fileInputStream.read(fileBuffer)) > 0){
+                    byte filePrevByte=0;
+                    int tst = 0;
+                    for(byte fileByte:fileBuffer){
+                        tst++;
+                        if(filePrevByte==0x0d&&fileByte==0x0a)
+                            actualLinecount++;
+                        filePrevByte=fileByte;
+                    }
+                }
+                switch (buf.getStoreMethod()){
+                    case "oneLine":
+                        assertEquals(1, actualLinecount);
+                        break;
+                    case "separateLines":
+                        assertEquals(buf.getLastN()+1, actualLinecount);
+                        break;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         for(edu.sgu.lab2.buffer.variant15.Buffer buf:buffer)
             buf.close();

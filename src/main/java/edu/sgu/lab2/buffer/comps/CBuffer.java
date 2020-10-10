@@ -1,6 +1,6 @@
 package edu.sgu.lab2.buffer.comps;
 
-public abstract class CBuffer implements IBufferPrintable{
+public abstract class CBuffer{
 
     protected int bufID;
 

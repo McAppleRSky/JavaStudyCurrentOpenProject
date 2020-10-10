@@ -63,3 +63,10 @@ task runCalc(type: JavaExec, dependsOn: build){
     main = 'edu.sgu.lab1.calc.Cli'
     args "b Z"
 }
+
+task preClean(type: Delete) {
+    delete 'store/*'
+    followSymlinks = true
+}
+
+clean.dependsOn.add(preClean)
