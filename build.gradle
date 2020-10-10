@@ -65,7 +65,9 @@ task runCalc(type: JavaExec, dependsOn: build){
 }
 
 task preClean(type: Delete) {
-    delete 'store/*'
+    delete fileTree("store").matching {
+        include "*"
+    }
     followSymlinks = true
 }
 
