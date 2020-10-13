@@ -8,8 +8,9 @@ version '1.0-SNAPSHOT'
 //sourceCompatibility = 11
 //targetCompatibility = 11
 
+
 //create a single Jar with all dependencies
-task extJar(type: Jar, dependsOn: build) {
+task calcJar(type: Jar, dependsOn: build) {
     manifest {
         attributes 'Implementation-Title': 'Calc cli 4 lab1',
 //                'Implementation-Version': version,
@@ -22,7 +23,26 @@ task extJar(type: Jar, dependsOn: build) {
                 'Build-Jdk': "${System.properties['java.version']} (${System.properties['java.vendor']} ${System.properties['java.vm.version']})",
                 'Build-OS': "${System.properties['os.name']} ${System.properties['os.arch']} ${System.properties['os.version']}"
     }
-    baseName = project.name + '-full'
+    //baseName project.name + '-full'
+    baseName "lab1Calc" + '-full'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+task bufJar(type: Jar, dependsOn: build) {
+    manifest {
+        attributes 'Implementation-Title': 'Buf cli 4 lab2',
+//                'Implementation-Version': version,
+                'Main-Class': 'edu.sgu.lab2.buffer.Cli',
+                'Class-Path': '../../repository/lib',
+                'Built-By'       : System.properties['user.name'],
+                'Build-Timestamp': new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").format(new Date()),
+//        'Build-Revision' : versioning.info.commit,
+                'Created-By': "Gradle ${gradle.gradleVersion}",
+                'Build-Jdk': "${System.properties['java.version']} (${System.properties['java.vendor']} ${System.properties['java.vm.version']})",
+                'Build-OS': "${System.properties['os.name']} ${System.properties['os.arch']} ${System.properties['os.version']}"
+    }
+    //baseName project.name + '-full'
+    baseName "lab2buf" + '-full'
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     with jar
 }
@@ -56,7 +76,10 @@ dependencies {
     compile group: 'org.javassist', name: 'javassist', version: '3.27.0-GA'
 }
 
-defaultTasks 'extJar'
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+
+defaultTasks 'calcJar', 'bufJar'
 
 task runCalc(type: JavaExec, dependsOn: build){
     classpath sourceSets.main.runtimeClasspath
@@ -64,11 +87,21 @@ task runCalc(type: JavaExec, dependsOn: build){
     args "b Z"
 }
 
+task runBuf(type: JavaExec, dependsOn: build){
+    classpath sourceSets.main.runtimeClasspath
+    main = 'edu.sgu.lab2.buffer.Cli'
+}
+
 task preClean(type: Delete) {
-    delete fileTree("store").matching {
+    delete fileTree("bufstore").matching {
         include "*"
     }
     followSymlinks = true
 }
 
 clean.dependsOn.add(preClean)
+
+tasks.withType(JavaCompile) {
+    //enable compilation in a separate daemon process
+    options.fork = true
+}

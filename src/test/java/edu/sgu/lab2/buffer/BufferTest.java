@@ -30,15 +30,20 @@ public class BufferTest {
 /*15*/  {"7", "Integer", "60", "bubble", "sum", "oneLine"}
     };
     String sep = System.getProperty("line.separator");
-    int len = sep.length();
-
+    byte RC = 0x0d, LF = 0x0a, HT = 0x09, VT = 0x0b;
+    boolean isWin(){
+        if( sep.length()>1 && (sep.charAt(0)==RC && sep.charAt(1)==LF) )
+            return true;
+        else return false;
+    }
+    boolean isNix(){
+        if(sep.length()==1 && sep.charAt(0)==LF)
+            return true;
+        else return false;
+    }
     @Test
     public void testSystemLineSeparator() {
-        assertTrue(len==1||len==2);
-        if(len>1){
-            assertTrue(sep.charAt(0)==0x0d);
-            assertTrue(sep.charAt(1)==0x0a);
-        } else assertTrue(sep.charAt(0)==0x0a);
+        assertTrue(isWin() || isNix());
     }
 
     @Test
@@ -74,17 +79,18 @@ public class BufferTest {
             name = "buf-v"+varSuffix+var+"-n"+ ++bufcount;
             buf.store(name);
             try {
-                assertTrue(new File("store/"+name).isFile());
-                fileInputStream = new FileInputStream("store/"+name);
+                assertTrue(new File("bufstore/"+name).isFile());
+                fileInputStream = new FileInputStream("bufstore/"+name);
                 int actualLinecount=0, streamPart=0;
                 byte[] fileBuffer = new byte[8192];
+                boolean winSepar=isWin();
                 while ((streamPart = fileInputStream.read(fileBuffer)) > 0){
                     byte filePrevByte=0;
                     for(byte fileByte:fileBuffer){
-                        if(len>1){
-                            if(filePrevByte==sep.charAt(0) &&fileByte==sep.charAt(1))actualLinecount++;
-                        } else if(fileByte==sep.charAt(0))actualLinecount++;
-                        filePrevByte=fileByte;
+                        if (winSepar) {
+                            if(filePrevByte==RC && fileByte==LF) actualLinecount++;
+                            filePrevByte = fileByte;
+                        } else if(fileByte==LF) actualLinecount++;
                     }
                 }
                 switch (buf.getStoreMethod()){
@@ -136,17 +142,18 @@ public class BufferTest {
             name = "buf-v"+varSuffix+var+"-n"+ ++bufcount;
             buf.store(name);
             try {
-                assertTrue(new File("store/"+name).isFile());
-                fileInputStream = new FileInputStream("store/"+name);
+                assertTrue(new File("bufstore/"+name).isFile());
+                fileInputStream = new FileInputStream("bufstore/"+name);
                 int actualLinecount=0, streamPart=0;
                 byte[] fileBuffer = new byte[8192];
+                boolean winSepar=isWin();
                 while ((streamPart = fileInputStream.read(fileBuffer)) > 0){
                     byte filePrevByte=0;
                     for(byte fileByte:fileBuffer){
-                        if(len>1){
-                            if(filePrevByte==sep.charAt(0) &&fileByte==sep.charAt(1))actualLinecount++;
-                        } else if(fileByte==sep.charAt(0))actualLinecount++;
-                        filePrevByte=fileByte;
+                        if (winSepar) {
+                            if(filePrevByte==RC && fileByte==LF) actualLinecount++;
+                            filePrevByte = fileByte;
+                        } else if(fileByte==LF) actualLinecount++;
                     }
                 }
                 switch (buf.getStoreMethod()){
@@ -198,17 +205,18 @@ public class BufferTest {
             name = "buf-v"+varSuffix+var+"-n"+ ++bufcount;
             buf.store(name);
             try {
-                assertTrue(new File("store/"+name).isFile());
-                fileInputStream = new FileInputStream("store/"+name);
+                assertTrue(new File("bufstore/"+name).isFile());
+                fileInputStream = new FileInputStream("bufstore/"+name);
                 int actualLinecount=0, streamPart=0;
                 byte[] fileBuffer = new byte[8192];
+                boolean winSepar=isWin();
                 while ((streamPart = fileInputStream.read(fileBuffer)) > 0){
                     byte filePrevByte=0;
                     for(byte fileByte:fileBuffer){
-                        if(len>1){
-                            if(filePrevByte==sep.charAt(0) &&fileByte==sep.charAt(1))actualLinecount++;
-                        } else if(fileByte==sep.charAt(0))actualLinecount++;
-                        filePrevByte=fileByte;
+                        if (winSepar) {
+                            if(filePrevByte==RC && fileByte==LF) actualLinecount++;
+                            filePrevByte = fileByte;
+                        } else if(fileByte==LF) actualLinecount++;
                     }
                 }
                 switch (buf.getStoreMethod()){
@@ -260,17 +268,18 @@ public class BufferTest {
             name = "buf-v"+varSuffix+var+"-n"+ ++bufcount;
             buf.store(name);
             try {
-                assertTrue(new File("store/"+name).isFile());
-                fileInputStream = new FileInputStream("store/"+name);
+                assertTrue(new File("bufstore/"+name).isFile());
+                fileInputStream = new FileInputStream("bufstore/"+name);
                 int actualLinecount=0, streamPart=0;
                 byte[] fileBuffer = new byte[8192];
+                boolean winSepar=isWin();
                 while ((streamPart = fileInputStream.read(fileBuffer)) > 0){
                     byte filePrevByte=0;
                     for(byte fileByte:fileBuffer){
-                        if(len>1){
-                            if(filePrevByte==sep.charAt(0) &&fileByte==sep.charAt(1))actualLinecount++;
-                        } else if(fileByte==sep.charAt(0))actualLinecount++;
-                        filePrevByte=fileByte;
+                        if (winSepar) {
+                            if(filePrevByte==RC && fileByte==LF) actualLinecount++;
+                            filePrevByte = fileByte;
+                        } else if(fileByte==LF) actualLinecount++;
                     }
                 }
                 switch (buf.getStoreMethod()){
@@ -322,17 +331,18 @@ public class BufferTest {
             name = "buf-v"+varSuffix+var+"-n"+ ++bufcount;
             buf.store(name);
             try {
-                assertTrue(new File("store/"+name).isFile());
-                fileInputStream = new FileInputStream("store/"+name);
+                assertTrue(new File("bufstore/"+name).isFile());
+                fileInputStream = new FileInputStream("bufstore/"+name);
                 int actualLinecount=0, streamPart=0;
                 byte[] fileBuffer = new byte[8192];
+                boolean winSepar=isWin();
                 while ((streamPart = fileInputStream.read(fileBuffer)) > 0){
                     byte filePrevByte=0;
                     for(byte fileByte:fileBuffer){
-                        if(len>1){
-                            if(filePrevByte==sep.charAt(0) &&fileByte==sep.charAt(1))actualLinecount++;
-                        } else if(fileByte==sep.charAt(0))actualLinecount++;
-                        filePrevByte=fileByte;
+                        if (winSepar) {
+                            if(filePrevByte==RC && fileByte==LF) actualLinecount++;
+                            filePrevByte = fileByte;
+                        } else if(fileByte==LF) actualLinecount++;
                     }
                 }
                 switch (buf.getStoreMethod()){
@@ -384,17 +394,18 @@ public class BufferTest {
             name = "buf-v"+varSuffix+var+"-n"+ ++bufcount;
             buf.store(name);
             try {
-                assertTrue(new File("store/"+name).isFile());
-                fileInputStream = new FileInputStream("store/"+name);
+                assertTrue(new File("bufstore/"+name).isFile());
+                fileInputStream = new FileInputStream("bufstore/"+name);
                 int actualLinecount=0, streamPart=0;
                 byte[] fileBuffer = new byte[8192];
+                boolean winSepar=isWin();
                 while ((streamPart = fileInputStream.read(fileBuffer)) > 0){
                     byte filePrevByte=0;
                     for(byte fileByte:fileBuffer){
-                        if(len>1){
-                            if(filePrevByte==sep.charAt(0) &&fileByte==sep.charAt(1))actualLinecount++;
-                        } else if(fileByte==sep.charAt(0))actualLinecount++;
-                        filePrevByte=fileByte;
+                        if (winSepar) {
+                            if(filePrevByte==RC && fileByte==LF) actualLinecount++;
+                            filePrevByte = fileByte;
+                        } else if(fileByte==LF) actualLinecount++;
                     }
                 }
                 switch (buf.getStoreMethod()){
@@ -446,17 +457,18 @@ public class BufferTest {
             name = "buf-v"+varSuffix+var+"-n"+ ++bufcount;
             buf.store(name);
             try {
-                assertTrue(new File("store/"+name).isFile());
-                fileInputStream = new FileInputStream("store/"+name);
+                assertTrue(new File("bufstore/"+name).isFile());
+                fileInputStream = new FileInputStream("bufstore/"+name);
                 int actualLinecount=0, streamPart=0;
                 byte[] fileBuffer = new byte[8192];
+                boolean winSepar=isWin();
                 while ((streamPart = fileInputStream.read(fileBuffer)) > 0){
                     byte filePrevByte=0;
                     for(byte fileByte:fileBuffer){
-                        if(len>1){
-                            if(filePrevByte==sep.charAt(0) &&fileByte==sep.charAt(1))actualLinecount++;
-                        } else if(fileByte==sep.charAt(0))actualLinecount++;
-                        filePrevByte=fileByte;
+                        if (winSepar) {
+                            if(filePrevByte==RC && fileByte==LF) actualLinecount++;
+                            filePrevByte = fileByte;
+                        } else if(fileByte==LF) actualLinecount++;
                     }
                 }
                 switch (buf.getStoreMethod()){
@@ -508,17 +520,18 @@ public class BufferTest {
             name = "buf-v"+varSuffix+var+"-n"+ ++bufcount;
             buf.store(name);
             try {
-                assertTrue(new File("store/"+name).isFile());
-                fileInputStream = new FileInputStream("store/"+name);
+                assertTrue(new File("bufstore/"+name).isFile());
+                fileInputStream = new FileInputStream("bufstore/"+name);
                 int actualLinecount=0, streamPart=0;
                 byte[] fileBuffer = new byte[8192];
+                boolean winSepar=isWin();
                 while ((streamPart = fileInputStream.read(fileBuffer)) > 0){
                     byte filePrevByte=0;
                     for(byte fileByte:fileBuffer){
-                        if(len>1){
-                            if(filePrevByte==sep.charAt(0) &&fileByte==sep.charAt(1))actualLinecount++;
-                        } else if(fileByte==sep.charAt(0))actualLinecount++;
-                        filePrevByte=fileByte;
+                        if (winSepar) {
+                            if(filePrevByte==RC && fileByte==LF) actualLinecount++;
+                            filePrevByte = fileByte;
+                        } else if(fileByte==LF) actualLinecount++;
                     }
                 }
                 switch (buf.getStoreMethod()){
@@ -570,17 +583,18 @@ public class BufferTest {
             name = "buf-v"+varSuffix+var+"-n"+ ++bufcount;
             buf.store(name);
             try {
-                assertTrue(new File("store/"+name).isFile());
-                fileInputStream = new FileInputStream("store/"+name);
+                assertTrue(new File("bufstore/"+name).isFile());
+                fileInputStream = new FileInputStream("bufstore/"+name);
                 int actualLinecount=0, streamPart=0;
                 byte[] fileBuffer = new byte[8192];
+                boolean winSepar=isWin();
                 while ((streamPart = fileInputStream.read(fileBuffer)) > 0){
                     byte filePrevByte=0;
                     for(byte fileByte:fileBuffer){
-                        if(len>1){
-                            if(filePrevByte==sep.charAt(0) &&fileByte==sep.charAt(1))actualLinecount++;
-                        } else if(fileByte==sep.charAt(0))actualLinecount++;
-                        filePrevByte=fileByte;
+                        if (winSepar) {
+                            if(filePrevByte==RC && fileByte==LF) actualLinecount++;
+                            filePrevByte = fileByte;
+                        } else if(fileByte==LF) actualLinecount++;
                     }
                 }
                 switch (buf.getStoreMethod()){
@@ -633,17 +647,18 @@ public class BufferTest {
             name = "buf-v"+varSuffix+var+"-n"+ ++bufcount;
             buf.store(name);
             try {
-                assertTrue(new File("store/"+name).isFile());
-                fileInputStream = new FileInputStream("store/"+name);
+                assertTrue(new File("bufstore/"+name).isFile());
+                fileInputStream = new FileInputStream("bufstore/"+name);
                 int actualLinecount=0, streamPart=0;
                 byte[] fileBuffer = new byte[8192];
+                boolean winSepar=isWin();
                 while ((streamPart = fileInputStream.read(fileBuffer)) > 0){
                     byte filePrevByte=0;
                     for(byte fileByte:fileBuffer){
-                        if(len>1){
-                            if(filePrevByte==sep.charAt(0) &&fileByte==sep.charAt(1))actualLinecount++;
-                        } else if(fileByte==sep.charAt(0))actualLinecount++;
-                        filePrevByte=fileByte;
+                        if (winSepar) {
+                            if(filePrevByte==RC && fileByte==LF) actualLinecount++;
+                            filePrevByte = fileByte;
+                        } else if(fileByte==LF) actualLinecount++;
                     }
                 }
                 switch (buf.getStoreMethod()){
@@ -695,17 +710,18 @@ public class BufferTest {
             name = "buf-v"+varSuffix+var+"-n"+ ++bufcount;
             buf.store(name);
             try {
-                assertTrue(new File("store/"+name).isFile());
-                fileInputStream = new FileInputStream("store/"+name);
+                assertTrue(new File("bufstore/"+name).isFile());
+                fileInputStream = new FileInputStream("bufstore/"+name);
                 int actualLinecount=0, streamPart=0;
                 byte[] fileBuffer = new byte[8192];
+                boolean winSepar=isWin();
                 while ((streamPart = fileInputStream.read(fileBuffer)) > 0){
                     byte filePrevByte=0;
                     for(byte fileByte:fileBuffer){
-                        if(len>1){
-                            if(filePrevByte==sep.charAt(0) &&fileByte==sep.charAt(1))actualLinecount++;
-                        } else if(fileByte==sep.charAt(0))actualLinecount++;
-                        filePrevByte=fileByte;
+                        if (winSepar) {
+                            if(filePrevByte==RC && fileByte==LF) actualLinecount++;
+                            filePrevByte = fileByte;
+                        } else if(fileByte==LF) actualLinecount++;
                     }
                 }
                 switch (buf.getStoreMethod()){
@@ -757,17 +773,18 @@ public class BufferTest {
             name = "buf-v"+varSuffix+var+"-n"+ ++bufcount;
             buf.store(name);
             try {
-                assertTrue(new File("store/"+name).isFile());
-                fileInputStream = new FileInputStream("store/"+name);
+                assertTrue(new File("bufstore/"+name).isFile());
+                fileInputStream = new FileInputStream("bufstore/"+name);
                 int actualLinecount=0, streamPart=0;
                 byte[] fileBuffer = new byte[8192];
+                boolean winSepar=isWin();
                 while ((streamPart = fileInputStream.read(fileBuffer)) > 0){
                     byte filePrevByte=0;
                     for(byte fileByte:fileBuffer){
-                        if(len>1){
-                            if(filePrevByte==sep.charAt(0) &&fileByte==sep.charAt(1))actualLinecount++;
-                        } else if(fileByte==sep.charAt(0))actualLinecount++;
-                        filePrevByte=fileByte;
+                        if (winSepar) {
+                            if(filePrevByte==RC && fileByte==LF) actualLinecount++;
+                            filePrevByte = fileByte;
+                        } else if(fileByte==LF) actualLinecount++;
                     }
                 }
                 switch (buf.getStoreMethod()){
@@ -819,17 +836,18 @@ public class BufferTest {
             name = "buf-v"+varSuffix+var+"-n"+ ++bufcount;
             buf.store(name);
             try {
-                assertTrue(new File("store/"+name).isFile());
-                fileInputStream = new FileInputStream("store/"+name);
+                assertTrue(new File("bufstore/"+name).isFile());
+                fileInputStream = new FileInputStream("bufstore/"+name);
                 int actualLinecount=0, streamPart=0;
                 byte[] fileBuffer = new byte[8192];
+                boolean winSepar=isWin();
                 while ((streamPart = fileInputStream.read(fileBuffer)) > 0){
                     byte filePrevByte=0;
                     for(byte fileByte:fileBuffer){
-                        if(len>1){
-                            if(filePrevByte==sep.charAt(0) &&fileByte==sep.charAt(1))actualLinecount++;
-                        } else if(fileByte==sep.charAt(0))actualLinecount++;
-                        filePrevByte=fileByte;
+                        if (winSepar) {
+                            if(filePrevByte==RC && fileByte==LF) actualLinecount++;
+                            filePrevByte = fileByte;
+                        } else if(fileByte==LF) actualLinecount++;
                     }
                 }
                 switch (buf.getStoreMethod()){
@@ -881,17 +899,18 @@ public class BufferTest {
             name = "buf-v"+varSuffix+var+"-n"+ ++bufcount;
             buf.store(name);
             try {
-                assertTrue(new File("store/"+name).isFile());
-                fileInputStream = new FileInputStream("store/"+name);
+                assertTrue(new File("bufstore/"+name).isFile());
+                fileInputStream = new FileInputStream("bufstore/"+name);
                 int actualLinecount=0, streamPart=0;
                 byte[] fileBuffer = new byte[8192];
+                boolean winSepar=isWin();
                 while ((streamPart = fileInputStream.read(fileBuffer)) > 0){
                     byte filePrevByte=0;
                     for(byte fileByte:fileBuffer){
-                        if(len>1){
-                            if(filePrevByte==sep.charAt(0) &&fileByte==sep.charAt(1))actualLinecount++;
-                        } else if(fileByte==sep.charAt(0))actualLinecount++;
-                        filePrevByte=fileByte;
+                        if (winSepar) {
+                            if(filePrevByte==RC && fileByte==LF) actualLinecount++;
+                            filePrevByte = fileByte;
+                        } else if(fileByte==LF) actualLinecount++;
                     }
                 }
                 switch (buf.getStoreMethod()){
@@ -943,17 +962,18 @@ public class BufferTest {
             name = "buf-v"+varSuffix+var+"-n"+ ++bufcount;
             buf.store(name);
             try {
-                assertTrue(new File("store/"+name).isFile());
-                fileInputStream = new FileInputStream("store/"+name);
+                assertTrue(new File("bufstore/"+name).isFile());
+                fileInputStream = new FileInputStream("bufstore/"+name);
                 int actualLinecount=0, streamPart=0;
                 byte[] fileBuffer = new byte[8192];
+                boolean winSepar=isWin();
                 while ((streamPart = fileInputStream.read(fileBuffer)) > 0){
                     byte filePrevByte=0;
                     for(byte fileByte:fileBuffer){
-                        if(len>1){
-                            if(filePrevByte==sep.charAt(0) &&fileByte==sep.charAt(1))actualLinecount++;
-                        } else if(fileByte==sep.charAt(0))actualLinecount++;
-                        filePrevByte=fileByte;
+                        if (winSepar) {
+                            if(filePrevByte==RC && fileByte==LF) actualLinecount++;
+                            filePrevByte = fileByte;
+                        } else if(fileByte==LF) actualLinecount++;
                     }
                 }
                 switch (buf.getStoreMethod()){
