@@ -1,33 +1,17 @@
 package edu.sgu.lab3.myCollection.pojo;
 
-import java.io.InvalidObjectException;
-import java.io.Serializable;
+public class Smartphone {
 
-public class Smartphone implements Serializable {
-    private static final long serialVersionUID = 1L;
-
-    /*
-     * Модель. Mast not a null
-     * @serial
-     * */
+    // Модель
     private String model;
 
-    /*
-     * Размер экрана. Mast not a null
-     * @serial
-     * */
+    // Размер экрана
     private String size;
 
-    /*
-     * Тип экрана. Mast not a null
-     * @serial
-     * */
+    // Тип экрана
     private String screen;
 
-    /*
-     * Объем встроенной флэш-памяти. Mast not a null
-     * @serial
-     * */
+    // Объем встроенной флэш-памяти
     private String flash;
 
     public Smartphone(String model, String size, String screen, String flash) {
@@ -69,7 +53,4 @@ public class Smartphone implements Serializable {
         this.flash = flash;
     }
 
-    private void readObjectNoData() throws InvalidObjectException {
-        throw new InvalidObjectException("Need stream data");
-    }
 }

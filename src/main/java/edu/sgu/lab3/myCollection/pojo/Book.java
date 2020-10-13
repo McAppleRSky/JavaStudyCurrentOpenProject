@@ -1,33 +1,17 @@
 package edu.sgu.lab3.myCollection.pojo;
 
-import java.io.InvalidObjectException;
-import java.io.Serializable;
+public class Book {
 
-public class Book implements Serializable {
-    private static final long serialVersionUID = 1L;
-
-    /*
-     * Автор. Mast not a null
-     * @serial
-     * */
+    // Автор
     private String author;
 
-    /*
-     * Год издания. Mast not a null
-     * @serial
-     * */
+    // Год издания
     private String year;
 
-    /*
-     * Количество страниц. Mast not a null
-     * @serial
-     * */
+    // Количество страниц
     private String pages;
 
-    /*
-     * Издательство. Mast not a null
-     * @serial
-     * */
+    // Издательство
     private String publisher;
 
     public Book(String author, String date, String pages, String publisher) {
@@ -69,7 +53,4 @@ public class Book implements Serializable {
         this.publisher = publisher;
     }
 
-    private void readObjectNoData() throws InvalidObjectException {
-        throw new InvalidObjectException("Need stream data");
-    }
 }

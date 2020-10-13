@@ -39,42 +39,5 @@ public class CliTest extends Cli {
         assertTrue(params.get('o').equals("oname"));
     }
 
-    @Test public void testStoreBook() {}
-
-    @Test
-    public void testRestoreBook() {
-        String pathname = "book.ser";
-        ObjectOutputStream objectOutputStream = null;
-        FileOutputStream fileOutputStream = null;
-        Book book = new Book("august","2020", "1","typo");
-        try {
-            fileOutputStream = new FileOutputStream(pathname, true);
-            objectOutputStream = new ObjectOutputStream(fileOutputStream);
-            objectOutputStream.writeObject(book);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }finally {
-            if(objectOutputStream != null){
-                try {
-                    objectOutputStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        File f = new File(pathname);
-        FileInputStream fileInputStream = null;
-        ObjectInputStream objectInputStream = null;
-        try {
-            fileInputStream = new FileInputStream(f);
-            objectInputStream = new ObjectInputStream(fileInputStream);
-            assertTrue(book.equals((Book) objectInputStream.readObject()));
-            //assertEquals(new Book("august","2020", "1","typo"), );
-            objectInputStream.close();
-        } catch (IOException|ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
 
 }

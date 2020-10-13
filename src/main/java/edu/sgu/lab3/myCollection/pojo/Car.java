@@ -1,33 +1,17 @@
 package edu.sgu.lab3.myCollection.pojo;
 
-import java.io.InvalidObjectException;
-import java.io.Serializable;
+public class Car{
 
-public class Car implements Serializable {
-    private static final long serialVersionUID = 1L;
-
-    /*
-     * Марка. Mast not a null
-     * @serial
-     * */
+    // Марка
     private String brand;
 
-    /*
-     * Год выпуска. Mast not a null
-     * @serial
-     * */
+    // Год выпуска
     private String year;
 
-    /*
-     * Объем двигателя. Mast not a null
-     * @serial
-     * */
+    // Объем двигателя
     private String volume;
 
-    /*
-     * Максимальная скорость. Mast not a null
-     * @serial
-     * */
+    // Максимальная скорость
     private String speed;
 
     public Car(String brand, String year, String volume, String speed) {
@@ -69,7 +53,4 @@ public class Car implements Serializable {
         this.speed = speed;
     }
 
-    private void readObjectNoData() throws InvalidObjectException {
-        throw new InvalidObjectException("Need stream data");
-    }
 }

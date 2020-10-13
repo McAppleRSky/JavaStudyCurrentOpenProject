@@ -1,33 +1,18 @@
 package edu.sgu.lab3.myCollection.pojo;
 
-import java.io.InvalidObjectException;
-import java.io.Serializable;
 
-public class Notebook implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class Notebook {
 
-    /*
-     * Идентификатор модели. Mast not a null
-     * @serial
-     * */
+    // Идентификатор модели
     private String vendor;
 
-    /*
-     * Производитель процессора. Mast not a null
-     * @serial
-     * */
+    // Производитель процессора
     private String cpu;
 
-    /*
-     * Тактовая частота процессора. Mast not a null
-     * @serial
-     * */
+    // Тактовая частота процессора
     private String clock;
 
-    /*
-     * Объем ОЗУ. Mast not a null
-     * @serial
-     * */
+    // Объем ОЗУ
     private String memory;
 
     public Notebook(String vendor, String cpu, String clock, String memory) {
@@ -69,7 +54,4 @@ public class Notebook implements Serializable {
         this.memory = memory;
     }
 
-    private void readObjectNoData() throws InvalidObjectException {
-        throw new InvalidObjectException("Need stream data");
-    }
 }

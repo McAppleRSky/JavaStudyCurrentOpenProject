@@ -1,33 +1,17 @@
 package edu.sgu.lab3.myCollection.pojo;
 
-import java.io.InvalidObjectException;
-import java.io.Serializable;
+public class Compactdisk {
 
-public class Compactdisk implements Serializable {
-    private static final long serialVersionUID = 1L;
-
-    /*
-     * Название ольбома. Mast not a null
-     * @serial
-     * */
+    // Название aльбома
     private String name;
 
-    /*
-     * Исполнитель. Mast not a null
-     * @serial
-     * */
+    // Исполнитель
     private String musician;
 
-    /*
-     * Количество треков. Mast not a null
-     * @serial
-     * */
+    // Количество треков
     private String tracks;
 
-    /*
-     * Длительность звучания. Mast not a null
-     * @serial
-     * */
+    // Длительность звучания
     private String length;
 
     public Compactdisk(String name, String musician, String tracks, String length) {
@@ -69,7 +53,4 @@ public class Compactdisk implements Serializable {
         this.length = length;
     }
 
-    private void readObjectNoData() throws InvalidObjectException {
-        throw new InvalidObjectException("Need stream data");
-    }
 }

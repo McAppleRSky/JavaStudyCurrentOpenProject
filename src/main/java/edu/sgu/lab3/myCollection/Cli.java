@@ -26,10 +26,10 @@ public class Cli {
     private static String inputFilename, outputFilename;
 
     public static void main(String[] args) {
-        while(inviteMsgIter.hasNext())System.out.println(inviteMsgIter.next());
-        params = getParams("-i name -h");
+        printMsg(inviteMsgIter);
+        params = getParams("-i iname -o oname -h");
         if(params.containsKey('h'))
-            while(helpMsgIter.hasNext()) System.out.println(helpMsgIter.next());
+            printMsg(helpMsgIter);
         try {
             if(params.containsKey('i')) inputFilename=params.get('i');
             else throw new Exception("Need inputfile");
@@ -38,33 +38,10 @@ public class Cli {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
-
-
-
-/*
-            case
-            try {
-            if (args[0].split(" ").length==1) logger.warning("Receive one argument : " + args[0].split(" ")[0]);
-            calc = new Calc();
-            String[] results= calc.solve(args[0].split(" "));
-            for (String result:results){
-                switch (results.length){
-                    case 0:
-                        System.out.println("calc no return result");
-                        break;
-                    case 1:
-                        System.out.println(" " + args[0] + " = " + result);
-                        break;
-                    default:
-                        System.out.println(result);
-                        break;
-                }
-            }
-        } catch (ClassNotFoundException | InstantiationException | InvocationTargetException | IllegalAccessException | NoSuchMethodException e) {
-            e.printStackTrace();
-        }
-*/
+    static void printMsg(Iterator<String> msgIter){
+        while(msgIter.hasNext())System.out.println(msgIter.next());
     }
 
     static HashMap<Character,String> getParams(String arg){
